@@ -185,7 +185,16 @@ void PreferenceDialog::onScreenBreakSliderChanged(int iValue)
 void PreferenceDialog::onScreenBreakEnabledToggled(bool bChecked)
 {
     bool bEnabled = !bChecked;
-    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, bEnabled ? SCREEN_BREAK_ENABLED : SCREEN_BREAK_DISABLED);
+    if (bEnabled)
+        m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
+    else
+    {
+        QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
+        if ((sScreenBreakState != SCREEN_BREAK_DISABLED_FOR_ONE_HOUR) &&
+            (sScreenBreakState != SCREEN_BREAK_DISABLED_FOR_THREE_HOURS) &&
+                (sScreenBreakState != SCREEN_BREAK_DISABLED_UNTIL_TOMORROW))
+            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED);
+    }
     updateScreenBreakArea();
 }
 
