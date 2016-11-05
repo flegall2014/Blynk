@@ -96,7 +96,6 @@ void BlueLightReducerWidget::setButtonColor(QPushButton *pButton, const QColor &
         QString sRed = QString::number(color.red(), 16).toUpper();
         QString sGreen = QString::number(color.green(), 16).toUpper();
         QString sBlue = QString::number(color.blue(), 16).toUpper();
-        qDebug() << sRed << sGreen << sBlue;
         pButton->setStyleSheet(QString("background-color: #%1%2%3").arg(sRed).arg(sGreen).arg(sBlue));
     }
 }

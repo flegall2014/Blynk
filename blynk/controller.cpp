@@ -283,7 +283,6 @@ void Controller::saveParameters()
 // Enter blynk cursor random mode:
 void Controller::enterBlynkCursorRandomMode()
 {
-    qDebug() << "ENTER RANDOM MODE";
     m_tApplicationTimer.stop();
     m_iBlynkCursorElapsedTime = 0;
     int iBlynkPerMinuteRandom = m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt();
@@ -294,7 +293,6 @@ void Controller::enterBlynkCursorRandomMode()
 // Enter blynk cursor regular mode:
 void Controller::enterBlynCursorRegularMode()
 {
-    qDebug() << "ENTER REGULAR MODE";
     m_tApplicationTimer.stop();
     m_iBlynkCursorElapsedTime = 0;
     m_tApplicationTimer.start();
@@ -337,7 +335,6 @@ void Controller::onApplicationTimerTimeOut()
             {
                 int iBlynkCursorRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
                 if (m_iBlynkCursorElapsedTime%iBlynkCursorRegularity == 0) {
-                    //qDebug() << "*** PLAY CURSOR ***";
                     m_pDimmerWidget->playCursor();
                 }
             }
@@ -371,7 +368,6 @@ void Controller::onApplicationTimerTimeOut()
         // Strength:
         Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
         if (m_iScreenBreakElapsedTime%iScreenBreakRegularity == 0) {
-            //qDebug() << "*** PLAY BIG EYE ***";
             m_pDimmerWidget->playBigEye(eScreenBreakStrength);
         }
     }
