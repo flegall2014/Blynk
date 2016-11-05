@@ -44,6 +44,7 @@ DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
 
     // Create movie:
     m_pBigEyeMovie = new QMovie(sMoviePath);
+    m_pBigEyeMovie->setCacheMode(QMovie::CacheAll);
     connect(m_pBigEyeMovie, &QMovie::frameChanged, this, &DimmerWidget::onFrameChanged);
     ui->movieArea->hide();
     ui->movieArea->setMovie(m_pBigEyeMovie);

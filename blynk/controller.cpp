@@ -359,11 +359,11 @@ void Controller::onApplicationTimerTimeOut()
         }
     }
 
-    // Screen break & blue light reducer:
+    // Screen break:
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*60;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
 
         // Strength:
         Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
