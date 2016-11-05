@@ -52,6 +52,9 @@ private:
     // Create tray icon:
     void initializeTrayIcon();
 
+    // Create tooltip:
+    void createTooltip();
+
     // Save parameters:
     void saveParameters();
 

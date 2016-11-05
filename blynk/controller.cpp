@@ -162,8 +162,11 @@ void Controller::startGUI()
 {
     /*** TRAY ICON ***/
 
-    // Create tray icon:
     initializeTrayIcon();
+
+    /*** TOOLTIP ***/
+
+    createTooltip();
 
     /*** BLYNK CURSOR ***/
 
@@ -182,7 +185,9 @@ void Controller::startGUI()
 void Controller::initializeTrayIcon()
 {
     // Create actions:
-    createMenu(CXMLNode::loadXMLFromFile(":/xml/BlynkMenu.xml"), m_pTrayIconMenu);
+    CXMLNode rootNode = CXMLNode::loadXMLFromFile(":/xml/BlynkMenu.xml");
+    CXMLNode menuNode = rootNode.getNodeByTagName("Menu");
+    createMenu(menuNode, m_pTrayIconMenu);
 
     // Set context menu:
     m_pTrayIcon->setContextMenu(m_pTrayIconMenu);
@@ -195,6 +200,23 @@ void Controller::initializeTrayIcon()
 
     // Show tray icon:
     m_pTrayIcon->setVisible(true);
+}
+
+// Create tooltip:
+void Controller::createTooltip()
+{
+    // Create actions:
+    CXMLNode rootNode = CXMLNode::loadXMLFromFile(":/xml/BlynkMenu.xml");
+    CXMLNode tooltipNode = rootNode.getNodeByTagName("Tooltip");
+    QVector<CXMLNode> vTooltipItems = tooltipNode.getNodesByTagName("TooltipItem");
+    QMap<QString, QString> mTooltipValues;
+    for (auto node : vTooltipItems)
+    {
+        QString sTooltipName = node.attributes()["name"];
+        QString sTooltipValue = node.attributes()["value"];
+        mTooltipValues[sTooltipName] = sTooltipValue;
+    }
+    m_pPreferenceDialog->setTooltips(mTooltipValues);
 }
 
 // Action triggered:

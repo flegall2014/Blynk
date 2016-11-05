@@ -7,7 +7,6 @@
         <file>icons/ico-bigeye.gif</file>
         <file>icons/ico-careteye.gif</file>
         <file>icons/ico-mouseeye.gif</file>
-        <file>icons/Fra_20.png</file>
         <file>css/style.css</file>
     </qresource>
 </RCC>

@@ -25,6 +25,9 @@ public:
     // Set parameters:
     void setParameters(Parameters *pParameters);
 
+    // Set tooltips:
+    void setTooltips(const QMap<QString, QString> &mTooltipValues);
+
 protected:
     // Close event:
     void closeEvent(QCloseEvent *);

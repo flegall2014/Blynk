@@ -255,3 +255,11 @@ void PreferenceDialog::setParameters(Parameters *pParameters)
 {
     m_pParameters = pParameters;
 }
+
+// Set tooltips:
+void PreferenceDialog::setTooltips(const QMap<QString, QString> &mTooltipValues)
+{
+    ui->wBlynkCursorHelp->setToolTip(mTooltipValues["BlynkCursorTooltip"]);
+    ui->wScreenBreakHelp->setToolTip(mTooltipValues["ScreenBreakTooltip"]);
+    ui->wBlueLightReducerHelp->setToolTip(mTooltipValues["BlueLightReducerTooltip"]);
+}

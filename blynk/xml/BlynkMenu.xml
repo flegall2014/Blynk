@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Menu>
- <MenuItem name="About Blynk..." objectName="aboutBlynk"/>
- <MenuItem name="Preferences" objectName="preferences"/>
- <Menu name="Blynk Cursor" enabled="0">
-    <MenuItem name="Cursor1" objectName="cursor1"/>
-    <MenuItem name="Cursor2" objectName="cursor2"/>
-    <MenuItem name="Cursor3" objectName="cursor3"/>
- </Menu>
- <Menu name="Screen Break" exclusive="1">
-    <MenuItem name="Disable for 1 hour" objectName="screenBreakDisabledForOneHour"/>
-    <MenuItem name="Disable for 3 hours" objectName="screenBreakDisabledForThreeHours"/>
-    <MenuItem name="Disable until tomorrow" objectName="screenBreakDisabledUntilTomorrow"/>
- </Menu>
- <MenuItem name="Vision aids overseas" objectName="visionAidsOverseas" enabled="0"/>
- <MenuItem name="Quit Blynk" objectName="quitBlynk"/>
-</Menu>
+<Blynk>
+    <Menu>
+     <MenuItem name="About Blynk..." objectName="aboutBlynk"/>
+     <MenuItem name="Preferences" objectName="preferences"/>
+     <Menu name="Blynk Cursor" enabled="0">
+        <MenuItem name="Cursor1" objectName="cursor1"/>
+        <MenuItem name="Cursor2" objectName="cursor2"/>
+        <MenuItem name="Cursor3" objectName="cursor3"/>
+     </Menu>
+     <Menu name="Screen Break" exclusive="1">
+        <MenuItem name="Disable for 1 hour" objectName="screenBreakDisabledForOneHour"/>
+        <MenuItem name="Disable for 3 hours" objectName="screenBreakDisabledForThreeHours"/>
+        <MenuItem name="Disable until tomorrow" objectName="screenBreakDisabledUntilTomorrow"/>
+     </Menu>
+     <MenuItem name="Vision aids overseas" objectName="visionAidsOverseas" enabled="0"/>
+     <MenuItem name="Quit Blynk" objectName="quitBlynk"/>
+    </Menu>
+    <Tooltip>
+        <TooltipItem name="BlynkCursorTooltip" value="Blynk Cursor Tooltip"/>
+        <TooltipItem name="ScreenBreakTooltip" value="Screen Break Tooltip"/>
+        <TooltipItem name="BlueLightReducerTooltip" value="Blue Light Reducer Tooltip"/>
+    </Tooltip>
+</Blynk>
