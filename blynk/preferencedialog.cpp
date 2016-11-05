@@ -72,13 +72,17 @@ void PreferenceDialog::updateBlynkCursorArea()
     ui->wBlynkRandomCheckbox->setChecked(bRandomModeOn);
 
     // Update blynk cursor enabled checkbox:
+    QString sBlynkCursorState = "(%1/%2)";
+    ui->wBlynkCursorState->setText(bRandomModeOn ?
+        sBlynkCursorState.arg("Random").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled") :
+        sBlynkCursorState.arg("Regular").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled"));
     ui->wBlynkCursorEnabled->setChecked(!bBlynkCursorEnabled);
 
     // Update blynk per minute:
     QString sBlynkPerMinuteRange = m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANGE);
     QStringList lBlynkPerMinuteRange = sBlynkPerMinuteRange.split(",");
 
-    ui->wBlynkPerMinuteValues->setEnabled(bBlynkCursorEnabled && !bRandomModeOn);
+    ui->wBlynkPerMinuteValues->setEnabled(bBlynkCursorEnabled && bRandomModeOn);
     if (lBlynkPerMinuteRange.size() > 1)
     {
         QStringList lBlynkPerMinuteValues;
@@ -121,6 +125,11 @@ void PreferenceDialog::updateBlueLightReducerArea()
     bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
 
     // Blue light buttons:
+    Parameters::Strength eBlueLightReducerStrength =
+        (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
+
+    QString sBlueLightReducerState = "(%1/%2)";
+    ui->wBlueLightReducerState->setText(sBlueLightReducerState.arg(eBlueLightReducerStrength).arg(bBlueLightReducerEnabled ? "Enabled" : "Disabled"));
     ui->wBlueLightReducerWidget->setEnabled(bBlueLightReducerEnabled);
     ui->wBlueLightReducerWidget->setParameters(m_pParameters);
     ui->wBlueLightReducerEnabled->setChecked(!bBlueLightReducerEnabled);

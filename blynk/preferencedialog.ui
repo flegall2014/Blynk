@@ -91,6 +91,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QLabel" name="wBlynkCursorState">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="wBlynkCursorEnabled">
             <property name="font">
              <font>
@@ -313,6 +320,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="wBlueLightReducerState">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="wBlueLightReducerEnabled">
