@@ -112,7 +112,7 @@ void PreferenceDialog::updateScreenBreakArea()
 
     // Screen break strength combo:
     ui->wScreenBreakStrengthCombo->setEnabled(bScreenBreakEnabled);
-    ui->wScreenBreakStrengthCombo->setCurrentIndex(m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt());
+    ui->wScreenBreakStrengthCombo->setCurrentIndex(m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt()-1);
 
     // Check state:
     ui->wScreenBreakEnabled->setChecked(!bScreenBreakEnabled);
