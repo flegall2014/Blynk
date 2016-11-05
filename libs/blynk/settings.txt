@@ -1,0 +1,8 @@
+CursorFrequency(seconds)=6
+CursorDuration(seconds)=0.5
+CenterFrequency(minutes)=30
+CenterDuration(seconds)=2.0
+OpenAtStartup=n
+EyeOpacity=20
+Blinkrandomly=n
+DoBigBlink=n

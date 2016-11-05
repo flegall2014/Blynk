@@ -1,0 +1,12 @@
+#ifndef GAMMARAMP_GLOBAL_H
+#define GAMMARAMP_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(GAMMARAMP_LIBRARY)
+#  define GAMMARAMPSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define GAMMARAMPSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // GAMMARAMP_GLOBAL_H
