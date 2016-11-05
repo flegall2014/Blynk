@@ -49,10 +49,20 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"> QGroupBox {
- background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
- stop: 0 #E0E0E0, stop: 1 #FFFFFF);
-};
+      <string notr="true">QGroupBox
+{
+    background-color:transparent;
+    border: 1px solid #0b477b;
+    margin-top: 5px;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin: margin;	
+    border: 1px solid #0b477b;
+    color: black;   
+}
+
 </string>
      </property>
      <property name="title">
@@ -178,10 +188,21 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"> QGroupBox {
- background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
- stop: 0 #E0E0E0, stop: 1 #FFFFFF);
-}</string>
+      <string notr="true">QGroupBox
+{
+    background-color:transparent;
+    border: 1px solid #0b477b;
+    margin-top: 5px;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin: margin;	
+    border: 1px solid #0b477b;
+    color: black;   
+}
+
+</string>
      </property>
      <property name="title">
       <string>Screen Break</string>
@@ -284,10 +305,21 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"> QGroupBox {
- background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
- stop: 0 #E0E0E0, stop: 1 #FFFFFF);
-}</string>
+      <string notr="true">QGroupBox
+{
+    background-color:transparent;
+    border: 1px solid #0b477b;
+    margin-top: 5px;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin: margin;	
+    border: 1px solid #0b477b;
+    color: black;   
+}
+
+</string>
      </property>
      <property name="title">
       <string>Blue Light Reducer</string>
@@ -390,10 +422,21 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"> QGroupBox {
- background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
- stop: 0 #E0E0E0, stop: 1 #FFFFFF);
-}</string>
+      <string notr="true">QGroupBox
+{
+    background-color:transparent;
+    border: 1px solid #0b477b;
+    margin-top: 5px;
+}
+
+QGroupBox::title
+{
+    subcontrol-origin: margin;	
+    border: 1px solid #0b477b;
+    color: black;   
+}
+
+</string>
      </property>
      <property name="title">
       <string>Starter</string>
