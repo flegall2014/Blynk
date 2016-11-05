@@ -19,3 +19,4 @@
 *.dll
 *.exe
 *.stash
+ui_*

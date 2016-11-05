@@ -185,7 +185,7 @@ void PreferenceDialog::onScreenBreakSliderChanged(int iValue)
 void PreferenceDialog::onScreenBreakEnabledToggled(bool bChecked)
 {
     bool bEnabled = !bChecked;
-    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, bEnabled ? "enabled" : "disabled");
+    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, bEnabled ? SCREEN_BREAK_ENABLED : SCREEN_BREAK_DISABLED);
     updateScreenBreakArea();
 }
 
