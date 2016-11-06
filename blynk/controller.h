@@ -111,7 +111,7 @@ private:
     QMap<QString, QAction *> m_mActions;
 
     // Screen break state:
-    int m_iDelay;
+    int m_iScreenBreakDelay;
 
 public slots:
     // Action triggered:

@@ -34,7 +34,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
     m_bBlynkCursorRandomModeOn(false),
-    m_iDelay(0)
+    m_iScreenBreakDelay(0)
 {
     m_pDimmerWidget->setParameters(m_pParameters);
     connect(m_pParameters, &Parameters::parameterChanged, m_pDimmerWidget, &DimmerWidget::updateUI);
@@ -250,7 +250,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for an hour:
         if (sObjectName == "screenBreakDisabledForOneHour")
         {
-            m_iDelay = ONE_HOUR;
+            m_iScreenBreakDelay = ONE_HOUR;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -258,7 +258,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for three hour:
         if (sObjectName == "screenBreakDisabledForThreeHours")
         {
-            m_iDelay = THREE_HOURS;
+            m_iScreenBreakDelay = THREE_HOURS;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -266,7 +266,7 @@ void Controller::onActionTriggered()
         // Screen break disabled until tomorrow:
         if (sObjectName == "screenBreakDisabledUntilTomorrow")
         {
-            m_iDelay = ONE_DAY;
+            m_iScreenBreakDelay = ONE_DAY;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -335,10 +335,10 @@ void Controller::onApplicationTimerTimeOut()
     bool bScreenBreakEnabled = (sScreenBreakState == SCREEN_BREAK_ENABLED);
 
     // Read screen break state:
-    if ((m_iDelay > 0) && (m_iScreenBreakElapsedTime > m_iDelay))
+    if ((m_iScreenBreakDelay > 0) && (m_iScreenBreakElapsedTime > m_iScreenBreakDelay))
         m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
 
-    bScreenBreakEnabled &= (m_iScreenBreakElapsedTime >= m_iDelay);
+    bScreenBreakEnabled &= (m_iScreenBreakElapsedTime >= m_iScreenBreakDelay);
 
     // Blue light reducer enabled?
     bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();

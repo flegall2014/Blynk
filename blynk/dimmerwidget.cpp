@@ -132,6 +132,15 @@ void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
     m_pBigEyeMovie->start();
 }
 
+// Set RGB:
+void DimmerWidget::setRGB(unsigned short iMinRed, unsigned short iMaxRed,
+                          unsigned short iMinGreen, unsigned short iMaxGreen,
+                          unsigned short iMinBlue, unsigned short iMaxBlue)
+{
+    GammaRamp gammaRamp;
+    gammaRamp.setBlueLightReducerParameters(iMinRed, iMaxRed, iMinGreen, iMaxGreen, iMinBlue, iMaxBlue);
+}
+
 // Set strength:
 void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
 {

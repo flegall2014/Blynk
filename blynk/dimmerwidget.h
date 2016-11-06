@@ -27,6 +27,11 @@ public:
     // Destructor:
     ~DimmerWidget();
 
+    // Set RGB:
+    void setRGB(unsigned short iMinRed, unsigned short iMaxRed,
+        unsigned short iMinGreen, unsigned short iMaxGreen,
+        unsigned short iMinBlue, unsigned short iMaxBlue);
+
     // Set strength:
     void setStrength(const Parameters::Strength &eStrength);
 
