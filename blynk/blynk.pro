@@ -53,7 +53,8 @@ HEADERS += \
     bluelightreducerwidget.h \
     customslider.h \
     animatedcursor.h \
-    dimmerwidget.h
+    dimmerwidget.h \
+    customtooltip.h
 
 SOURCES += \
     main.cpp \
@@ -66,7 +67,8 @@ SOURCES += \
     bluelightreducerwidget.cpp \
     customslider.cpp \
     animatedcursor.cpp \
-    dimmerwidget.cpp
+    dimmerwidget.cpp \
+    customtooltip.cpp
 
 RESOURCES += \
     resources.qrc
@@ -74,5 +76,6 @@ RESOURCES += \
 FORMS += \
     preferencedialog.ui \
     dimmerwidget.ui \
-    customslider.ui
+    customslider.ui \
+    customtooltip.ui
 

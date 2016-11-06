@@ -195,9 +195,6 @@ void Controller::initializeTrayIcon()
     // Set icon:
     m_pTrayIcon->setIcon(QIcon(":/icons/ico-splash.png"));
 
-    // Set tooltip:
-    m_pTrayIcon->setToolTip(tr("TEST"));
-
     // Show tray icon:
     m_pTrayIcon->setVisible(true);
 }

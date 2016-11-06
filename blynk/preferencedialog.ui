@@ -128,6 +128,17 @@ QGroupBox::title
       <item row="2" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
+         <widget class="QPushButton" name="wBlynkCursorRandomHelp">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="wBlynkRandomCheckbox">
           <property name="font">
            <font>
@@ -269,7 +280,25 @@ QGroupBox::title
       <item row="1" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="CustomSlider" name="wScreenBreakSlider" native="true"/>
+         <widget class="CustomSlider" name="wScreenBreakSlider" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="wScreenBreakStrengthHelp">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QComboBox" name="wScreenBreakStrengthCombo">
@@ -391,6 +420,29 @@ QGroupBox::title
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="wBlueLightReducerStartTimeHelp">
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="label_8">
           <property name="font">
            <font>
@@ -405,7 +457,71 @@ QGroupBox::title
          </widget>
         </item>
         <item>
-         <widget class="QTimeEdit" name="wStartTimeEdit"/>
+         <widget class="QTimeEdit" name="wStartTimeEdit">
+          <property name="styleSheet">
+           <string notr="true">QSpinBox {
+    padding-right: 15px; /* make room for the arrows */
+    border-image: url(:/images/frame.png) 4;
+    border-width: 3;
+}
+
+QSpinBox::up-button {
+    subcontrol-origin: border;
+    subcontrol-position: top right; /* position at the top right corner */
+
+    width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */
+    border-image: url(:/images/spinup.png) 1;
+    border-width: 1px;
+}
+
+QSpinBox::up-button:hover {
+    border-image: url(:/images/spinup_hover.png) 1;
+}
+
+QSpinBox::up-button:pressed {
+    border-image: url(:/images/spinup_pressed.png) 1;
+}
+
+QSpinBox::up-arrow {
+    image: url(:/images/up_arrow.png);
+    width: 7px;
+    height: 7px;
+}
+
+QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when value is max */
+   image: url(:/images/up_arrow_disabled.png);
+}
+
+QSpinBox::down-button {
+    subcontrol-origin: border;
+    subcontrol-position: bottom right; /* position at bottom right corner */
+
+    width: 16px;
+    border-image: url(:/images/spindown.png) 1;
+    border-width: 1px;
+    border-top-width: 0;
+}
+
+QSpinBox::down-button:hover {
+    border-image: url(:/images/spindown_hover.png) 1;
+}
+
+QSpinBox::down-button:pressed {
+    border-image: url(:/images/spindown_pressed.png) 1;
+}
+
+QSpinBox::down-arrow {
+    image: url(:/images/down_arrow.png);
+    width: 7px;
+    height: 7px;
+}
+
+QSpinBox::down-arrow:disabled,
+QSpinBox::down-arrow:off { /* off state when value in min */
+   image: url(:/images/down_arrow_disabled.png);
+}</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

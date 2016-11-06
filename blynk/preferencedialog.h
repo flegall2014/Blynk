@@ -10,6 +10,7 @@
 namespace Ui {
 class PreferenceDialog;
 }
+class CustomTooltip;
 
 class PreferenceDialog : public QDialog
 {
@@ -30,7 +31,10 @@ public:
 
 protected:
     // Close event:
-    void closeEvent(QCloseEvent *);
+    virtual void closeEvent(QCloseEvent *);
+
+    // Handle event for tooltip display:
+    virtual bool event(QEvent *event);
 
 private:
     // Update blynk cursor:
@@ -45,12 +49,21 @@ private:
     // Update start blynk at login:
     void updateStartBlynkAtLoginArea();
 
+    // Contains mouse?
+    bool containsMouse(const QPoint &point);
+
 private:
     // UI:
     Ui::PreferenceDialog *ui;
 
     // Parameters:
     Parameters *m_pParameters;
+
+    // Custom tooltip:
+    CustomTooltip *m_pCustomTooltip;
+
+    // Tooltips:
+    QMap<QString, QString> m_mTooltips;
 
 public slots:
     // Blynk cursor:

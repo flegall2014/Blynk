@@ -3,22 +3,31 @@
 #include <QTimeEdit>
 #include <QDebug>
 #include <QCloseEvent>
+#include <QToolTip>
 
 // Application:
 #include "preferencedialog.h"
 #include "ui_preferencedialog.h"
 #include "controller.h"
+#include "customtooltip.h"
 
 // Constructor:
 PreferenceDialog::PreferenceDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::PreferenceDialog)
+    ui(new Ui::PreferenceDialog),
+    m_pCustomTooltip(NULL)
 {
     // Initialize:
     ui->setupUi(this);
 
+    // Create custom tooltip:
+    m_pCustomTooltip = new CustomTooltip();
+    m_pCustomTooltip->hide();
+
+    // Set style sheet:
     setStyleSheet(":/css/style.css");
 
+    // Setup splash widget:
     ui->splashWidget->setText("BLYNK", QColor("#1FBBE5"));
     ui->splashWidget->setImage(":/icons/ico-splash.png");
 
@@ -64,7 +73,7 @@ void PreferenceDialog::updateBlynkCursorArea()
     ui->wBlynkCursorSlider->setEnabled(bBlynkCursorEnabled && !bRandomModeOn);
     ui->wBlynkCursorSlider->setTitle(tr("Regularity (sec)"));
     ui->wBlynkCursorSlider->setRange(m_pParameters->parameter(Parameters::BLYNK_CURSOR_MIN).toInt(),
-        m_pParameters->parameter(Parameters::BLYNK_CURSOR_MAX).toInt());
+                                     m_pParameters->parameter(Parameters::BLYNK_CURSOR_MAX).toInt());
     ui->wBlynkCursorSlider->setValue(m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt());
 
     // Update blynk random checkbox:
@@ -74,8 +83,8 @@ void PreferenceDialog::updateBlynkCursorArea()
     // Update blynk cursor enabled checkbox:
     QString sBlynkCursorState = "(%1/%2)";
     ui->wBlynkCursorState->setText(bRandomModeOn ?
-        sBlynkCursorState.arg("Random").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled") :
-        sBlynkCursorState.arg("Regular").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled"));
+                                       sBlynkCursorState.arg("Random").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled") :
+                                       sBlynkCursorState.arg("Regular").arg(bBlynkCursorEnabled ? "Enabled" : "Disabled"));
     ui->wBlynkCursorEnabled->setChecked(!bBlynkCursorEnabled);
 
     // Update blynk per minute:
@@ -107,7 +116,7 @@ void PreferenceDialog::updateScreenBreakArea()
     ui->wScreenBreakSlider->setEnabled(bScreenBreakEnabled);
     ui->wScreenBreakSlider->setTitle(tr("Regularity (min)"));
     ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
-        m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
+                                     m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
     ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
 
     // Screen break strength combo:
@@ -126,7 +135,7 @@ void PreferenceDialog::updateBlueLightReducerArea()
 
     // Blue light buttons:
     Parameters::Strength eBlueLightReducerStrength =
-        (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
+            (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
 
     QString sBlueLightReducerState = "(%1/%2)";
     ui->wBlueLightReducerState->setText(sBlueLightReducerState.arg(eBlueLightReducerStrength).arg(bBlueLightReducerEnabled ? "Enabled" : "Disabled"));
@@ -200,7 +209,7 @@ void PreferenceDialog::onScreenBreakEnabledToggled(bool bChecked)
     {
         QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
         if ((sScreenBreakState != SCREEN_BREAK_DISABLED_FOR_ONE_HOUR) &&
-            (sScreenBreakState != SCREEN_BREAK_DISABLED_FOR_THREE_HOURS) &&
+                (sScreenBreakState != SCREEN_BREAK_DISABLED_FOR_THREE_HOURS) &&
                 (sScreenBreakState != SCREEN_BREAK_DISABLED_UNTIL_TOMORROW))
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED);
     }
@@ -240,6 +249,7 @@ void PreferenceDialog::onStartBlynkAtLoginChanged(bool bChecked)
 // Done:
 void PreferenceDialog::onDone()
 {
+    m_pCustomTooltip->hide();
     hide();
 }
 
@@ -259,7 +269,47 @@ void PreferenceDialog::setParameters(Parameters *pParameters)
 // Set tooltips:
 void PreferenceDialog::setTooltips(const QMap<QString, QString> &mTooltipValues)
 {
-    ui->wBlynkCursorHelp->setToolTip(mTooltipValues["BlynkCursorTooltip"]);
-    ui->wScreenBreakHelp->setToolTip(mTooltipValues["ScreenBreakTooltip"]);
-    ui->wBlueLightReducerHelp->setToolTip(mTooltipValues["BlueLightReducerTooltip"]);
+    m_mTooltips = mTooltipValues;
+}
+
+// Handle event for tooltip display:
+bool PreferenceDialog::event(QEvent *event)
+{
+    // Handle tooltip:
+    if (event->type() == QEvent::ToolTip)
+    {
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+        QPushButton *pButtonUnderMouse = dynamic_cast<QPushButton *>(childAt(helpEvent->pos()));
+
+        if (pButtonUnderMouse != NULL)
+        {
+            if (m_pCustomTooltip)
+            {
+                QString sTooltipText = m_mTooltips[pButtonUnderMouse->objectName()];
+                if (!sTooltipText.isEmpty())
+                {
+                    m_pCustomTooltip->setText(sTooltipText);
+                    m_pCustomTooltip->move(mapToGlobal(helpEvent->pos()));
+                    m_pCustomTooltip->show();
+                }
+            }
+        }
+        else
+        {
+            m_pCustomTooltip->hide();
+            event->ignore();
+        }
+
+        return true;
+    }
+
+    if (!containsMouse(QCursor::pos()) && m_pCustomTooltip && m_pCustomTooltip->isVisible())
+        m_pCustomTooltip->hide();
+
+    return QWidget::event(event);
+}
+
+bool PreferenceDialog::containsMouse(const QPoint &point)
+{
+    return rect().contains(mapFromGlobal(point));
 }
