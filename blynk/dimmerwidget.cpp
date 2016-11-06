@@ -133,9 +133,9 @@ void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
 }
 
 // Set RGB:
-void DimmerWidget::setRGB(unsigned short iMinRed, unsigned short iMaxRed,
-                          unsigned short iMinGreen, unsigned short iMaxGreen,
-                          unsigned short iMinBlue, unsigned short iMaxBlue)
+void DimmerWidget::setRGB(int iMinRed, int iMaxRed,
+                          int iMinGreen, int iMaxGreen,
+                          int iMinBlue, int iMaxBlue)
 {
     GammaRamp gammaRamp;
     gammaRamp.setBlueLightReducerParameters(iMinRed, iMaxRed, iMinGreen, iMaxGreen, iMinBlue, iMaxBlue);
@@ -148,12 +148,12 @@ void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
     m_eStrength = eStrength;
 
     // Default:
-    unsigned short iMinRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toUShort();
-    unsigned short iMaxRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toUShort();
-    unsigned short iMinGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toUShort();
-    unsigned short iMaxGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toUShort();
-    unsigned short iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toUShort();
-    unsigned short iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toUShort();
+    int iMinRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
+    int iMaxRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
+    int iMinGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
+    int iMaxGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
+    int iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
+    int iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
 
     // Set iMinBlue/iMaxBlue based on strength:
     switch (eStrength) {

@@ -62,15 +62,15 @@ void BlueLightReducerWidget::onButtonStrongClicked()
 void BlueLightReducerWidget::update(int iStrength)
 {
     Parameters::Strength eStrength = (Parameters::Strength)iStrength;
-    QColor lightButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_LIGHT).toInt()/255,
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_LIGHT).toInt()/255,
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_LIGHT).toInt()/255);
-    QColor mediumButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_MEDIUM).toInt()/255,
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_MEDIUM).toInt()/255,
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_MEDIUM).toInt()/255);
-    QColor strongButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_STRONG).toInt()/255,
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_STRONG).toInt()/255,
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_STRONG).toInt()/255);
+    QColor lightButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_LIGHT).toInt(),
+        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_LIGHT).toInt(),
+        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_LIGHT).toInt());
+    QColor mediumButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_MEDIUM).toInt(),
+        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_MEDIUM).toInt(),
+        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_MEDIUM).toInt());
+    QColor strongButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_STRONG).toInt(),
+        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_STRONG).toInt(),
+        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_STRONG).toInt());
 
     setButtonColor(m_pLightButton, lightButtonColor);
     setButtonColor(m_pMediumButton, mediumButtonColor);

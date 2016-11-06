@@ -18,7 +18,7 @@ public:
     ~GammaRamp();
 
     // Set blue light parameters:
-    void setBlueLightReducerParameters(WORD iMinRed, WORD iMaxRed, WORD iMinGreen, WORD iMaxGreen, WORD iMinBlue, WORD iMaxBlue);
+    void setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMinGreen, int iMaxGreen, int iMinBlue, int iMaxBlue);
 
 private:
     // Load library:
@@ -37,7 +37,7 @@ private:
     BOOL getDeviceGammaRamp(HDC hDC, LPVOID lpRamp);
 
     // Set color palette:
-    BOOL setColorPalette(HDC, const std::vector<WORD> &vRed, const std::vector<WORD> &vGreen, const std::vector<WORD> &vBlue);
+    BOOL setColorPalette(HDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue);
 
 protected:
     HMODULE hGDI32;

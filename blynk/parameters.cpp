@@ -147,26 +147,26 @@ void Parameters::defineParameterDefaultValues()
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(START_BLYNK_AT_LOGIN, "0");
     setParameter(BLUE_CHANNEL_MIN_DEFAULT, "0");
-    setParameter(BLUE_CHANNEL_MAX_DEFAULT, "65535");
+    setParameter(BLUE_CHANNEL_MAX_DEFAULT, "255");
 
     setParameter(RED_CHANNEL_MIN_LIGHT, "0");
-    setParameter(RED_CHANNEL_MAX_LIGHT, "57825");
+    setParameter(RED_CHANNEL_MAX_LIGHT, "255");
     setParameter(RED_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(RED_CHANNEL_MAX_MEDIUM, "57825");
+    setParameter(RED_CHANNEL_MAX_MEDIUM, "255");
     setParameter(RED_CHANNEL_MIN_STRONG, "0");
-    setParameter(RED_CHANNEL_MAX_STRONG, "57825");
+    setParameter(RED_CHANNEL_MAX_STRONG, "255");
 
     setParameter(GREEN_CHANNEL_MIN_LIGHT, "0");
-    setParameter(GREEN_CHANNEL_MAX_LIGHT, "57825");
+    setParameter(GREEN_CHANNEL_MAX_LIGHT, "212");
     setParameter(GREEN_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(GREEN_CHANNEL_MAX_MEDIUM, "57825");
+    setParameter(GREEN_CHANNEL_MAX_MEDIUM, "188");
     setParameter(GREEN_CHANNEL_MIN_STRONG, "0");
-    setParameter(GREEN_CHANNEL_MAX_STRONG, "57825");
+    setParameter(GREEN_CHANNEL_MAX_STRONG, "170");
 
     setParameter(BLUE_CHANNEL_MIN_LIGHT, "0");
-    setParameter(BLUE_CHANNEL_MAX_LIGHT, "52171");
+    setParameter(BLUE_CHANNEL_MAX_LIGHT, "168");
     setParameter(BLUE_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(BLUE_CHANNEL_MAX_MEDIUM, "43947");
+    setParameter(BLUE_CHANNEL_MAX_MEDIUM, "118");
     setParameter(BLUE_CHANNEL_MIN_STRONG, "0");
-    setParameter(BLUE_CHANNEL_MAX_STRONG, "35723");
+    setParameter(BLUE_CHANNEL_MAX_STRONG, "84");
 }

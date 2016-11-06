@@ -5,9 +5,6 @@
 // Application:
 #include "gammaramp.h"
 
-#define MIN_CHANNEL_VALUE 0
-#define MAX_CHANNEL_VALUE 65535
-
 // Constructor:
 GammaRamp::GammaRamp()
 {
@@ -105,7 +102,7 @@ BOOL GammaRamp::getDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 }
 
 // Set color palette:
-BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<WORD> &vRed, const std::vector<WORD> &vGreen, const std::vector<WORD> &vBlue)
+BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue)
 {
     BOOL bReturn = FALSE;
     HDC hGammaDC = hDC;
@@ -121,9 +118,9 @@ BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<WORD> &vRed, const st
 
         for (int iIndex = 0; iIndex < 256; iIndex++)
         {
-            GammaArray[0][iIndex] = vRed[iIndex];
-            GammaArray[1][iIndex] = vGreen[iIndex];
-            GammaArray[2][iIndex] = vBlue[iIndex];
+            GammaArray[0][iIndex] = (WORD)vRed[iIndex]*257;
+            GammaArray[1][iIndex] = (WORD)vGreen[iIndex]*257;
+            GammaArray[2][iIndex] = (WORD)vBlue[iIndex]*257;
         }
 
         // Set the GammaArray values into the display device context:
@@ -137,22 +134,22 @@ BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<WORD> &vRed, const st
 }
 
 // Set blue light parameters:
-void GammaRamp::setBlueLightReducerParameters(WORD iMinRed, WORD iMaxRed, WORD iMinGreen, WORD iMaxGreen, WORD iMinBlue, WORD iMaxBlue)
+void GammaRamp::setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMinGreen, int iMaxGreen, int iMinBlue, int iMaxBlue)
 {
     int iDeltaRed = abs(iMaxRed-iMinRed);
     int iDeltaGreen = abs(iMaxGreen-iMinGreen);
     int iDeltaBlue = abs(iMaxBlue-iMinBlue);
 
-    double iRedStep = (double)iDeltaRed/(double)255;
-    double iGreenStep = (double)iDeltaGreen/(double)255;
-    double iBlueStep = (double)iDeltaBlue/(double)255;
+    double iRedStep = (double)iDeltaRed/(double)256;
+    double iGreenStep = (double)iDeltaGreen/(double)256;
+    double iBlueStep = (double)iDeltaBlue/(double)256;
 
-    std::vector<WORD> vRed, vGreen, vBlue;
+    std::vector<int> vRed, vGreen, vBlue;
     for (int i=0; i<256; i++)
     {
-        vRed.push_back((WORD)qRound(qMin(iMinRed, iMaxRed) + i*iRedStep));
-        vGreen.push_back((WORD)qRound(qMin(iMinGreen, iMaxGreen) + i*iGreenStep));
-        vBlue.push_back((WORD)qRound(qMin(iMinBlue, iMaxBlue) + i*iBlueStep));
+        vRed.push_back(qRound(qMin(iMinRed, iMaxRed) + i*iRedStep));
+        vGreen.push_back(qRound(qMin(iMinGreen, iMaxGreen) + i*iGreenStep));
+        vBlue.push_back(qRound(qMin(iMinBlue, iMaxBlue) + i*iBlueStep));
     }
 
     // Apply color palette:

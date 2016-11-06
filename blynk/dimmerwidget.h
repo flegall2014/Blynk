@@ -28,9 +28,9 @@ public:
     ~DimmerWidget();
 
     // Set RGB:
-    void setRGB(unsigned short iMinRed, unsigned short iMaxRed,
-        unsigned short iMinGreen, unsigned short iMaxGreen,
-        unsigned short iMinBlue, unsigned short iMaxBlue);
+    void setRGB(int iMinRed, int iMaxRed,
+        int iMinGreen, int iMaxGreen,
+        int iMinBlue, int iMaxBlue);
 
     // Set strength:
     void setStrength(const Parameters::Strength &eStrength);
@@ -74,22 +74,22 @@ private:
     Parameters *m_pParameters;
 
     // Min red:
-    unsigned short m_iMinRed;
+    int m_iMinRed;
 
     // Max red:
-    unsigned short m_iMaxRed;
+    int m_iMaxRed;
 
     // Min green:
-    unsigned short m_iMinGreen;
+    int m_iMinGreen;
 
     // Max green:
-    unsigned short m_iMaxGreen;
+    int m_iMaxGreen;
 
     // Min blue:
-    unsigned short m_iMinBlue;
+    int m_iMinBlue;
 
     // Max blue:
-    unsigned short m_iMaxBlue;
+    int m_iMaxBlue;
 
 public slots:
     // Next image available:
