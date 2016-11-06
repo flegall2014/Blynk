@@ -232,9 +232,6 @@ void Controller::onActionTriggered()
             m_pPreferenceDialog->updateUI();
             m_pPreferenceDialog->exec();
 
-            // Set parameters:
-            saveParameters();
-
             // Check blynk cursor random mode:
             bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
             bool bBlynkCursorRandomMode = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
