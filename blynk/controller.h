@@ -35,6 +35,12 @@ public:
     // Shutdown:
     virtual void shutdown();
 
+    // Return reference color for given temperature in Kelvin:
+    QColor referenceColor(int iTemperature) const;
+
+    // Color for strength:
+    QColor colorForStrength(const Parameters::Strength &eStrength);
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);

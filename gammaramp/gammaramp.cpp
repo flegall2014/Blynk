@@ -140,16 +140,25 @@ void GammaRamp::setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMin
     int iDeltaGreen = abs(iMaxGreen-iMinGreen);
     int iDeltaBlue = abs(iMaxBlue-iMinBlue);
 
-    double iRedStep = (double)iDeltaRed/(double)256;
-    double iGreenStep = (double)iDeltaGreen/(double)256;
-    double iBlueStep = (double)iDeltaBlue/(double)256;
+    double iRedStep = (double)iDeltaRed/(double)255;
+    double iGreenStep = (double)iDeltaGreen/(double)255;
+    double iBlueStep = (double)iDeltaBlue/(double)255;
 
     std::vector<int> vRed, vGreen, vBlue;
     for (int i=0; i<256; i++)
     {
-        vRed.push_back(qRound(qMin(iMinRed, iMaxRed) + i*iRedStep));
-        vGreen.push_back(qRound(qMin(iMinGreen, iMaxGreen) + i*iGreenStep));
-        vBlue.push_back(qRound(qMin(iMinBlue, iMaxBlue) + i*iBlueStep));
+        int iRedValue = qRound(qMin(iMinRed, iMaxRed) + i*iRedStep);
+        if (iRedValue > 255)
+            iRedValue = 255;
+        vRed.push_back(iRedValue);
+        int iGreenValue = qRound(qMin(iMinGreen, iMaxGreen) + i*iGreenStep);
+        if (iGreenValue > 255)
+            iGreenValue = 255;
+        vGreen.push_back(iGreenValue);
+        int iBlueValue = qRound(qMin(iMinBlue, iMaxBlue) + i*iBlueStep);
+        if (iBlueValue > 255)
+            iBlueValue = 255;
+        vBlue.push_back(iBlueValue);
     }
 
     // Apply color palette:

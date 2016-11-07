@@ -422,3 +422,46 @@ void Controller::onContextMenuAboutToShow()
         m_mActions["screenBreakDisabledUntilTomorrow"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
 }
 
+// Return reference color for given temperature in Kelvin:
+QColor Controller::referenceColor(int iTemperature) const
+{
+    if (iTemperature <= 1700)
+        return QColor(255, 122, 0);
+    if ((iTemperature > 1700) && (iTemperature <= 1850))
+        return QColor(255, 130, 0);
+    if ((iTemperature > 1850) && (iTemperature <= 2400))
+        return QColor(255, 157, 60);
+    if ((iTemperature > 2400) && (iTemperature <= 2550))
+        return QColor(255, 164, 72);
+    if ((iTemperature > 2550) && (iTemperature <= 2700))
+        return QColor(255, 170, 84);
+    if ((iTemperature > 2700) && (iTemperature <= 3000))
+        return QColor(255, 181, 105);
+    if ((iTemperature > 3000) && (iTemperature <= 3200))
+        return QColor(255, 188, 118);
+    if ((iTemperature > 3200) && (iTemperature <= 3350))
+        return QColor(255, 192, 127);
+    if ((iTemperature > 3350) && (iTemperature <= 4100))
+        return QColor(255, 212, 168);
+    if ((iTemperature > 4100) && (iTemperature <= 5000))
+        return QColor(255, 229, 206);
+    if ((iTemperature > 5000) && (iTemperature <= 6000))
+        return QColor(255, 240, 232);
+    if ((iTemperature > 6000) && (iTemperature <= 6200))
+        return QColor(255, 246, 246);
+    if (iTemperature > 6200)
+        return QColor(255, 249, 255);
+    return QColor(255, 255, 255);
+}
+
+// Return color for strength:
+QColor Controller::colorForStrength(const Parameters::Strength &eStrength)
+{
+    if (eStrength == Parameters::LIGHT)
+        return referenceColor(m_pParameters->parameter(Parameters::LIGHT_TEMPERATURE).toInt());
+    if (eStrength == Parameters::MEDIUM)
+        return referenceColor(m_pParameters->parameter(Parameters::MEDIUM_TEMPERATURE).toInt());
+    if (eStrength == Parameters::STRONG)
+        return referenceColor(m_pParameters->parameter(Parameters::STRONG_TEMPERATURE).toInt());
+    return QColor(255, 255, 255);
+}

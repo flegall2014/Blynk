@@ -11,6 +11,8 @@
 #include "animatedcursor.h"
 #include "parameters.h"
 #include <gammaramp.h>
+#include "blynk.h"
+#include "controller.h"
 #define MAX_LOOP_TIMES 1
 
 // Constructor:
@@ -132,61 +134,21 @@ void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
     m_pBigEyeMovie->start();
 }
 
-// Set RGB:
-void DimmerWidget::setRGB(int iMinRed, int iMaxRed,
-                          int iMinGreen, int iMaxGreen,
-                          int iMinBlue, int iMaxBlue)
-{
-    GammaRamp gammaRamp;
-    gammaRamp.setBlueLightReducerParameters(iMinRed, iMaxRed, iMinGreen, iMaxGreen, iMinBlue, iMaxBlue);
-}
 
 // Set strength:
 void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
 {
     // Set strength:
     m_eStrength = eStrength;
+    QColor targetColor = Blynk::instance()->controller()->colorForStrength(eStrength);
 
     // Default:
-    int iMinRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
-    int iMaxRed = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
-    int iMinGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
-    int iMaxGreen = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
-    int iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_DEFAULT).toInt();
-    int iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_DEFAULT).toInt();
-
-    // Set iMinBlue/iMaxBlue based on strength:
-    switch (eStrength) {
-    case Parameters::LIGHT: {
-        iMinRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MIN_LIGHT).toInt();
-        iMaxRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_LIGHT).toInt();
-        iMinGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MIN_LIGHT).toInt();
-        iMaxGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_LIGHT).toInt();
-        iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_LIGHT).toInt();
-        iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_LIGHT).toInt();
-        break;
-    }
-    case Parameters::MEDIUM: {
-        iMinRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MIN_MEDIUM).toInt();
-        iMaxRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_MEDIUM).toInt();
-        iMinGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MIN_MEDIUM).toInt();
-        iMaxGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_MEDIUM).toInt();
-        iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_MEDIUM).toInt();
-        iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_MEDIUM).toInt();
-        break;
-    }
-    case Parameters::STRONG: {
-        iMinRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MIN_STRONG).toInt();
-        iMaxRed = m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_STRONG).toInt();
-        iMinGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MIN_STRONG).toInt();
-        iMaxGreen = m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_STRONG).toInt();
-        iMinBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MIN_STRONG).toInt();
-        iMaxBlue = m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_STRONG).toInt();
-        break;
-    }
-    default:
-        break;
-    }
+    int iMinRed = 0;
+    int iMaxRed = targetColor.red();
+    int iMinGreen = 0;
+    int iMaxGreen = targetColor.green();
+    int iMinBlue = 0;
+    int iMaxBlue = targetColor.blue();
 
     if ((m_iMinRed != iMinRed) || (m_iMaxRed != iMaxRed) ||
             (m_iMinGreen != iMinGreen) || (m_iMaxGreen != iMaxGreen) ||

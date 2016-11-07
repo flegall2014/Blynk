@@ -101,29 +101,9 @@ void Parameters::defineParameterName()
     m_parameterName[BLUE_LIGHT_REDUCER_STRENGTH] = "blueLightReducerStrength";
     m_parameterName[BLUE_LIGHT_REDUCER_START_TIME] = "blueLightReducerStartTime";
     m_parameterName[START_BLYNK_AT_LOGIN] = "startBlynkAtLogin";
-    m_parameterName[BLUE_CHANNEL_MIN_DEFAULT] = "blueChannelMinDefault";
-    m_parameterName[BLUE_CHANNEL_MAX_DEFAULT] = "blueChannelMaxDefault";
-
-    m_parameterName[RED_CHANNEL_MIN_LIGHT] = "redChannelMinLight";
-    m_parameterName[RED_CHANNEL_MAX_LIGHT] = "redChannelMaxLight";
-    m_parameterName[RED_CHANNEL_MIN_MEDIUM] = "redChannelMinMedium";
-    m_parameterName[RED_CHANNEL_MAX_MEDIUM] = "redChannelMaxMedium";
-    m_parameterName[RED_CHANNEL_MIN_STRONG] = "redChannelMinStrong";
-    m_parameterName[RED_CHANNEL_MAX_STRONG] = "redChannelMaxStrong";
-
-    m_parameterName[GREEN_CHANNEL_MIN_LIGHT] = "greenChannelMinLight";
-    m_parameterName[GREEN_CHANNEL_MAX_LIGHT] = "greenChannelMaxLight";
-    m_parameterName[GREEN_CHANNEL_MIN_MEDIUM] = "greenChannelMinMedium";
-    m_parameterName[GREEN_CHANNEL_MAX_MEDIUM] = "greenChannelMaxMedium";
-    m_parameterName[GREEN_CHANNEL_MIN_STRONG] = "greenChannelMinStrong";
-    m_parameterName[GREEN_CHANNEL_MAX_STRONG] = "greenChannelMaxStrong";
-
-    m_parameterName[BLUE_CHANNEL_MIN_LIGHT] = "blueChannelMinLight";
-    m_parameterName[BLUE_CHANNEL_MAX_LIGHT] = "blueChannelMaxLight";
-    m_parameterName[BLUE_CHANNEL_MIN_MEDIUM] = "blueChannelMinMedium";
-    m_parameterName[BLUE_CHANNEL_MAX_MEDIUM] = "blueChannelMaxMedium";
-    m_parameterName[BLUE_CHANNEL_MIN_STRONG] = "blueChannelMinStrong";
-    m_parameterName[BLUE_CHANNEL_MAX_STRONG] = "blueChannelMaxStrong";
+    m_parameterName[LIGHT_TEMPERATURE] = "lightTemperature";
+    m_parameterName[MEDIUM_TEMPERATURE] = "mediumTemperature";
+    m_parameterName[STRONG_TEMPERATURE] = "strongTemperature";
 }
 
 // Define parameter default value:
@@ -143,30 +123,10 @@ void Parameters::defineParameterDefaultValues()
     setParameter(SCREEN_BREAK_MIN, "20");
     setParameter(SCREEN_BREAK_MAX, "100");
     setParameter(BLUE_LIGHT_REDUCER_ENABLED, "1");
-    setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "3");
+    setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "1");
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(START_BLYNK_AT_LOGIN, "0");
-    setParameter(BLUE_CHANNEL_MIN_DEFAULT, "0");
-    setParameter(BLUE_CHANNEL_MAX_DEFAULT, "255");
-
-    setParameter(RED_CHANNEL_MIN_LIGHT, "0");
-    setParameter(RED_CHANNEL_MAX_LIGHT, "255");
-    setParameter(RED_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(RED_CHANNEL_MAX_MEDIUM, "255");
-    setParameter(RED_CHANNEL_MIN_STRONG, "0");
-    setParameter(RED_CHANNEL_MAX_STRONG, "255");
-
-    setParameter(GREEN_CHANNEL_MIN_LIGHT, "0");
-    setParameter(GREEN_CHANNEL_MAX_LIGHT, "212");
-    setParameter(GREEN_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(GREEN_CHANNEL_MAX_MEDIUM, "188");
-    setParameter(GREEN_CHANNEL_MIN_STRONG, "0");
-    setParameter(GREEN_CHANNEL_MAX_STRONG, "170");
-
-    setParameter(BLUE_CHANNEL_MIN_LIGHT, "0");
-    setParameter(BLUE_CHANNEL_MAX_LIGHT, "168");
-    setParameter(BLUE_CHANNEL_MIN_MEDIUM, "0");
-    setParameter(BLUE_CHANNEL_MAX_MEDIUM, "118");
-    setParameter(BLUE_CHANNEL_MIN_STRONG, "0");
-    setParameter(BLUE_CHANNEL_MAX_STRONG, "84");
+    setParameter(LIGHT_TEMPERATURE, "4000");
+    setParameter(MEDIUM_TEMPERATURE, "3000");
+    setParameter(STRONG_TEMPERATURE, "2000");
 }

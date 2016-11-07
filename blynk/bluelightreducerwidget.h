@@ -18,7 +18,7 @@ public:
     explicit BlueLightReducerWidget(QWidget *parent = 0);
 
     // Update:
-    void update(int iStrength);
+    void update(const Parameters::Strength &eStrength);
 
     // Set parameters:
     void setParameters(Parameters *pParameters);

@@ -5,6 +5,8 @@
 #include <QDebug>
 
 // Application:
+#include "blynk.h"
+#include "controller.h"
 #include "bluelightreducerwidget.h"
 
 // Constructor:
@@ -59,18 +61,15 @@ void BlueLightReducerWidget::onButtonStrongClicked()
 }
 
 // Update:
-void BlueLightReducerWidget::update(int iStrength)
+void BlueLightReducerWidget::update(const Parameters::Strength &eStrength)
 {
-    Parameters::Strength eStrength = (Parameters::Strength)iStrength;
-    QColor lightButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_LIGHT).toInt(),
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_LIGHT).toInt(),
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_LIGHT).toInt());
-    QColor mediumButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_MEDIUM).toInt(),
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_MEDIUM).toInt(),
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_MEDIUM).toInt());
-    QColor strongButtonColor = QColor(m_pParameters->parameter(Parameters::RED_CHANNEL_MAX_STRONG).toInt(),
-        m_pParameters->parameter(Parameters::GREEN_CHANNEL_MAX_STRONG).toInt(),
-        m_pParameters->parameter(Parameters::BLUE_CHANNEL_MAX_STRONG).toInt());
+    Controller *pController = Blynk::instance()->controller();
+
+    QColor lightButtonColor = pController->colorForStrength(Parameters::LIGHT);
+    QColor mediumButtonColor = pController->colorForStrength(Parameters::MEDIUM);
+    QColor strongButtonColor = pController->colorForStrength(Parameters::STRONG);
+
+    qDebug() << "TOTO: " << lightButtonColor.red() << lightButtonColor.green() << lightButtonColor.blue();
 
     setButtonColor(m_pLightButton, lightButtonColor);
     setButtonColor(m_pMediumButton, mediumButtonColor);
@@ -85,7 +84,7 @@ void BlueLightReducerWidget::update(int iStrength)
 void BlueLightReducerWidget::setParameters(Parameters *pParameters)
 {
     m_pParameters = pParameters;
-    update(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
+    update((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
 }
 
 // Set button color:
@@ -99,3 +98,4 @@ void BlueLightReducerWidget::setButtonColor(QPushButton *pButton, const QColor &
         pButton->setStyleSheet(QString("background-color: #%1%2%3").arg(sRed).arg(sGreen).arg(sBlue));
     }
 }
+

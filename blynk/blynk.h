@@ -29,6 +29,9 @@ public:
 
     }
 
+    // Return controller:
+    Controller *controller() const;
+
 private:
     // Constructor:
     Blynk(QObject *parent=0);

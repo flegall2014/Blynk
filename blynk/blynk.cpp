@@ -25,6 +25,12 @@ Blynk *Blynk::instance()
     return sBlynk;
 }
 
+// Return controller:
+Controller *Blynk::controller() const
+{
+    return m_pController;
+}
+
 // Startup:
 bool Blynk::startup()
 {

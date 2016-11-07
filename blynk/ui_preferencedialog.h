@@ -41,10 +41,12 @@ public:
     CustomSlider *wBlynkCursorSlider;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_9;
-    QPushButton *pushButton;
+    QPushButton *wBlynkCursorHelp;
     QSpacerItem *horizontalSpacer_5;
+    QLabel *wBlynkCursorState;
     QCheckBox *wBlynkCursorEnabled;
     QHBoxLayout *horizontalLayout_2;
+    QPushButton *wBlynkCursorRandomHelp;
     QCheckBox *wBlynkRandomCheckbox;
     QSpacerItem *horizontalSpacer;
     QLabel *label_3;
@@ -53,22 +55,25 @@ public:
     QGridLayout *gridLayout_3;
     QVBoxLayout *verticalLayout_4;
     QHBoxLayout *horizontalLayout_10;
-    QPushButton *pushButton_4;
+    QPushButton *wScreenBreakHelp;
     QSpacerItem *horizontalSpacer_6;
     QLabel *wScreenBreakState;
     QCheckBox *wScreenBreakEnabled;
     QHBoxLayout *horizontalLayout_3;
     CustomSlider *wScreenBreakSlider;
+    QPushButton *wScreenBreakStrengthHelp;
     QComboBox *wScreenBreakStrengthCombo;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_4;
     QVBoxLayout *verticalLayout_5;
     QHBoxLayout *horizontalLayout_11;
-    QPushButton *pushButton_5;
+    QPushButton *wBlueLightReducerHelp;
     QSpacerItem *horizontalSpacer_7;
+    QLabel *wBlueLightReducerState;
     QCheckBox *wBlueLightReducerEnabled;
     QHBoxLayout *horizontalLayout;
     BlueLightReducerWidget *wBlueLightReducerWidget;
+    QPushButton *wBlueLightReducerStartTimeHelp;
     QLabel *label_8;
     QTimeEdit *wStartTimeEdit;
     QGroupBox *groupBox_5;
@@ -105,10 +110,20 @@ public:
         font.setBold(false);
         font.setWeight(50);
         groupBox_2->setFont(font);
-        groupBox_2->setStyleSheet(QLatin1String(" QGroupBox {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-" stop: 0 #E0E0E0, stop: 1 #FFFFFF);\n"
-"};\n"
+        groupBox_2->setStyleSheet(QLatin1String("QGroupBox\n"
+"{\n"
+"    background-color:transparent;\n"
+"    border: 1px solid #0b477b;\n"
+"    margin-top: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title\n"
+"{\n"
+"    subcontrol-origin: margin;	\n"
+"    border: 1px solid #0b477b;\n"
+"    color: black;   \n"
+"}\n"
+"\n"
 ""));
         gridLayout_8 = new QGridLayout(groupBox_2);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
@@ -121,17 +136,22 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        wBlynkCursorHelp = new QPushButton(groupBox_2);
+        wBlynkCursorHelp->setObjectName(QStringLiteral("wBlynkCursorHelp"));
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/icons/ico-question.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon1);
+        wBlynkCursorHelp->setIcon(icon1);
 
-        horizontalLayout_9->addWidget(pushButton);
+        horizontalLayout_9->addWidget(wBlynkCursorHelp);
 
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_9->addItem(horizontalSpacer_5);
+
+        wBlynkCursorState = new QLabel(groupBox_2);
+        wBlynkCursorState->setObjectName(QStringLiteral("wBlynkCursorState"));
+
+        horizontalLayout_9->addWidget(wBlynkCursorState);
 
         wBlynkCursorEnabled = new QCheckBox(groupBox_2);
         wBlynkCursorEnabled->setObjectName(QStringLiteral("wBlynkCursorEnabled"));
@@ -151,6 +171,12 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        wBlynkCursorRandomHelp = new QPushButton(groupBox_2);
+        wBlynkCursorRandomHelp->setObjectName(QStringLiteral("wBlynkCursorRandomHelp"));
+        wBlynkCursorRandomHelp->setIcon(icon1);
+
+        horizontalLayout_2->addWidget(wBlynkCursorRandomHelp);
+
         wBlynkRandomCheckbox = new QCheckBox(groupBox_2);
         wBlynkRandomCheckbox->setObjectName(QStringLiteral("wBlynkRandomCheckbox"));
         wBlynkRandomCheckbox->setFont(font1);
@@ -182,21 +208,32 @@ public:
         groupBox_3 = new QGroupBox(PreferenceDialog);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
         groupBox_3->setFont(font);
-        groupBox_3->setStyleSheet(QLatin1String(" QGroupBox {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-" stop: 0 #E0E0E0, stop: 1 #FFFFFF);\n"
-"}"));
+        groupBox_3->setStyleSheet(QLatin1String("QGroupBox\n"
+"{\n"
+"    background-color:transparent;\n"
+"    border: 1px solid #0b477b;\n"
+"    margin-top: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title\n"
+"{\n"
+"    subcontrol-origin: margin;	\n"
+"    border: 1px solid #0b477b;\n"
+"    color: black;   \n"
+"}\n"
+"\n"
+""));
         gridLayout_3 = new QGridLayout(groupBox_3);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        pushButton_4 = new QPushButton(groupBox_3);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setIcon(icon1);
+        wScreenBreakHelp = new QPushButton(groupBox_3);
+        wScreenBreakHelp->setObjectName(QStringLiteral("wScreenBreakHelp"));
+        wScreenBreakHelp->setIcon(icon1);
 
-        horizontalLayout_10->addWidget(pushButton_4);
+        horizontalLayout_10->addWidget(wScreenBreakHelp);
 
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -226,8 +263,19 @@ public:
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         wScreenBreakSlider = new CustomSlider(groupBox_3);
         wScreenBreakSlider->setObjectName(QStringLiteral("wScreenBreakSlider"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(wScreenBreakSlider->sizePolicy().hasHeightForWidth());
+        wScreenBreakSlider->setSizePolicy(sizePolicy);
 
         horizontalLayout_3->addWidget(wScreenBreakSlider);
+
+        wScreenBreakStrengthHelp = new QPushButton(groupBox_3);
+        wScreenBreakStrengthHelp->setObjectName(QStringLiteral("wScreenBreakStrengthHelp"));
+        wScreenBreakStrengthHelp->setIcon(icon1);
+
+        horizontalLayout_3->addWidget(wScreenBreakStrengthHelp);
 
         wScreenBreakStrengthCombo = new QComboBox(groupBox_3);
         wScreenBreakStrengthCombo->setObjectName(QStringLiteral("wScreenBreakStrengthCombo"));
@@ -243,25 +291,41 @@ public:
         groupBox_4 = new QGroupBox(PreferenceDialog);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         groupBox_4->setFont(font);
-        groupBox_4->setStyleSheet(QLatin1String(" QGroupBox {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-" stop: 0 #E0E0E0, stop: 1 #FFFFFF);\n"
-"}"));
+        groupBox_4->setStyleSheet(QLatin1String("QGroupBox\n"
+"{\n"
+"    background-color:transparent;\n"
+"    border: 1px solid #0b477b;\n"
+"    margin-top: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title\n"
+"{\n"
+"    subcontrol-origin: margin;	\n"
+"    border: 1px solid #0b477b;\n"
+"    color: black;   \n"
+"}\n"
+"\n"
+""));
         gridLayout_4 = new QGridLayout(groupBox_4);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         horizontalLayout_11 = new QHBoxLayout();
         horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
-        pushButton_5 = new QPushButton(groupBox_4);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setIcon(icon1);
+        wBlueLightReducerHelp = new QPushButton(groupBox_4);
+        wBlueLightReducerHelp->setObjectName(QStringLiteral("wBlueLightReducerHelp"));
+        wBlueLightReducerHelp->setIcon(icon1);
 
-        horizontalLayout_11->addWidget(pushButton_5);
+        horizontalLayout_11->addWidget(wBlueLightReducerHelp);
 
         horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_11->addItem(horizontalSpacer_7);
+
+        wBlueLightReducerState = new QLabel(groupBox_4);
+        wBlueLightReducerState->setObjectName(QStringLiteral("wBlueLightReducerState"));
+
+        horizontalLayout_11->addWidget(wBlueLightReducerState);
 
         wBlueLightReducerEnabled = new QCheckBox(groupBox_4);
         wBlueLightReducerEnabled->setObjectName(QStringLiteral("wBlueLightReducerEnabled"));
@@ -279,13 +343,18 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         wBlueLightReducerWidget = new BlueLightReducerWidget(groupBox_4);
         wBlueLightReducerWidget->setObjectName(QStringLiteral("wBlueLightReducerWidget"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(wBlueLightReducerWidget->sizePolicy().hasHeightForWidth());
         wBlueLightReducerWidget->setSizePolicy(sizePolicy);
 
         horizontalLayout->addWidget(wBlueLightReducerWidget);
+
+        wBlueLightReducerStartTimeHelp = new QPushButton(groupBox_4);
+        wBlueLightReducerStartTimeHelp->setObjectName(QStringLiteral("wBlueLightReducerStartTimeHelp"));
+        wBlueLightReducerStartTimeHelp->setMinimumSize(QSize(24, 0));
+        wBlueLightReducerStartTimeHelp->setMaximumSize(QSize(24, 16777215));
+        wBlueLightReducerStartTimeHelp->setIcon(icon1);
+
+        horizontalLayout->addWidget(wBlueLightReducerStartTimeHelp);
 
         label_8 = new QLabel(groupBox_4);
         label_8->setObjectName(QStringLiteral("label_8"));
@@ -295,6 +364,68 @@ public:
 
         wStartTimeEdit = new QTimeEdit(groupBox_4);
         wStartTimeEdit->setObjectName(QStringLiteral("wStartTimeEdit"));
+        wStartTimeEdit->setStyleSheet(QLatin1String("QSpinBox {\n"
+"    padding-right: 15px; /* make room for the arrows */\n"
+"    border-image: url(:/images/frame.png) 4;\n"
+"    border-width: 3;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button {\n"
+"    subcontrol-origin: border;\n"
+"    subcontrol-position: top right; /* position at the top right corner */\n"
+"\n"
+"    width: 16px; /* 16 + 2*1px border-width = 15px padding + 3px parent border */\n"
+"    border-image: url(:/images/spinup.png) 1;\n"
+"    border-width: 1px;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button:hover {\n"
+"    border-image: url(:/images/spinup_hover.png) 1;\n"
+"}\n"
+"\n"
+"QSpinBox::up-button:pressed {\n"
+"    border-image: url(:/images/spinup_pressed.png) 1;\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow {\n"
+"    image: url(:/images/up_arrow.png);\n"
+"    width: 7px;\n"
+"    height: 7px;\n"
+"}\n"
+"\n"
+"QSpinBox::up-arrow:disabled, QSpinBox::up-arrow:off { /* off state when value is max */\n"
+"   image: url(:/images/up_arrow_disabled.png);\n"
+"}\n"
+"\n"
+"QSpinBox::down-button {\n"
+"    subcontrol-origin: border;\n"
+"    sub"
+                        "control-position: bottom right; /* position at bottom right corner */\n"
+"\n"
+"    width: 16px;\n"
+"    border-image: url(:/images/spindown.png) 1;\n"
+"    border-width: 1px;\n"
+"    border-top-width: 0;\n"
+"}\n"
+"\n"
+"QSpinBox::down-button:hover {\n"
+"    border-image: url(:/images/spindown_hover.png) 1;\n"
+"}\n"
+"\n"
+"QSpinBox::down-button:pressed {\n"
+"    border-image: url(:/images/spindown_pressed.png) 1;\n"
+"}\n"
+"\n"
+"QSpinBox::down-arrow {\n"
+"    image: url(:/images/down_arrow.png);\n"
+"    width: 7px;\n"
+"    height: 7px;\n"
+"}\n"
+"\n"
+"QSpinBox::down-arrow:disabled,\n"
+"QSpinBox::down-arrow:off { /* off state when value in min */\n"
+"   image: url(:/images/down_arrow_disabled.png);\n"
+"}"));
 
         horizontalLayout->addWidget(wStartTimeEdit);
 
@@ -307,10 +438,21 @@ public:
         groupBox_5 = new QGroupBox(PreferenceDialog);
         groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
         groupBox_5->setFont(font);
-        groupBox_5->setStyleSheet(QLatin1String(" QGroupBox {\n"
-" background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-" stop: 0 #E0E0E0, stop: 1 #FFFFFF);\n"
-"}"));
+        groupBox_5->setStyleSheet(QLatin1String("QGroupBox\n"
+"{\n"
+"    background-color:transparent;\n"
+"    border: 1px solid #0b477b;\n"
+"    margin-top: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title\n"
+"{\n"
+"    subcontrol-origin: margin;	\n"
+"    border: 1px solid #0b477b;\n"
+"    color: black;   \n"
+"}\n"
+"\n"
+""));
         gridLayout_5 = new QGridLayout(groupBox_5);
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         horizontalLayout_5 = new QHBoxLayout();
@@ -372,14 +514,17 @@ public:
     {
         PreferenceDialog->setWindowTitle(QApplication::translate("PreferenceDialog", "Preferences", 0));
         groupBox_2->setTitle(QApplication::translate("PreferenceDialog", "Blynk Cursor", 0));
-        pushButton->setText(QString());
+        wBlynkCursorHelp->setText(QString());
+        wBlynkCursorState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
         wBlynkCursorEnabled->setText(QApplication::translate("PreferenceDialog", "Disable", 0));
+        wBlynkCursorRandomHelp->setText(QString());
         wBlynkRandomCheckbox->setText(QApplication::translate("PreferenceDialog", "Random", 0));
         label_3->setText(QApplication::translate("PreferenceDialog", "Blinks a minute", 0));
         groupBox_3->setTitle(QApplication::translate("PreferenceDialog", "Screen Break", 0));
-        pushButton_4->setText(QString());
+        wScreenBreakHelp->setText(QString());
         wScreenBreakState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
         wScreenBreakEnabled->setText(QApplication::translate("PreferenceDialog", "Disable", 0));
+        wScreenBreakStrengthHelp->setText(QString());
         wScreenBreakStrengthCombo->clear();
         wScreenBreakStrengthCombo->insertItems(0, QStringList()
          << QApplication::translate("PreferenceDialog", "LIGHT", 0)
@@ -387,8 +532,10 @@ public:
          << QApplication::translate("PreferenceDialog", "STRONG", 0)
         );
         groupBox_4->setTitle(QApplication::translate("PreferenceDialog", "Blue Light Reducer", 0));
-        pushButton_5->setText(QString());
+        wBlueLightReducerHelp->setText(QString());
+        wBlueLightReducerState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
         wBlueLightReducerEnabled->setText(QApplication::translate("PreferenceDialog", "Disable", 0));
+        wBlueLightReducerStartTimeHelp->setText(QString());
         label_8->setText(QApplication::translate("PreferenceDialog", "Turn on at", 0));
         groupBox_5->setTitle(QApplication::translate("PreferenceDialog", "Starter", 0));
         wStartBlynkAtLogin->setText(QApplication::translate("PreferenceDialog", "Start Blynk at login", 0));
