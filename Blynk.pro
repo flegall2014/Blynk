@@ -4,4 +4,5 @@ SUBDIRS += \
     singleapplication \
     gammaramp \
     utils \
-    blynk
+    blynk \
+    fluxlib

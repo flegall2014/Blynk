@@ -8,13 +8,13 @@ QT       += core gui xml widgets
 
 TEMPLATE = app
 
-INCLUDEPATH += $$PWD/../utils ../singleapplication ../gammaramp
+INCLUDEPATH += $$PWD/../utils ../singleapplication ../gammaramp ../fluxlib
 
 CONFIG(debug, debug|release) {
-    LIBS += -L$$PWD/../bin/ -lutilsd -lsingleapplicationd -lgammarampd
+    LIBS += -L$$PWD/../bin/ -lutilsd -lsingleapplicationd -lgammarampd -lfluxlibd
     TARGET = blynkd
 } else {
-    LIBS += -L$$PWD/../bin/ -lutils -lsingleapplication -lgammaramp
+    LIBS += -L$$PWD/../bin/ -lutils -lsingleapplication -lgammaramp -lfluxlib
     TARGET = blynk
 }
 
