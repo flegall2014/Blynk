@@ -30,6 +30,12 @@ public:
     // Set strength:
     void setStrength(const Parameters::Strength &eStrength);
 
+    // Set color:
+    void setColor(const QColor &color);
+
+    // Set temperature:
+    void setTemperature(int iTemperature);
+
     // Return strength:
     const Parameters::Strength &strength() const;
 

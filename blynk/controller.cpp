@@ -15,6 +15,7 @@
 #include "preferencedialog.h"
 #include "utils.h"
 #include "blynk.h"
+#include "fluxlib.h"
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
@@ -425,6 +426,9 @@ void Controller::onContextMenuAboutToShow()
 // Return reference color for given temperature in Kelvin:
 QColor Controller::referenceColor(int iTemperature) const
 {
+    return Fluxlib::colorForTemperature(iTemperature);
+
+    /* Keep this as a reference
     if (iTemperature <= 1700)
         return QColor(255, 122, 0);
     if ((iTemperature > 1700) && (iTemperature <= 1850))
@@ -452,6 +456,7 @@ QColor Controller::referenceColor(int iTemperature) const
     if (iTemperature > 6200)
         return QColor(255, 249, 255);
     return QColor(255, 255, 255);
+    */
 }
 
 // Return color for strength:

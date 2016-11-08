@@ -13,6 +13,7 @@
 #include <gammaramp.h>
 #include "blynk.h"
 #include "controller.h"
+#include <fluxlib.h>
 #define MAX_LOOP_TIMES 1
 
 // Constructor:
@@ -140,8 +141,12 @@ void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
 {
     // Set strength:
     m_eStrength = eStrength;
-    QColor targetColor = Blynk::instance()->controller()->colorForStrength(eStrength);
+    setColor(Blynk::instance()->controller()->colorForStrength(eStrength));
+}
 
+// Set color:
+void DimmerWidget::setColor(const QColor &targetColor)
+{
     // Default:
     int iMinRed = 0;
     int iMaxRed = targetColor.red();
@@ -163,6 +168,12 @@ void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
         GammaRamp gammaRamp;
         gammaRamp.setBlueLightReducerParameters(iMinRed, iMaxRed, iMinGreen, iMaxGreen, iMinBlue, iMaxBlue);
     }
+}
+
+// Set temperature:
+void DimmerWidget::setTemperature(int iTemperature)
+{
+    setColor(Fluxlib::colorForTemperature(iTemperature));
 }
 
 // Return strength:
