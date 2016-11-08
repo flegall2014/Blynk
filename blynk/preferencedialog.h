@@ -85,6 +85,9 @@ public slots:
     // Start Blynk at login:
     void onStartBlynkAtLoginChanged(bool bChecked);
 
+    // Temperature changed:
+    void onTemperatureChanged(int iValue);
+
     // Done:
     void onDone();
 

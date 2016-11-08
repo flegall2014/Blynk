@@ -8,6 +8,7 @@
 // Application:
 #include "preferencedialog.h"
 #include "ui_preferencedialog.h"
+#include "blynk.h"
 #include "controller.h"
 #include "customtooltip.h"
 
@@ -49,6 +50,9 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
 
     // Start Blynk at login:
     connect(ui->wStartBlynkAtLogin, &QCheckBox::toggled, this, &PreferenceDialog::onStartBlynkAtLoginChanged);
+
+    // Temperature slider:
+    connect(ui->wTemperatureSlider, &QSlider::valueChanged, this, &PreferenceDialog::onTemperatureChanged);
 
     // Done:
     connect(ui->wDoneButton, &QPushButton::clicked, this, &PreferenceDialog::onDone);
@@ -244,6 +248,12 @@ void PreferenceDialog::onStartTimeEditChanged(const QTime &tTime)
 void PreferenceDialog::onStartBlynkAtLoginChanged(bool bChecked)
 {
     m_pParameters->setParameter(Parameters::START_BLYNK_AT_LOGIN, QString::number((int)bChecked));
+}
+
+// Temperature changed:
+void PreferenceDialog::onTemperatureChanged(int iValue)
+{
+    Blynk::instance()->controller()->setTemperature(iValue);
 }
 
 // Done:

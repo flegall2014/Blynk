@@ -22,6 +22,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -51,18 +52,6 @@ public:
     QSpacerItem *horizontalSpacer;
     QLabel *label_3;
     QComboBox *wBlynkPerMinuteValues;
-    QGroupBox *groupBox_3;
-    QGridLayout *gridLayout_3;
-    QVBoxLayout *verticalLayout_4;
-    QHBoxLayout *horizontalLayout_10;
-    QPushButton *wScreenBreakHelp;
-    QSpacerItem *horizontalSpacer_6;
-    QLabel *wScreenBreakState;
-    QCheckBox *wScreenBreakEnabled;
-    QHBoxLayout *horizontalLayout_3;
-    CustomSlider *wScreenBreakSlider;
-    QPushButton *wScreenBreakStrengthHelp;
-    QComboBox *wScreenBreakStrengthCombo;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_4;
     QVBoxLayout *verticalLayout_5;
@@ -82,11 +71,24 @@ public:
     QCheckBox *wStartBlynkAtLogin;
     QSpacerItem *horizontalSpacer_4;
     QPushButton *wDoneButton;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_3;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_10;
+    QPushButton *wScreenBreakHelp;
+    QSpacerItem *horizontalSpacer_6;
+    QLabel *wScreenBreakState;
+    QCheckBox *wScreenBreakEnabled;
+    QHBoxLayout *horizontalLayout_3;
+    CustomSlider *wScreenBreakSlider;
+    QPushButton *wScreenBreakStrengthHelp;
+    QComboBox *wScreenBreakStrengthCombo;
     QVBoxLayout *verticalLayout;
     QWidget *widget;
     QGridLayout *gridLayout_2;
     QHBoxLayout *horizontalLayout_7;
     ImageWidget *splashWidget;
+    QSlider *wTemperatureSlider;
 
     void setupUi(QDialog *PreferenceDialog)
     {
@@ -205,89 +207,6 @@ public:
 
         gridLayout->addWidget(groupBox_2, 1, 0, 1, 1);
 
-        groupBox_3 = new QGroupBox(PreferenceDialog);
-        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setFont(font);
-        groupBox_3->setStyleSheet(QLatin1String("QGroupBox\n"
-"{\n"
-"    background-color:transparent;\n"
-"    border: 1px solid #0b477b;\n"
-"    margin-top: 5px;\n"
-"}\n"
-"\n"
-"QGroupBox::title\n"
-"{\n"
-"    subcontrol-origin: margin;	\n"
-"    border: 1px solid #0b477b;\n"
-"    color: black;   \n"
-"}\n"
-"\n"
-""));
-        gridLayout_3 = new QGridLayout(groupBox_3);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        wScreenBreakHelp = new QPushButton(groupBox_3);
-        wScreenBreakHelp->setObjectName(QStringLiteral("wScreenBreakHelp"));
-        wScreenBreakHelp->setIcon(icon1);
-
-        horizontalLayout_10->addWidget(wScreenBreakHelp);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_10->addItem(horizontalSpacer_6);
-
-        wScreenBreakState = new QLabel(groupBox_3);
-        wScreenBreakState->setObjectName(QStringLiteral("wScreenBreakState"));
-        QFont font2;
-        font2.setPointSize(10);
-        wScreenBreakState->setFont(font2);
-
-        horizontalLayout_10->addWidget(wScreenBreakState);
-
-        wScreenBreakEnabled = new QCheckBox(groupBox_3);
-        wScreenBreakEnabled->setObjectName(QStringLiteral("wScreenBreakEnabled"));
-        wScreenBreakEnabled->setFont(font1);
-
-        horizontalLayout_10->addWidget(wScreenBreakEnabled);
-
-
-        verticalLayout_4->addLayout(horizontalLayout_10);
-
-
-        gridLayout_3->addLayout(verticalLayout_4, 0, 0, 1, 1);
-
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        wScreenBreakSlider = new CustomSlider(groupBox_3);
-        wScreenBreakSlider->setObjectName(QStringLiteral("wScreenBreakSlider"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(wScreenBreakSlider->sizePolicy().hasHeightForWidth());
-        wScreenBreakSlider->setSizePolicy(sizePolicy);
-
-        horizontalLayout_3->addWidget(wScreenBreakSlider);
-
-        wScreenBreakStrengthHelp = new QPushButton(groupBox_3);
-        wScreenBreakStrengthHelp->setObjectName(QStringLiteral("wScreenBreakStrengthHelp"));
-        wScreenBreakStrengthHelp->setIcon(icon1);
-
-        horizontalLayout_3->addWidget(wScreenBreakStrengthHelp);
-
-        wScreenBreakStrengthCombo = new QComboBox(groupBox_3);
-        wScreenBreakStrengthCombo->setObjectName(QStringLiteral("wScreenBreakStrengthCombo"));
-
-        horizontalLayout_3->addWidget(wScreenBreakStrengthCombo);
-
-
-        gridLayout_3->addLayout(horizontalLayout_3, 1, 0, 1, 1);
-
-
-        gridLayout->addWidget(groupBox_3, 2, 0, 1, 1);
-
         groupBox_4 = new QGroupBox(PreferenceDialog);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         groupBox_4->setFont(font);
@@ -343,6 +262,9 @@ public:
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         wBlueLightReducerWidget = new BlueLightReducerWidget(groupBox_4);
         wBlueLightReducerWidget->setObjectName(QStringLiteral("wBlueLightReducerWidget"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(wBlueLightReducerWidget->sizePolicy().hasHeightForWidth());
         wBlueLightReducerWidget->setSizePolicy(sizePolicy);
 
@@ -479,6 +401,86 @@ public:
 
         gridLayout->addWidget(groupBox_5, 4, 0, 1, 1);
 
+        groupBox_3 = new QGroupBox(PreferenceDialog);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        groupBox_3->setFont(font);
+        groupBox_3->setStyleSheet(QLatin1String("QGroupBox\n"
+"{\n"
+"    background-color:transparent;\n"
+"    border: 1px solid #0b477b;\n"
+"    margin-top: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title\n"
+"{\n"
+"    subcontrol-origin: margin;	\n"
+"    border: 1px solid #0b477b;\n"
+"    color: black;   \n"
+"}\n"
+"\n"
+""));
+        gridLayout_3 = new QGridLayout(groupBox_3);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        wScreenBreakHelp = new QPushButton(groupBox_3);
+        wScreenBreakHelp->setObjectName(QStringLiteral("wScreenBreakHelp"));
+        wScreenBreakHelp->setIcon(icon1);
+
+        horizontalLayout_10->addWidget(wScreenBreakHelp);
+
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_10->addItem(horizontalSpacer_6);
+
+        wScreenBreakState = new QLabel(groupBox_3);
+        wScreenBreakState->setObjectName(QStringLiteral("wScreenBreakState"));
+        QFont font2;
+        font2.setPointSize(10);
+        wScreenBreakState->setFont(font2);
+
+        horizontalLayout_10->addWidget(wScreenBreakState);
+
+        wScreenBreakEnabled = new QCheckBox(groupBox_3);
+        wScreenBreakEnabled->setObjectName(QStringLiteral("wScreenBreakEnabled"));
+        wScreenBreakEnabled->setFont(font1);
+
+        horizontalLayout_10->addWidget(wScreenBreakEnabled);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_10);
+
+
+        gridLayout_3->addLayout(verticalLayout_4, 0, 0, 1, 1);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        wScreenBreakSlider = new CustomSlider(groupBox_3);
+        wScreenBreakSlider->setObjectName(QStringLiteral("wScreenBreakSlider"));
+        sizePolicy.setHeightForWidth(wScreenBreakSlider->sizePolicy().hasHeightForWidth());
+        wScreenBreakSlider->setSizePolicy(sizePolicy);
+
+        horizontalLayout_3->addWidget(wScreenBreakSlider);
+
+        wScreenBreakStrengthHelp = new QPushButton(groupBox_3);
+        wScreenBreakStrengthHelp->setObjectName(QStringLiteral("wScreenBreakStrengthHelp"));
+        wScreenBreakStrengthHelp->setIcon(icon1);
+
+        horizontalLayout_3->addWidget(wScreenBreakStrengthHelp);
+
+        wScreenBreakStrengthCombo = new QComboBox(groupBox_3);
+        wScreenBreakStrengthCombo->setObjectName(QStringLiteral("wScreenBreakStrengthCombo"));
+
+        horizontalLayout_3->addWidget(wScreenBreakStrengthCombo);
+
+
+        gridLayout_3->addLayout(horizontalLayout_3, 1, 0, 1, 1);
+
+
+        gridLayout->addWidget(groupBox_3, 2, 0, 1, 1);
+
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         widget = new QWidget(PreferenceDialog);
@@ -504,6 +506,14 @@ public:
 
         gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
 
+        wTemperatureSlider = new QSlider(PreferenceDialog);
+        wTemperatureSlider->setObjectName(QStringLiteral("wTemperatureSlider"));
+        wTemperatureSlider->setMinimum(1000);
+        wTemperatureSlider->setMaximum(10000);
+        wTemperatureSlider->setOrientation(Qt::Horizontal);
+
+        gridLayout->addWidget(wTemperatureSlider, 5, 0, 1, 1);
+
 
         retranslateUi(PreferenceDialog);
 
@@ -520,6 +530,15 @@ public:
         wBlynkCursorRandomHelp->setText(QString());
         wBlynkRandomCheckbox->setText(QApplication::translate("PreferenceDialog", "Random", 0));
         label_3->setText(QApplication::translate("PreferenceDialog", "Blinks a minute", 0));
+        groupBox_4->setTitle(QApplication::translate("PreferenceDialog", "Blue Light Reducer", 0));
+        wBlueLightReducerHelp->setText(QString());
+        wBlueLightReducerState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
+        wBlueLightReducerEnabled->setText(QApplication::translate("PreferenceDialog", "Disable", 0));
+        wBlueLightReducerStartTimeHelp->setText(QString());
+        label_8->setText(QApplication::translate("PreferenceDialog", "Turn on at", 0));
+        groupBox_5->setTitle(QApplication::translate("PreferenceDialog", "Starter", 0));
+        wStartBlynkAtLogin->setText(QApplication::translate("PreferenceDialog", "Start Blynk at login", 0));
+        wDoneButton->setText(QApplication::translate("PreferenceDialog", "DONE", 0));
         groupBox_3->setTitle(QApplication::translate("PreferenceDialog", "Screen Break", 0));
         wScreenBreakHelp->setText(QString());
         wScreenBreakState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
@@ -531,15 +550,6 @@ public:
          << QApplication::translate("PreferenceDialog", "MEDIUM", 0)
          << QApplication::translate("PreferenceDialog", "STRONG", 0)
         );
-        groupBox_4->setTitle(QApplication::translate("PreferenceDialog", "Blue Light Reducer", 0));
-        wBlueLightReducerHelp->setText(QString());
-        wBlueLightReducerState->setText(QApplication::translate("PreferenceDialog", "TextLabel", 0));
-        wBlueLightReducerEnabled->setText(QApplication::translate("PreferenceDialog", "Disable", 0));
-        wBlueLightReducerStartTimeHelp->setText(QString());
-        label_8->setText(QApplication::translate("PreferenceDialog", "Turn on at", 0));
-        groupBox_5->setTitle(QApplication::translate("PreferenceDialog", "Starter", 0));
-        wStartBlynkAtLogin->setText(QApplication::translate("PreferenceDialog", "Start Blynk at login", 0));
-        wDoneButton->setText(QApplication::translate("PreferenceDialog", "DONE", 0));
     } // retranslateUi
 
 };

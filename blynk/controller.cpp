@@ -35,13 +35,16 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
     m_bBlynkCursorRandomModeOn(false),
-    m_iScreenBreakDelay(0)
+    m_iScreenBreakDelay(0),
+    m_iCurrentTemperature(0)
 {
     m_pDimmerWidget->setParameters(m_pParameters);
     connect(m_pParameters, &Parameters::parameterChanged, m_pDimmerWidget, &DimmerWidget::updateUI);
 
     m_pPreferenceDialog->setParameters(m_pParameters);
     connect(m_pParameters, &Parameters::parameterChanged, m_pPreferenceDialog, &PreferenceDialog::updateUI);
+
+    connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
 
     m_tApplicationTimer.setInterval(1000);
     connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
@@ -84,6 +87,9 @@ bool Controller::startup()
 
     // Start GUI:
     startGUI();
+
+    // Set current temperature:
+    m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
 
     // Start application timer:
     m_tApplicationTimer.start();
@@ -145,16 +151,16 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             }
         }
         else
-        if (sTag == "Menu")
-        {
-            bool bIsExclusive = (bool)node.attributes()["exclusive"].toInt();
-            QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
-            pSubMenu->setEnabled(bEnabled);
-            pSubMenu->setProperty("exclusiveMenu", bIsExclusive);
-            pSubMenu->setEnabled(bEnabled);
-            pRootMenu->addMenu(pSubMenu);
-            createMenu(node, pSubMenu);
-        }
+            if (sTag == "Menu")
+            {
+                bool bIsExclusive = (bool)node.attributes()["exclusive"].toInt();
+                QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
+                pSubMenu->setEnabled(bEnabled);
+                pSubMenu->setProperty("exclusiveMenu", bIsExclusive);
+                pSubMenu->setEnabled(bEnabled);
+                pRootMenu->addMenu(pSubMenu);
+                createMenu(node, pSubMenu);
+            }
     }
 }
 
@@ -245,35 +251,35 @@ void Controller::onActionTriggered()
             }
         }
         else
-        // Screen break disabled for an hour:
-        if (sObjectName == "screenBreakDisabledForOneHour")
-        {
-            m_iScreenBreakDelay = ONE_HOUR;
-            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
-            m_iScreenBreakElapsedTime = 0;
-        }
-        else
-        // Screen break disabled for three hour:
-        if (sObjectName == "screenBreakDisabledForThreeHours")
-        {
-            m_iScreenBreakDelay = THREE_HOURS;
-            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
-            m_iScreenBreakElapsedTime = 0;
-        }
-        else
-        // Screen break disabled until tomorrow:
-        if (sObjectName == "screenBreakDisabledUntilTomorrow")
-        {
-            m_iScreenBreakDelay = ONE_DAY;
-            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
-            m_iScreenBreakElapsedTime = 0;
-        }
-        else
-        // Quit:
-        if (sObjectName == "quitBlynk")
-        {
-            qApp->quit();
-        }
+            // Screen break disabled for an hour:
+            if (sObjectName == "screenBreakDisabledForOneHour")
+            {
+                m_iScreenBreakDelay = ONE_HOUR;
+                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
+                m_iScreenBreakElapsedTime = 0;
+            }
+            else
+                // Screen break disabled for three hour:
+                if (sObjectName == "screenBreakDisabledForThreeHours")
+                {
+                    m_iScreenBreakDelay = THREE_HOURS;
+                    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
+                    m_iScreenBreakElapsedTime = 0;
+                }
+                else
+                    // Screen break disabled until tomorrow:
+                    if (sObjectName == "screenBreakDisabledUntilTomorrow")
+                    {
+                        m_iScreenBreakDelay = ONE_DAY;
+                        m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
+                        m_iScreenBreakElapsedTime = 0;
+                    }
+                    else
+                        // Quit:
+                        if (sObjectName == "quitBlynk")
+                        {
+                            qApp->quit();
+                        }
     }
 }
 
@@ -396,14 +402,13 @@ void Controller::onApplicationTimerTimeOut()
         if (bBlueLightReducerEnabled)
         {
             QTime tTriggerTime = QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME));
-            Parameters::Strength eBlueLightReducerStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
 
             if (QTime::currentTime() < tTriggerTime)
-                m_pDimmerWidget->setStrength(Parameters::NO_STRENGTH);
+                m_pDimmerWidget->setTemperature(0);
             else
-                m_pDimmerWidget->setStrength(eBlueLightReducerStrength);
+                m_pDimmerWidget->setTemperature(m_iCurrentTemperature);
         }
-        else m_pDimmerWidget->setStrength(Parameters::NO_STRENGTH);
+        else m_pDimmerWidget->setTemperature(0);
     }
 
     m_iBlynkCursorElapsedTime++;
@@ -423,8 +428,8 @@ void Controller::onContextMenuAboutToShow()
         m_mActions["screenBreakDisabledUntilTomorrow"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
 }
 
-// Return reference color for given temperature in Kelvin:
-QColor Controller::referenceColor(int iTemperature) const
+// Return color for temperature:
+QColor Controller::colorForTemperature(int iTemperature) const
 {
     return Fluxlib::colorForTemperature(iTemperature);
 
@@ -462,11 +467,31 @@ QColor Controller::referenceColor(int iTemperature) const
 // Return color for strength:
 QColor Controller::colorForStrength(const Parameters::Strength &eStrength)
 {
+    int iTemperature = temperatureForStrength(eStrength);
+    return colorForTemperature(iTemperature);
+}
+
+// Return temperature for strength:
+int Controller::temperatureForStrength(const Parameters::Strength &eStrength)
+{
     if (eStrength == Parameters::LIGHT)
-        return referenceColor(m_pParameters->parameter(Parameters::LIGHT_TEMPERATURE).toInt());
+        return m_pParameters->parameter(Parameters::LIGHT_TEMPERATURE).toInt();
     if (eStrength == Parameters::MEDIUM)
-        return referenceColor(m_pParameters->parameter(Parameters::MEDIUM_TEMPERATURE).toInt());
+        return m_pParameters->parameter(Parameters::MEDIUM_TEMPERATURE).toInt();
     if (eStrength == Parameters::STRONG)
-        return referenceColor(m_pParameters->parameter(Parameters::STRONG_TEMPERATURE).toInt());
-    return QColor(255, 255, 255);
+        return m_pParameters->parameter(Parameters::STRONG_TEMPERATURE).toInt();
+    return 0;
+}
+
+// Parameter changed:
+void Controller::onParameterChanged(const Parameters::Parameter &parameter)
+{
+    if (parameter == Parameters::BLUE_LIGHT_REDUCER_STRENGTH)
+        m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
+}
+
+// Set temperature:
+void Controller::setTemperature(int iTemperature)
+{
+    m_iCurrentTemperature = iTemperature;
 }

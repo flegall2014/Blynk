@@ -6,7 +6,8 @@
 class FLUXLIBSHARED_EXPORT Fluxlib
 {
 public:
-    static QColor colorForTemperature(int temperature);
+    // Return color for temperature:
+    static QColor colorForTemperature(int iTemperature);
 };
 
 #endif // FLUXLIB_H

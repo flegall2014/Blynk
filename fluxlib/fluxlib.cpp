@@ -413,12 +413,16 @@ int main()
 }
 */
 
-QColor Fluxlib::colorForTemperature(int temperature)
+// Return color for temperature:
+QColor Fluxlib::colorForTemperature(int iTemperature)
 {
+    if (iTemperature <= 0)
+        return QColor(255, 255, 255);
+
     double x, y, z, r, g, b;
     struct colourSystem *cs = &SMPTEsystem;
 
-    bbTemp = temperature;
+    bbTemp = iTemperature;
     spectrum_to_xyz(bb_spectrum, &x, &y, &z);
     xyz_to_rgb(cs, x, y, z, &r, &g, &b);
     if (constrain_rgb(&r, &g, &b)) {

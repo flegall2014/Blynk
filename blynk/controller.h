@@ -35,11 +35,17 @@ public:
     // Shutdown:
     virtual void shutdown();
 
-    // Return reference color for given temperature in Kelvin:
-    QColor referenceColor(int iTemperature) const;
+    // Return color for temperature:
+    QColor colorForTemperature(int iTemperature) const;
 
     // Color for strength:
     QColor colorForStrength(const Parameters::Strength &eStrength);
+
+    // Return temperature for strength:
+    int temperatureForStrength(const Parameters::Strength &eStrength);
+
+    // Set temperature:
+    void setTemperature(int iTemperature);
 
 protected:
     // Constructor:
@@ -119,12 +125,18 @@ private:
     // Screen break state:
     int m_iScreenBreakDelay;
 
+    // Current temperature:
+    int m_iCurrentTemperature;
+
 public slots:
     // Action triggered:
     void onActionTriggered();
 
     // Context menu about to show:
     void onContextMenuAboutToShow();
+
+    // Parameter changed:
+    void onParameterChanged(const Parameters::Parameter &parameter);
 };
 
 #endif // CONTROLLER_H
