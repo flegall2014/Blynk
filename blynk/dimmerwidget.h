@@ -28,13 +28,13 @@ public:
     ~DimmerWidget();
 
     // Set strength:
-    void setStrength(const Parameters::Strength &eStrength);
+    bool setStrength(const Parameters::Strength &eStrength);
 
     // Set color:
-    void setColor(const QColor &color);
+    bool setColor(const QColor &startColor, const QColor &stopColor);
 
     // Set temperature:
-    void setTemperature(int iTemperature);
+    bool setTemperature(int iTemperature);
 
     // Return strength:
     const Parameters::Strength &strength() const;
@@ -74,23 +74,11 @@ private:
     // Parameters:
     Parameters *m_pParameters;
 
-    // Min red:
-    int m_iMinRed;
+    // Start color:
+    QColor m_startColor;
 
-    // Max red:
-    int m_iMaxRed;
-
-    // Min green:
-    int m_iMinGreen;
-
-    // Max green:
-    int m_iMaxGreen;
-
-    // Min blue:
-    int m_iMinBlue;
-
-    // Max blue:
-    int m_iMaxBlue;
+    // Stop color:
+    QColor m_stopColor;
 
 public slots:
     // Next image available:

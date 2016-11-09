@@ -88,6 +88,9 @@ public slots:
     // Temperature changed:
     void onTemperatureChanged(int iValue);
 
+    // Test clicked:
+    void onTestClicked();
+
     // Done:
     void onDone();
 

@@ -22,12 +22,8 @@ DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
     ui(new Ui::DimmerWidget),
     m_bDone(false),
     m_pParameters(NULL),
-    m_iMinRed(0),
-    m_iMaxRed(0),
-    m_iMinGreen(0),
-    m_iMaxGreen(0),
-    m_iMinBlue(0),
-    m_iMaxBlue(0)
+    m_startColor(0, 0, 0),
+    m_stopColor(255, 255, 255)
 {
     // Setup UI:
     ui->setupUi(this);
@@ -137,43 +133,31 @@ void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
 
 
 // Set strength:
-void DimmerWidget::setStrength(const Parameters::Strength &eStrength)
+bool DimmerWidget::setStrength(const Parameters::Strength &eStrength)
 {
     // Set strength:
     m_eStrength = eStrength;
-    setColor(Blynk::instance()->controller()->colorForStrength(eStrength));
+    return setColor(m_startColor, Blynk::instance()->controller()->colorForStrength(eStrength));
 }
 
 // Set color:
-void DimmerWidget::setColor(const QColor &targetColor)
+bool DimmerWidget::setColor(const QColor &startColor, const QColor &stopColor)
 {
-    // Default:
-    int iMinRed = 0;
-    int iMaxRed = targetColor.red();
-    int iMinGreen = 0;
-    int iMaxGreen = targetColor.green();
-    int iMinBlue = 0;
-    int iMaxBlue = targetColor.blue();
-
-    if ((m_iMinRed != iMinRed) || (m_iMaxRed != iMaxRed) ||
-            (m_iMinGreen != iMinGreen) || (m_iMaxGreen != iMaxGreen) ||
-                (m_iMinBlue != iMinBlue) || (m_iMaxBlue != iMaxBlue))
+    if ((m_startColor != startColor) || (m_stopColor != stopColor))
     {
-        m_iMinRed = iMinRed;
-        m_iMaxRed = iMaxRed;
-        m_iMinGreen = iMinGreen;
-        m_iMaxGreen = iMaxGreen;
-        m_iMinBlue = iMinBlue;
-        m_iMaxBlue = iMaxBlue;
+        m_startColor = startColor;
+        m_stopColor = stopColor;
         GammaRamp gammaRamp;
-        gammaRamp.setBlueLightReducerParameters(iMinRed, iMaxRed, iMinGreen, iMaxGreen, iMinBlue, iMaxBlue);
+        return gammaRamp.createColorPalette(startColor, stopColor);
     }
+
+    return false;
 }
 
 // Set temperature:
-void DimmerWidget::setTemperature(int iTemperature)
+bool DimmerWidget::setTemperature(int iTemperature)
 {
-    setColor(Fluxlib::colorForTemperature(iTemperature));
+    return setColor(m_startColor, Fluxlib::colorForTemperature(iTemperature));
 }
 
 // Return strength:

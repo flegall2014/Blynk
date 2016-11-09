@@ -102,7 +102,7 @@ BOOL GammaRamp::getDeviceGammaRamp(HDC hDC, LPVOID lpRamp)
 }
 
 // Set color palette:
-BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue)
+bool GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue)
 {
     BOOL bReturn = FALSE;
     HDC hGammaDC = hDC;
@@ -130,15 +130,15 @@ BOOL GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std
     if (hDC == NULL)
         ReleaseDC(NULL, hGammaDC);
 
-    return bReturn;
+    return (bool)bReturn;
 }
 
 // Set blue light parameters:
-void GammaRamp::setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMinGreen, int iMaxGreen, int iMinBlue, int iMaxBlue)
+bool GammaRamp::createColorPalette(const QColor &startColor, const QColor &stopColor)
 {
-    int iDeltaRed = abs(iMaxRed-iMinRed);
-    int iDeltaGreen = abs(iMaxGreen-iMinGreen);
-    int iDeltaBlue = abs(iMaxBlue-iMinBlue);
+    int iDeltaRed = abs(stopColor.red()-startColor.red());
+    int iDeltaGreen = abs(stopColor.green()-startColor.green());
+    int iDeltaBlue = abs(stopColor.blue()-startColor.blue());
 
     double iRedStep = (double)iDeltaRed/(double)255;
     double iGreenStep = (double)iDeltaGreen/(double)255;
@@ -147,20 +147,20 @@ void GammaRamp::setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMin
     std::vector<int> vRed, vGreen, vBlue;
     for (int i=0; i<256; i++)
     {
-        int iRedValue = qRound(qMin(iMinRed, iMaxRed) + i*iRedStep);
+        int iRedValue = qRound(qMin(startColor.red(), stopColor.red()) + i*iRedStep);
         if (iRedValue > 255)
             iRedValue = 255;
         vRed.push_back(iRedValue);
-        int iGreenValue = qRound(qMin(iMinGreen, iMaxGreen) + i*iGreenStep);
+        int iGreenValue = qRound(qMin(startColor.green(), stopColor.green()) + i*iGreenStep);
         if (iGreenValue > 255)
             iGreenValue = 255;
         vGreen.push_back(iGreenValue);
-        int iBlueValue = qRound(qMin(iMinBlue, iMaxBlue) + i*iBlueStep);
+        int iBlueValue = qRound(qMin(startColor.blue(), stopColor.blue()) + i*iBlueStep);
         if (iBlueValue > 255)
             iBlueValue = 255;
         vBlue.push_back(iBlueValue);
     }
 
     // Apply color palette:
-    setColorPalette(NULL, vRed, vGreen, vBlue);
+    return setColorPalette(NULL, vRed, vGreen, vBlue);
 }

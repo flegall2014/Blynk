@@ -495,3 +495,11 @@ void Controller::setTemperature(int iTemperature)
 {
     m_iCurrentTemperature = iTemperature;
 }
+
+// Start test:
+void Controller::startTest()
+{
+    //m_pDimmerWidget->setTemperature(4510);
+    for (int i=4511; i<10000; i++)
+        m_pDimmerWidget->setTemperature(i);
+}

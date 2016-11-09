@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       -= gui
+QT       += core
 
 TEMPLATE = lib
 DEFINES += GAMMARAMP_LIBRARY

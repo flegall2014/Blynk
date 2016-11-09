@@ -4,6 +4,7 @@
 // Qt:
 #include <Windows.h>
 #include <QVector>
+#include <QColor>
 
 // Application:
 #include "gammaramp_global.h"
@@ -18,7 +19,7 @@ public:
     ~GammaRamp();
 
     // Set blue light parameters:
-    void setBlueLightReducerParameters(int iMinRed, int iMaxRed, int iMinGreen, int iMaxGreen, int iMinBlue, int iMaxBlue);
+    bool createColorPalette(const QColor &startColor, const QColor &stopColor);
 
 private:
     // Load library:
@@ -37,7 +38,7 @@ private:
     BOOL getDeviceGammaRamp(HDC hDC, LPVOID lpRamp);
 
     // Set color palette:
-    BOOL setColorPalette(HDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue);
+    bool setColorPalette(HDC, const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue);
 
 protected:
     HMODULE hGDI32;

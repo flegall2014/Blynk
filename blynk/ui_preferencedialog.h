@@ -37,6 +37,11 @@ class Ui_PreferenceDialog
 {
 public:
     QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
+    QWidget *widget;
+    QGridLayout *gridLayout_2;
+    QHBoxLayout *horizontalLayout_7;
+    ImageWidget *splashWidget;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_8;
     CustomSlider *wBlynkCursorSlider;
@@ -83,12 +88,9 @@ public:
     CustomSlider *wScreenBreakSlider;
     QPushButton *wScreenBreakStrengthHelp;
     QComboBox *wScreenBreakStrengthCombo;
-    QVBoxLayout *verticalLayout;
-    QWidget *widget;
-    QGridLayout *gridLayout_2;
-    QHBoxLayout *horizontalLayout_7;
-    ImageWidget *splashWidget;
+    QHBoxLayout *horizontalLayout_4;
     QSlider *wTemperatureSlider;
+    QPushButton *wTestButton;
 
     void setupUi(QDialog *PreferenceDialog)
     {
@@ -105,6 +107,31 @@ public:
         PreferenceDialog->setModal(false);
         gridLayout = new QGridLayout(PreferenceDialog);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        widget = new QWidget(PreferenceDialog);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setMinimumSize(QSize(0, 0));
+        widget->setMaximumSize(QSize(16777215, 16777215));
+        gridLayout_2 = new QGridLayout(widget);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        splashWidget = new ImageWidget(widget);
+        splashWidget->setObjectName(QStringLiteral("splashWidget"));
+        splashWidget->setStyleSheet(QStringLiteral(""));
+
+        horizontalLayout_7->addWidget(splashWidget);
+
+
+        gridLayout_2->addLayout(horizontalLayout_7, 1, 0, 1, 1);
+
+
+        verticalLayout->addWidget(widget);
+
+
+        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
+
         groupBox_2 = new QGroupBox(PreferenceDialog);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         QFont font;
@@ -481,38 +508,23 @@ public:
 
         gridLayout->addWidget(groupBox_3, 2, 0, 1, 1);
 
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        widget = new QWidget(PreferenceDialog);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setMinimumSize(QSize(0, 0));
-        widget->setMaximumSize(QSize(16777215, 16777215));
-        gridLayout_2 = new QGridLayout(widget);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        splashWidget = new ImageWidget(widget);
-        splashWidget->setObjectName(QStringLiteral("splashWidget"));
-        splashWidget->setStyleSheet(QStringLiteral(""));
-
-        horizontalLayout_7->addWidget(splashWidget);
-
-
-        gridLayout_2->addLayout(horizontalLayout_7, 1, 0, 1, 1);
-
-
-        verticalLayout->addWidget(widget);
-
-
-        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
-
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         wTemperatureSlider = new QSlider(PreferenceDialog);
         wTemperatureSlider->setObjectName(QStringLiteral("wTemperatureSlider"));
         wTemperatureSlider->setMinimum(1000);
         wTemperatureSlider->setMaximum(10000);
         wTemperatureSlider->setOrientation(Qt::Horizontal);
 
-        gridLayout->addWidget(wTemperatureSlider, 5, 0, 1, 1);
+        horizontalLayout_4->addWidget(wTemperatureSlider);
+
+        wTestButton = new QPushButton(PreferenceDialog);
+        wTestButton->setObjectName(QStringLiteral("wTestButton"));
+
+        horizontalLayout_4->addWidget(wTestButton);
+
+
+        gridLayout->addLayout(horizontalLayout_4, 5, 0, 1, 1);
 
 
         retranslateUi(PreferenceDialog);
@@ -550,6 +562,7 @@ public:
          << QApplication::translate("PreferenceDialog", "MEDIUM", 0)
          << QApplication::translate("PreferenceDialog", "STRONG", 0)
         );
+        wTestButton->setText(QApplication::translate("PreferenceDialog", "TEST", 0));
     } // retranslateUi
 
 };

@@ -47,6 +47,9 @@ public:
     // Set temperature:
     void setTemperature(int iTemperature);
 
+    // Start test:
+    void startTest();
+
 protected:
     // Constructor:
     explicit Controller(QObject *parent = 0);

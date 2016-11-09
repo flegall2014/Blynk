@@ -54,6 +54,8 @@ PreferenceDialog::PreferenceDialog(QWidget *parent) :
     // Temperature slider:
     connect(ui->wTemperatureSlider, &QSlider::valueChanged, this, &PreferenceDialog::onTemperatureChanged);
 
+    connect(ui->wTestButton, &QPushButton::clicked, this, &PreferenceDialog::onTestClicked);
+
     // Done:
     connect(ui->wDoneButton, &QPushButton::clicked, this, &PreferenceDialog::onDone);
 }
@@ -253,7 +255,14 @@ void PreferenceDialog::onStartBlynkAtLoginChanged(bool bChecked)
 // Temperature changed:
 void PreferenceDialog::onTemperatureChanged(int iValue)
 {
+    qDebug() << "SET TEMPERATURE TO " << iValue;
     Blynk::instance()->controller()->setTemperature(iValue);
+}
+
+// Test clicked:
+void PreferenceDialog::onTestClicked()
+{
+    Blynk::instance()->controller()->startTest();
 }
 
 // Done:
