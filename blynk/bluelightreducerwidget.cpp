@@ -69,8 +69,6 @@ void BlueLightReducerWidget::update(const Parameters::Strength &eStrength)
     QColor mediumButtonColor = pController->colorForStrength(Parameters::MEDIUM);
     QColor strongButtonColor = pController->colorForStrength(Parameters::STRONG);
 
-    qDebug() << "TOTO: " << lightButtonColor.red() << lightButtonColor.green() << lightButtonColor.blue();
-
     setButtonColor(m_pLightButton, lightButtonColor);
     setButtonColor(m_pMediumButton, mediumButtonColor);
     setButtonColor(m_pStrongButton, strongButtonColor);
