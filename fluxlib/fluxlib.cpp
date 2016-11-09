@@ -39,13 +39,14 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <QString>
 
 /* A colour system is defined by the CIE x and y coordinates of
    its three primary illuminants and the x and y coordinates of
    the white point. */
 
 struct colourSystem {
-    char *name;     	    	    /* Colour system name */
+    QString name;     	    	    /* Colour system name */
     double xRed, yRed,	    	    /* Red x, y */
     xGreen, yGreen,  	    /* Green x, y */
     xBlue, yBlue,    	    /* Blue x, y */
@@ -385,32 +386,6 @@ double bb_spectrum(double wavelength)
        9000 K      0.2869 0.2956 0.4174   0.668 0.738 1.000
        9500 K      0.2836 0.2918 0.4246   0.632 0.714 1.000
       10000 K      0.2807 0.2884 0.4310   0.602 0.693 1.000
-*/
-
-/*
-int main()
-{
-    double t, x, y, z, r, g, b;
-    struct colourSystem *cs = &SMPTEsystem;
-
-    printf("Temperature       x      y      z       R     G     B\n");
-    printf("-----------    ------ ------ ------   ----- ----- -----\n");
-
-    for (t = 1000; t <= 10000; t+= 500) {
-        bbTemp = t;
-        spectrum_to_xyz(bb_spectrum, &x, &y, &z);
-        xyz_to_rgb(cs, x, y, z, &r, &g, &b);
-        printf("  %5.0f K      %.4f %.4f %.4f   ", t, x, y, z);
-        if (constrain_rgb(&r, &g, &b)) {
-        norm_rgb(&r, &g, &b);
-            printf("%.3f %.3f %.3f (Approximation)\n", r, g, b);
-        } else {
-        norm_rgb(&r, &g, &b);
-            printf("%.3f %.3f %.3f\n", r, g, b);
-        }
-    }
-    return 0;
-}
 */
 
 // Return color for temperature:
