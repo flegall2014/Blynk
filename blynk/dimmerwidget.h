@@ -89,9 +89,6 @@ public slots:
 
     // Frame changed:
     void onFrameChanged(int iFrameIndex);
-
-    // Update UI:
-    void updateUI();
 };
 
 #endif // DIMMERWIDGET_H

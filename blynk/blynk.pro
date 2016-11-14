@@ -53,7 +53,6 @@ HEADERS += \
     customslider.h \
     animatedcursor.h \
     dimmerwidget.h \
-    customtooltip.h \
     bluelightreducerpage.h \
     customwindow.h \
     screenbreakpage.h \
@@ -70,7 +69,6 @@ SOURCES += \
     customslider.cpp \
     animatedcursor.cpp \
     dimmerwidget.cpp \
-    customtooltip.cpp \
     bluelightreducerpage.cpp \
     customwindow.cpp \
     screenbreakpage.cpp \

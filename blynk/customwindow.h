@@ -10,7 +10,6 @@
 namespace Ui {
 class CustomWindow;
 }
-class CustomTooltip;
 class CursorPage;
 class ScreenBreakPage;
 class BlueLightReducerPage;
@@ -53,7 +52,6 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void paintEvent(QPaintEvent *event);
     virtual void closeEvent(QCloseEvent *e);
-    virtual bool event(QEvent *event);
 
 private:
     // Center on screen:
@@ -77,7 +75,6 @@ private:
     ScreenBreakPage *m_pScreenBreakPage;
     BlueLightReducerPage *m_pBlueLightReducerPage;
     Parameters *m_pParameters;
-    CustomTooltip *m_pCustomTooltip;
     QMap<QString, QString> m_mTooltips;
     QPushButton *m_pCloseButton;
 

@@ -33,6 +33,8 @@ ScreenBreakPage::~ScreenBreakPage()
 void ScreenBreakPage::setParameters(Parameters *pParameters)
 {
     m_pParameters = pParameters;
+    ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
+        m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
 }
 
 // Update UI:
@@ -45,10 +47,6 @@ void ScreenBreakPage::updateUI()
     // Screen break slider:
     ui->wScreenBreakSlider->setEnabled(bScreenBreakEnabled);
     ui->wScreenBreakSlider->setTitle(tr("Regularity (min):"));
-    ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
-                                     m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
-
-    qDebug() << "TOTO: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
     ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
 
     // Screen break strength combo:
@@ -68,7 +66,6 @@ void ScreenBreakPage::updateUI()
 void ScreenBreakPage::onButtonClicked(QAbstractButton *pButton)
 {
     QString sButtonName = pButton->objectName();
-    qDebug() << sButtonName;
     if (sButtonName == "wLightRadioButton") {
         m_pParameters->setParameter(Parameters::SCREEN_BREAK_STRENGTH, QString::number(Parameters::LIGHT));
     }
@@ -102,6 +99,5 @@ void ScreenBreakPage::onScreenBreakEnabledToggled(bool bChecked)
 // Cursor break:
 void ScreenBreakPage::onScreenBreakSliderChanged(int iValue)
 {
-    qDebug() << "current = " << ui->wScreenBreakSlider->value();
     m_pParameters->setParameter(Parameters::SCREEN_BREAK_REGULARITY, QString::number(iValue));
 }

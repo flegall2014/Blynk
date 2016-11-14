@@ -11,7 +11,7 @@
 #include "cursorpage.h"
 #include "screenbreakpage.h"
 #include "bluelightreducerpage.h"
-#include "customtooltip.h"
+#include "utils.h"
 
 // Constructor:
 CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
@@ -22,8 +22,7 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     m_headerColor(QColor(196, 196, 196)),
     m_iHeaderHeight(25),
     m_bCloseButtonPressed(false),
-    m_pParameters(NULL),
-    m_pCustomTooltip(NULL)
+    m_pParameters(NULL)
 {
     // Setup UI:
     ui->setupUi(this);
@@ -31,10 +30,6 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     ui->wBlynkSupport->setTextFormat(Qt::RichText);
     ui->wBlynkSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
     ui->wBlynkSupport->setOpenExternalLinks(true);
-
-    // Create custom tooltip:
-    m_pCustomTooltip = new CustomTooltip();
-    m_pCustomTooltip->hide();
 
     // Add pages:
     m_pCursorPage = new CursorPage(this);
@@ -48,7 +43,7 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     setWindowTitle(m_sTitle);
 
     // Set attributes:
-    setWindowFlags(Qt::FramelessWindowHint);
+    setWindowFlags(Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
 
     // Close button:
@@ -58,8 +53,13 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     connect(m_pCloseButton, &QPushButton::clicked, this, &CustomWindow::onCloseButtonClicked);
 
     // Change tab:
+    QButtonGroup *pButtonGroup = new QButtonGroup(this);
+    pButtonGroup->setExclusive(true);
+    pButtonGroup->addButton(ui->wCursorButton);
     connect(ui->wCursorButton, &QPushButton::clicked, this, &CustomWindow::onCursorButtonClicked);
+    pButtonGroup->addButton(ui->wScreenBreakButton);
     connect(ui->wScreenBreakButton, &QPushButton::clicked, this, &CustomWindow::onScreenBreakButtonClicked);
+    pButtonGroup->addButton(ui->wBlueLightReducerButton);
     connect(ui->wBlueLightReducerButton, &QPushButton::clicked, this, &CustomWindow::onBlueLightReducerButtonClicked);
 
     // Menu button:
@@ -70,14 +70,11 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
 CustomWindow::~CustomWindow()
 {
     delete ui;
-    delete m_pCustomTooltip;
 }
 
 // Set parameters:
 void CustomWindow::setParameters(Parameters *pParameters)
 {
-    qDebug() << "PROUT " << pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
-
     m_pParameters = pParameters;
     m_pCursorPage->setParameters(pParameters);
     m_pScreenBreakPage->setParameters(pParameters);
@@ -105,6 +102,7 @@ void CustomWindow::updateBlueLightReducerArea()
 // Update UI:
 void CustomWindow::updateUI()
 {
+    qDebug() << "CURRENT = " << ui->stackedWidget->currentIndex();
     m_pCursorPage->updateUI();
     m_pScreenBreakPage->updateUI();
     m_pBlueLightReducerPage->updateUI();
@@ -114,6 +112,16 @@ void CustomWindow::updateUI()
 void CustomWindow::setTooltips(const QMap<QString, QString> &mTooltipValues)
 {
     m_mTooltips = mTooltipValues;
+
+    QList<QPushButton *> lChildButtons = findChildren<QPushButton *>();
+    foreach (QPushButton *pButton, lChildButtons) {
+        QString sObjectName = pButton->objectName();
+        if (sObjectName.isEmpty())
+            continue;
+        QString sTooltipValue = mTooltipValues[sObjectName];
+        if (!sTooltipValue.isEmpty())
+            pButton->setToolTip(Utils::splitTooltip(sTooltipValue, 256));
+    }
 }
 
 // Handle close event:
@@ -121,42 +129,6 @@ void CustomWindow::closeEvent(QCloseEvent *e)
 {
     hide();
     e->ignore();
-}
-
-// Handle event for tooltip display:
-bool CustomWindow::event(QEvent *event)
-{
-    // Handle tooltip:
-    if (event->type() == QEvent::ToolTip)
-    {
-        QHelpEvent *pHelpEvent = static_cast<QHelpEvent *>(event);
-        if (pHelpEvent)
-        {
-            QPushButton *pButtonUnderMouse = dynamic_cast<QPushButton *>(childAt(pHelpEvent->pos()));
-            if (pButtonUnderMouse != NULL)
-            {
-                if (m_pCustomTooltip)
-                {
-                    QString sTooltipText = m_mTooltips[pButtonUnderMouse->objectName()];
-                    if (!sTooltipText.isEmpty())
-                    {
-                        m_pCustomTooltip->setText(sTooltipText);
-                        m_pCustomTooltip->move(mapToGlobal(pHelpEvent->pos()));
-                        m_pCustomTooltip->show();
-                    }
-                    else m_pCustomTooltip->hide();
-                }
-            }
-            else m_pCustomTooltip->hide();
-        }
-
-        return true;
-    }
-
-    if (!containsMouse(QCursor::pos()) && m_pCustomTooltip && m_pCustomTooltip->isVisible())
-        m_pCustomTooltip->hide();
-
-    return QWidget::event(event);
 }
 
 // Contains mouse?
@@ -247,21 +219,18 @@ void CustomWindow::mouseMoveEvent(QMouseEvent *event)
 // Cursor button clicked:
 void CustomWindow::onCursorButtonClicked()
 {
-    m_pCustomTooltip->hide();
     ui->stackedWidget->setCurrentIndex(0);
 }
 
 // Screen break button clicked:
 void CustomWindow::onScreenBreakButtonClicked()
 {
-    m_pCustomTooltip->hide();
     ui->stackedWidget->setCurrentIndex(1);
 }
 
 // Blue light reducer button clicked:
 void CustomWindow::onBlueLightReducerButtonClicked()
 {
-    m_pCustomTooltip->hide();
     ui->stackedWidget->setCurrentIndex(2);
 }
 

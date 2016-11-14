@@ -17,6 +17,9 @@ public:
 
     // Return files:
     static QStringList files(const QString &srcDir, const QStringList &lImageFilters);
+
+    // Split tooltip:
+    static QString splitTooltip(const QString &sText, int iWidth);
 };
 
 #endif // UTILS_H

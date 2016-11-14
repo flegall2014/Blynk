@@ -74,12 +74,6 @@ void DimmerWidget::onFrameChanged(int iFrameIndex)
     }
 }
 
-// Update UI:
-void DimmerWidget::updateUI()
-{
-    // No op.
-}
-
 // Paint event:
 void DimmerWidget::paintEvent(QPaintEvent *event)
 {

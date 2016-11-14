@@ -2,6 +2,8 @@
 #include <QCoreApplication>
 #include <QDirIterator>
 #include <QUrl>
+#include <QFontMetrics>
+#include <QTooltip>
 
 // Application:
 #include "utils.h"
@@ -45,4 +47,30 @@ QStringList Utils::files(const QString &srcDir, const QStringList &lImageFilters
         lFiles << it.next();
 
     return lFiles;
+}
+
+// Split tooltip:
+QString Utils::splitTooltip(const QString &sText, int iWidth)
+{
+    QString sTmp = sText;
+    QFontMetrics fm(QToolTip::font());
+    QString result;
+
+    for (;;) {
+        int i = 0;
+        while (i < sTmp.length()) {
+            if (fm.width(sTmp.left(++i + 1)) > iWidth) {
+                int j = sTmp.lastIndexOf(' ', i);
+                if (j > 0)
+                    i = j;
+                result += sTmp.left(i);
+                result += '\n';
+                sTmp = sTmp.mid(i+1);
+                break;
+            }
+        }
+        if (i >= sTmp.length())
+            break;
+    }
+    return result + sTmp;
 }

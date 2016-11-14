@@ -1,6 +1,7 @@
 // Application:
 #include "bluelightreducerpage.h"
 #include "ui_bluelightreducerpage.h"
+#include <QDebug>
 
 // Constructor:
 BlueLightReducerPage::BlueLightReducerPage(QWidget *parent) :
@@ -46,6 +47,7 @@ void BlueLightReducerPage::updateUI()
 // Blue light reducer:
 void BlueLightReducerPage::onBlueLightReducerValueChanged(const Parameters::Strength &eStrength)
 {
+    qDebug() << "SET STRENGTH TO: " << eStrength;
     m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH, QString::number(eStrength));
 }
 

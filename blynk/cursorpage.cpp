@@ -6,6 +6,7 @@
 #include "cursorpage.h"
 #include "ui_cursorpage.h"
 #include "parameters.h"
+#include "utils.h"
 
 // Constructor:
 CursorPage::CursorPage(QWidget *parent) :
@@ -14,6 +15,7 @@ CursorPage::CursorPage(QWidget *parent) :
     m_pParameters(NULL)
 {
     ui->setupUi(this);
+
     m_pButtonGroup = new QButtonGroup(this);
     m_pButtonGroup->addButton(ui->wRadio2);
     m_pButtonGroup->addButton(ui->wRadio4);
@@ -49,7 +51,6 @@ void CursorPage::updateUI()
 
     // Update radio button:
     int iBlynkRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
-    qDebug() << "TATA: " << iBlynkRegularity;
     ui->wRadio2->setChecked(iBlynkRegularity == 2);
     ui->wRadio2->setEnabled(bBlynkCursorEnabled);
     ui->wRadio4->setChecked(iBlynkRegularity == 4);

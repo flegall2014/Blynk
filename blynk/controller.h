@@ -139,9 +139,6 @@ public slots:
     // Context menu about to hide:
     void onContextMenuAboutToHide();
 
-    // Parameter changed:
-    void onParameterChanged(const Parameters::Parameter &parameter);
-
     // Show application menu at cursor pos:
     void onShowApplicationMenuAtCursorPos();
 };

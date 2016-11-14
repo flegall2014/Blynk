@@ -5,7 +5,6 @@
 #include "blynk.h"
 #include "controller.h"
 
-
 // Blynk singleton:
 Blynk *Blynk::sBlynk = 0;
 

@@ -20,8 +20,10 @@ CustomSlider::~CustomSlider()
 // Set range:
 void CustomSlider::setRange(int iMin, int iMax)
 {
+    ui->wSlider->blockSignals(true);
     ui->wSlider->setMinimum(iMin);
     ui->wSlider->setMaximum(iMax);
+    ui->wSlider->blockSignals(false);
 }
 
 // Set value:

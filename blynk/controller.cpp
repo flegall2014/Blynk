@@ -38,21 +38,16 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
-    // Set parameters on dimmer widget:
-    connect(m_pParameters, &Parameters::parameterChanged, m_pDimmerWidget, &DimmerWidget::updateUI);
-
     // Set parameters on custom window:
-    connect(m_pParameters, &Parameters::parameterChanged, m_pCustomWindow, &CustomWindow::updateUI);
-    connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
     connect(m_pCustomWindow, &CustomWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
-
-    // Parametrize timer!
-    m_tApplicationTimer.setInterval(1000);
-    connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
 
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
     connect(m_pTrayIconMenu, &QMenu::aboutToHide, this, &Controller::onContextMenuAboutToHide);
+
+    // Parametrize timer:
+    m_tApplicationTimer.setInterval(1000);
+    connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
 }
 
 // Destructor:
@@ -89,9 +84,6 @@ bool Controller::startup()
 
     // Start GUI:
     startGUI();
-
-    // Set current temperature:
-    m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
 
     // Start application timer:
     m_tApplicationTimer.start();
@@ -268,11 +260,7 @@ void Controller::onActionTriggered()
         if (sObjectName == "settings")
         {
             // Show window:
-            qDebug() << "LILI: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
-
             m_pCustomWindow->raise();
-            qDebug() << "LOLO: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
-
             m_pCustomWindow->updateUI();
             m_pCustomWindow->exec();
 
@@ -296,27 +284,27 @@ void Controller::onActionTriggered()
                 m_iScreenBreakElapsedTime = 0;
             }
             else
-                // Screen break disabled for three hour:
-                if (sObjectName == "screenBreakDisabledForThreeHours")
-                {
-                    m_iScreenBreakDelay = THREE_HOURS;
-                    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
-                    m_iScreenBreakElapsedTime = 0;
-                }
-                else
-                    // Screen break disabled until tomorrow:
-                    if (sObjectName == "screenBreakDisabledUntilTomorrow")
-                    {
-                        m_iScreenBreakDelay = ONE_DAY;
-                        m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
-                        m_iScreenBreakElapsedTime = 0;
-                    }
-                    else
-                        // Quit:
-                        if (sObjectName == "quitBlynk")
-                        {
-                            qApp->quit();
-                        }
+            // Screen break disabled for three hour:
+            if (sObjectName == "screenBreakDisabledForThreeHours")
+            {
+                m_iScreenBreakDelay = THREE_HOURS;
+                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
+                m_iScreenBreakElapsedTime = 0;
+            }
+            else
+            // Screen break disabled until tomorrow:
+            if (sObjectName == "screenBreakDisabledUntilTomorrow")
+            {
+                m_iScreenBreakDelay = ONE_DAY;
+                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
+                m_iScreenBreakElapsedTime = 0;
+            }
+            else
+            // Quit:
+            if (sObjectName == "quitBlynk")
+            {
+                qApp->quit();
+            }
     }
 }
 
@@ -448,8 +436,11 @@ void Controller::onApplicationTimerTimeOut()
 
             if (QTime::currentTime() < tTriggerTime)
                 m_pDimmerWidget->setTemperature(0);
-            else
+            else {
+                // Set current temperature:
+                m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
                 m_pDimmerWidget->setTemperature(m_iCurrentTemperature);
+            }
         }
         else m_pDimmerWidget->setTemperature(0);
     }
@@ -531,13 +522,6 @@ int Controller::temperatureForStrength(const Parameters::Strength &eStrength)
     if (eStrength == Parameters::STRONG)
         return m_pParameters->parameter(Parameters::STRONG_TEMPERATURE).toInt();
     return 0;
-}
-
-// Parameter changed:
-void Controller::onParameterChanged(const Parameters::Parameter &parameter)
-{
-    if (parameter == Parameters::BLUE_LIGHT_REDUCER_STRENGTH)
-        m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
 }
 
 // Set temperature:
