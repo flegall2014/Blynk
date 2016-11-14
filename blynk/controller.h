@@ -16,6 +16,7 @@ class QSystemTrayIcon;
 class QMenu;
 class DimmerWidget;
 class PreferenceDialog;
+class CustomWindow;
 
 class Controller : public QObject, public IService
 {
@@ -46,9 +47,6 @@ public:
 
     // Set temperature:
     void setTemperature(int iTemperature);
-
-    // Start test:
-    void startTest();
 
 protected:
     // Constructor:
@@ -101,8 +99,8 @@ private:
     // Dimmer widget:
     DimmerWidget *m_pDimmerWidget;
 
-    // Preferences dialog:
-    PreferenceDialog *m_pPreferenceDialog;
+    // Custom window:
+    CustomWindow *m_pCustomWindow;
 
     // Application timer:
     QTimer m_tApplicationTimer;
@@ -138,8 +136,14 @@ public slots:
     // Context menu about to show:
     void onContextMenuAboutToShow();
 
+    // Context menu about to hide:
+    void onContextMenuAboutToHide();
+
     // Parameter changed:
     void onParameterChanged(const Parameters::Parameter &parameter);
+
+    // Show application menu at cursor pos:
+    void onShowApplicationMenuAtCursorPos();
 };
 
 #endif // CONTROLLER_H

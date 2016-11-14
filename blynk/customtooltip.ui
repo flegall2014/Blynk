@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>360</width>
-    <height>160</height>
+    <width>288</width>
+    <height>96</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,25 +16,42 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>288</width>
+    <height>96</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>288</width>
+    <height>96</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: &quot;steelblue&quot;;
+   <string notr="true">background-color: &quot;gray&quot;;
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>4</number>
+    <number>2</number>
    </property>
    <property name="topMargin">
-    <number>4</number>
+    <number>2</number>
    </property>
    <property name="rightMargin">
-    <number>4</number>
+    <number>2</number>
    </property>
    <property name="bottomMargin">
-    <number>4</number>
+    <number>2</number>
    </property>
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -47,7 +64,9 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: white</string>
+        <string notr="true">background-color: white;
+font-family: Segoe-UI;
+font-size: 10;</string>
        </property>
        <property name="text">
         <string/>

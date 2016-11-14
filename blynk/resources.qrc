@@ -1,12 +1,11 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/ico-heart.png</file>
         <file>xml/BlynkMenu.xml</file>
         <file>icons/ico-question.png</file>
-        <file>icons/ico-splash.png</file>
         <file>icons/ico-bigeye.gif</file>
         <file>icons/ico-careteye.gif</file>
         <file>icons/ico-mouseeye.gif</file>
-        <file>css/style.css</file>
+        <file>icons/ico-eye.png</file>
+        <file>icons/ico-menu.png</file>
     </qresource>
 </RCC>

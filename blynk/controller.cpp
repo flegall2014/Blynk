@@ -12,7 +12,7 @@
 // Application:
 #include "controller.h"
 #include "dimmerwidget.h"
-#include "preferencedialog.h"
+#include "customwindow.h"
 #include "utils.h"
 #include "blynk.h"
 #include "fluxlib.h"
@@ -30,7 +30,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_pTrayIconMenu(new QMenu()),
     m_pParameters(new Parameters()),
     m_pDimmerWidget(new DimmerWidget(":/icons/ico-bigeye.gif")),
-    m_pPreferenceDialog(new PreferenceDialog()),
+    m_pCustomWindow(new CustomWindow("Blynk")),
     m_iBlynkCursorElapsedTime(0),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
@@ -38,19 +38,21 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
-    m_pDimmerWidget->setParameters(m_pParameters);
+    // Set parameters on dimmer widget:
     connect(m_pParameters, &Parameters::parameterChanged, m_pDimmerWidget, &DimmerWidget::updateUI);
 
-    m_pPreferenceDialog->setParameters(m_pParameters);
-    connect(m_pParameters, &Parameters::parameterChanged, m_pPreferenceDialog, &PreferenceDialog::updateUI);
-
+    // Set parameters on custom window:
+    connect(m_pParameters, &Parameters::parameterChanged, m_pCustomWindow, &CustomWindow::updateUI);
     connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
+    connect(m_pCustomWindow, &CustomWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
 
+    // Parametrize timer!
     m_tApplicationTimer.setInterval(1000);
     connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
 
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
+    connect(m_pTrayIconMenu, &QMenu::aboutToHide, this, &Controller::onContextMenuAboutToHide);
 }
 
 // Destructor:
@@ -75,8 +77,8 @@ void Controller::releaseAll()
     // Dimmer widget:
     delete m_pDimmerWidget;
 
-    // Preferences dialog:
-    delete m_pPreferenceDialog;
+    // Custom window:
+    delete m_pCustomWindow;
 }
 
 // Startup:
@@ -114,6 +116,7 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 {
     // Exclusive menu?
     bool bIsExclusiveMenu = false;
+    QFont segoeUIFont("Segoe-UI", 10);
     QActionGroup *pActionGroup = NULL;
     if (pRootMenu)
     {
@@ -132,17 +135,31 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
         bool bEnabled = sEnabled.isEmpty() ? true : (bool)sEnabled.toInt();
         QString sIsChecked = node.attributes()["checked"].simplified();
         bool bIsChecked = sIsChecked.isEmpty() ? false : (bool)sIsChecked.toInt();
+        QString sIsBold = node.attributes()["bold"].simplified();
+        bool bBold = sIsBold.isEmpty() ? false : (bool)sIsBold.toInt();
+
+        // Menu item:
         if (sTag == "MenuItem")
         {
+            // Set action name:
             QString sActionName = node.attributes()["name"];
             QString sObjectName = node.attributes()["objectName"];
             QAction *pAction = new QAction(sActionName, this);
+
+            // Set font:
+            segoeUIFont.setBold(bBold);
+            pAction->setFont(segoeUIFont);
+
+            // Store action:
             m_mActions[sObjectName] = pAction;
+
+            // Set enabled state:
             pAction->setEnabled(bEnabled);
             connect(pAction, &QAction::triggered, this, &Controller::onActionTriggered);
             pAction->setObjectName(node.attributes()["objectName"]);
             pRootMenu->addAction(pAction);
 
+            // Add to exclusive group:
             if (pActionGroup)
             {
                 pAction->setCheckable(true);
@@ -151,16 +168,30 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             }
         }
         else
-            if (sTag == "Menu")
-            {
-                bool bIsExclusive = (bool)node.attributes()["exclusive"].toInt();
-                QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
-                pSubMenu->setEnabled(bEnabled);
-                pSubMenu->setProperty("exclusiveMenu", bIsExclusive);
-                pSubMenu->setEnabled(bEnabled);
-                pRootMenu->addMenu(pSubMenu);
-                createMenu(node, pSubMenu);
-            }
+        // Menu:
+        if (sTag == "Menu")
+        {
+            // Set menu title:
+            bool bIsExclusive = (bool)node.attributes()["exclusive"].toInt();
+            QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
+
+            // Set font:
+            segoeUIFont.setBold(bBold);
+            pSubMenu->setFont(segoeUIFont);
+
+            // Set enabled state:
+            pSubMenu->setEnabled(bEnabled);
+            pSubMenu->setProperty("exclusiveMenu", bIsExclusive);
+            pSubMenu->setEnabled(bEnabled);
+
+            // Add menu:
+            pRootMenu->addMenu(pSubMenu);
+            createMenu(node, pSubMenu);
+        }
+        else
+        // Separator:
+        if (sTag == "Separator")
+            pRootMenu->addSeparator();
     }
 }
 
@@ -200,7 +231,7 @@ void Controller::initializeTrayIcon()
     m_pTrayIcon->setContextMenu(m_pTrayIconMenu);
 
     // Set icon:
-    m_pTrayIcon->setIcon(QIcon(":/icons/ico-splash.png"));
+    m_pTrayIcon->setIcon(QIcon(":/icons/ico-eye.png"));
 
     // Show tray icon:
     m_pTrayIcon->setVisible(true);
@@ -220,24 +251,30 @@ void Controller::createTooltip()
         QString sTooltipValue = node.attributes()["value"];
         mTooltipValues[sTooltipName] = sTooltipValue;
     }
-    m_pPreferenceDialog->setTooltips(mTooltipValues);
+    m_pCustomWindow->setTooltips(mTooltipValues);
 }
 
 // Action triggered:
 void Controller::onActionTriggered()
 {
+    if (!m_pParameters)
+        return;
     QAction *pSender = dynamic_cast<QAction *>(sender());
     if (pSender)
     {
         QString sObjectName = pSender->objectName();
 
         // Show preferences:
-        if (sObjectName == "preferences")
+        if (sObjectName == "settings")
         {
-            // Show preferences:
-            m_pPreferenceDialog->raise();
-            m_pPreferenceDialog->updateUI();
-            m_pPreferenceDialog->exec();
+            // Show window:
+            qDebug() << "LILI: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
+
+            m_pCustomWindow->raise();
+            qDebug() << "LOLO: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
+
+            m_pCustomWindow->updateUI();
+            m_pCustomWindow->exec();
 
             // Check blynk cursor random mode:
             bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
@@ -293,6 +330,10 @@ void Controller::loadParameters()
         m_pParameters->deserialize(xRootNode);
         m_bBlynkCursorRandomModeOn = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
     }
+
+    // Update UI:
+    m_pDimmerWidget->setParameters(m_pParameters);
+    m_pCustomWindow->setParameters(m_pParameters);
 }
 
 // Save parameters:
@@ -324,6 +365,8 @@ void Controller::enterBlynCursorRegularMode()
 // Timeout:
 void Controller::onApplicationTimerTimeOut()
 {
+    if (!m_pParameters)
+        return;
     bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
     bool bBlynkCursorRandomMode = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
     if (m_bBlynkCursorRandomModeOn != bBlynkCursorRandomMode)
@@ -428,6 +471,13 @@ void Controller::onContextMenuAboutToShow()
         m_mActions["screenBreakDisabledUntilTomorrow"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
 }
 
+// Context menu about to hide:
+void Controller::onContextMenuAboutToHide()
+{
+    if (m_mActions["settings"])
+        m_mActions["settings"]->setVisible(true);
+}
+
 // Return color for temperature:
 QColor Controller::colorForTemperature(int iTemperature) const
 {
@@ -496,10 +546,10 @@ void Controller::setTemperature(int iTemperature)
     m_iCurrentTemperature = iTemperature;
 }
 
-// Start test:
-void Controller::startTest()
+// Show application menu at cursor pos:
+void Controller::onShowApplicationMenuAtCursorPos()
 {
-    //m_pDimmerWidget->setTemperature(4510);
-    for (int i=4511; i<10000; i++)
-        m_pDimmerWidget->setTemperature(i);
+    if (m_mActions["settings"])
+        m_mActions["settings"]->setVisible(false);
+    m_pTrayIconMenu->exec(QCursor::pos() + QPoint(0, -m_pTrayIconMenu->sizeHint().height()));
 }

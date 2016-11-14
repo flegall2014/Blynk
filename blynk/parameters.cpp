@@ -92,11 +92,11 @@ void Parameters::defineParameterName()
     m_parameterName[BLYNK_CURSOR_MIN] = "blynkCursorMin";
     m_parameterName[BLYNK_CURSOR_MAX] = "blynkCursorMax";
     m_parameterName[BLYNK_PER_MINUTE_RANGE] = "blynkPerMinuteRange";
-    m_parameterName[SCREEN_BREAK_REGULARITY] = "screenBreakRegularity";
     m_parameterName[SCREEN_BREAK_STATE] = "enabled";
     m_parameterName[SCREEN_BREAK_STRENGTH] = "screenBreakStrength";
     m_parameterName[SCREEN_BREAK_MIN] = "screenBreakMin";
     m_parameterName[SCREEN_BREAK_MAX] = "screenBreakMax";
+    m_parameterName[SCREEN_BREAK_REGULARITY] = "screenBreakRegularity";
     m_parameterName[BLUE_LIGHT_REDUCER_ENABLED] = "blueLightReducerEnabled";
     m_parameterName[BLUE_LIGHT_REDUCER_STRENGTH] = "blueLightReducerStrength";
     m_parameterName[BLUE_LIGHT_REDUCER_START_TIME] = "blueLightReducerStartTime";
@@ -109,7 +109,7 @@ void Parameters::defineParameterName()
 // Define parameter default value:
 void Parameters::defineParameterDefaultValues()
 {
-    setParameter(BLYNK_CURSOR_REGULARITY, "5");
+    setParameter(BLYNK_CURSOR_REGULARITY, "4");
     setParameter(BLYNK_CURSOR_ENABLED, "1");
     setParameter(BLYNK_CURSOR_RANDOM_MODE, "0");
     setParameter(BLYNK_PER_MINUTE_REGULAR, "2");
@@ -117,11 +117,11 @@ void Parameters::defineParameterDefaultValues()
     setParameter(BLYNK_CURSOR_MAX, "10");
     setParameter(BLYNK_PER_MINUTE_RANDOM, "8");
     setParameter(BLYNK_PER_MINUTE_RANGE, "6, 15");
-    setParameter(SCREEN_BREAK_REGULARITY, "20");
     setParameter(SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
-    setParameter(SCREEN_BREAK_STRENGTH, "0");
+    setParameter(SCREEN_BREAK_STRENGTH, "1");
     setParameter(SCREEN_BREAK_MIN, "20");
     setParameter(SCREEN_BREAK_MAX, "100");
+    setParameter(SCREEN_BREAK_REGULARITY, "30");
     setParameter(BLUE_LIGHT_REDUCER_ENABLED, "1");
     setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "1");
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");

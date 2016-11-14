@@ -28,6 +28,11 @@ public:
     // Set title:
     void setTitle(const QString &sTitle);
 
+    // Set orientation:
+    void setOrientation(const Qt::Orientation &orientation);
+
+    int value() const;
+
 private:
     // UI:
     Ui::CustomSlider *ui;

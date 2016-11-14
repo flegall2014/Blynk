@@ -13,8 +13,11 @@
 BlueLightReducerWidget::BlueLightReducerWidget(QWidget *parent) : QWidget(parent),
     m_pParameters(NULL)
 {
+    setContentsMargins(0, 0, 0, 0);
+
     // Horizontal layout:
     QHBoxLayout *pLayout = new QHBoxLayout(this);
+    pLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(pLayout);
 
     QButtonGroup *pGroup = new QButtonGroup(this);
@@ -69,9 +72,11 @@ void BlueLightReducerWidget::update(const Parameters::Strength &eStrength)
     QColor mediumButtonColor = pController->colorForStrength(Parameters::MEDIUM);
     QColor strongButtonColor = pController->colorForStrength(Parameters::STRONG);
 
+    /*
     setButtonColor(m_pLightButton, lightButtonColor);
     setButtonColor(m_pMediumButton, mediumButtonColor);
     setButtonColor(m_pStrongButton, strongButtonColor);
+    */
 
     m_pLightButton->setChecked(eStrength == Parameters::LIGHT);
     m_pMediumButton->setChecked(eStrength == Parameters::MEDIUM);

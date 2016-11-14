@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Blynk>
     <Menu>
-     <MenuItem name="About Blynk..." objectName="aboutBlynk"/>
-     <MenuItem name="Preferences" objectName="preferences"/>
+     <MenuItem name="Settings..." objectName="settings" bold="1"/>
+     <Separator/>
      <Menu name="Blynk Cursor" enabled="0">
         <MenuItem name="Cursor1" objectName="cursor1"/>
         <MenuItem name="Cursor2" objectName="cursor2"/>
         <MenuItem name="Cursor3" objectName="cursor3"/>
      </Menu>
+     <Separator/>
      <Menu name="Screen Break" exclusive="1">
         <MenuItem name="Disable for 1 hour" objectName="screenBreakDisabledForOneHour"/>
         <MenuItem name="Disable for 3 hours" objectName="screenBreakDisabledForThreeHours"/>
         <MenuItem name="Disable until tomorrow" objectName="screenBreakDisabledUntilTomorrow"/>
      </Menu>
+     <Separator/>
      <MenuItem name="Vision aids overseas" objectName="visionAidsOverseas" enabled="0"/>
+     <MenuItem name="About Blynk..." enabled="0" objectName="aboutBlynk"/>
      <MenuItem name="Quit Blynk" objectName="quitBlynk"/>
     </Menu>
     <Tooltip>

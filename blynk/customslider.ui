@@ -6,14 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>159</width>
+    <height>24</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -27,13 +45,14 @@
       <widget class="QLabel" name="wSliderValue">
        <property name="font">
         <font>
+         <family>Segoe UI</family>
          <pointsize>10</pointsize>
          <weight>50</weight>
          <bold>false</bold>
         </font>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>0</string>
        </property>
       </widget>
      </item>
@@ -43,6 +62,7 @@
     <widget class="QLabel" name="wSliderTitle">
      <property name="font">
       <font>
+       <family>Segoe UI</family>
        <pointsize>10</pointsize>
        <weight>50</weight>
        <bold>false</bold>

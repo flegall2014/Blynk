@@ -42,3 +42,15 @@ void CustomSlider::setTitle(const QString &sTitle)
 {
     ui->wSliderTitle->setText(sTitle);
 }
+
+// Set orientation:
+void CustomSlider::setOrientation(const Qt::Orientation &orientation)
+{
+    ui->wSlider->setOrientation(orientation);
+}
+
+int CustomSlider::value() const
+{
+    return ui->wSlider->value();
+}
+

@@ -46,7 +46,6 @@ HEADERS += \
     controller.h \
     blynk.h \
     iservice.h \
-    preferencedialog.h \
     imagewidget.h \
     parameters.h \
     utils.h \
@@ -54,13 +53,16 @@ HEADERS += \
     customslider.h \
     animatedcursor.h \
     dimmerwidget.h \
-    customtooltip.h
+    customtooltip.h \
+    bluelightreducerpage.h \
+    customwindow.h \
+    screenbreakpage.h \
+    cursorpage.h
 
 SOURCES += \
     main.cpp \
     controller.cpp \
     blynk.cpp \
-    preferencedialog.cpp \
     imagewidget.cpp \
     parameters.cpp \
     utils.cpp \
@@ -68,14 +70,22 @@ SOURCES += \
     customslider.cpp \
     animatedcursor.cpp \
     dimmerwidget.cpp \
-    customtooltip.cpp
+    customtooltip.cpp \
+    bluelightreducerpage.cpp \
+    customwindow.cpp \
+    screenbreakpage.cpp \
+    cursorpage.cpp
 
 RESOURCES += \
     resources.qrc
 
 FORMS += \
-    preferencedialog.ui \
     dimmerwidget.ui \
     customslider.ui \
-    customtooltip.ui
+    customtooltip.ui \
+    cursorpage.ui \
+    customwindow.ui \
+    screenbreakpage.ui \
+    bluelightreducerpage.ui \
+    cursorpage.ui
 
