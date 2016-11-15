@@ -7,5 +7,7 @@
         <file>icons/ico-mouseeye.gif</file>
         <file>icons/ico-eye.png</file>
         <file>icons/ico-menu.png</file>
+        <file>css/style.css</file>
+        <file>icons/blynk-logo.jpg</file>
     </qresource>
 </RCC>

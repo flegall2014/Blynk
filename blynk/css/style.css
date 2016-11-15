@@ -1,0 +1,36 @@
+QToolTip {
+background-color: #FFF1E7;
+border: 2px solid green;
+border-radius: 4px;
+padding: 2px;
+}
+
+QLabel {
+font-family: "Arial";
+font-size: 12px;
+}
+
+QCheckBox {
+font-family: "Arial";
+font-size: 12px;
+}
+
+QRadioButton  {
+font-family: "Arial";
+font-size: 12px;
+}
+
+QPushButton  {
+font-family: "Arial";
+font-size: 12px;
+}
+
+QComboBox {
+font-family: "Arial";
+font-size: 12px;
+}
+
+QMenu  {
+font-family: "Arial";
+font-size: 12px;
+}

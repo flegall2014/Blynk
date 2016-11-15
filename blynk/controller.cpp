@@ -472,7 +472,7 @@ void Controller::onContextMenuAboutToHide()
 // Return color for temperature:
 QColor Controller::colorForTemperature(int iTemperature) const
 {
-    return Fluxlib::colorForTemperature(iTemperature);
+    return Fluxlib::colorForTemperature1(iTemperature);
 
     /* Keep this as a reference
     if (iTemperature <= 1700)
