@@ -56,7 +56,9 @@ HEADERS += \
     bluelightreducerpage.h \
     customwindow.h \
     screenbreakpage.h \
-    cursorpage.h
+    cursorpage.h \
+    settingswindow.h \
+    bigeyewidget.h
 
 SOURCES += \
     main.cpp \
@@ -72,7 +74,9 @@ SOURCES += \
     bluelightreducerpage.cpp \
     customwindow.cpp \
     screenbreakpage.cpp \
-    cursorpage.cpp
+    cursorpage.cpp \
+    settingswindow.cpp \
+    bigeyewidget.cpp
 
 RESOURCES += \
     resources.qrc
@@ -82,8 +86,8 @@ FORMS += \
     customslider.ui \
     customtooltip.ui \
     cursorpage.ui \
-    customwindow.ui \
     screenbreakpage.ui \
     bluelightreducerpage.ui \
-    cursorpage.ui
+    cursorpage.ui \
+    settingswindow.ui
 

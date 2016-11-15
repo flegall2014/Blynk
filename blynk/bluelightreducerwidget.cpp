@@ -66,13 +66,13 @@ void BlueLightReducerWidget::onButtonStrongClicked()
 // Update:
 void BlueLightReducerWidget::update(const Parameters::Strength &eStrength)
 {
+    /*
     Controller *pController = Blynk::instance()->controller();
 
     QColor lightButtonColor = pController->colorForStrength(Parameters::LIGHT);
     QColor mediumButtonColor = pController->colorForStrength(Parameters::MEDIUM);
     QColor strongButtonColor = pController->colorForStrength(Parameters::STRONG);
 
-    /*
     setButtonColor(m_pLightButton, lightButtonColor);
     setButtonColor(m_pMediumButton, mediumButtonColor);
     setButtonColor(m_pStrongButton, strongButtonColor);

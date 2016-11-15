@@ -3,42 +3,20 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QPushButton>
-#include <QDebug>
 
 // Application:
 #include "customwindow.h"
-#include "ui_CustomWindow.h"
-#include "cursorpage.h"
-#include "screenbreakpage.h"
-#include "bluelightreducerpage.h"
 #include "utils.h"
 
 // Constructor:
 CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::CustomWindow),
     m_sTitle(sTitle),
     m_backgroundColor(QColor(229, 229, 229, 216)),
     m_headerColor(QColor(196, 196, 196)),
     m_iHeaderHeight(25),
-    m_bCloseButtonPressed(false),
-    m_pParameters(NULL)
+    m_bCloseButtonPressed(false)
 {
-    // Setup UI:
-    ui->setupUi(this);
-    ui->wBlynkSupport->setText("<a href=\"http://www.google.com/\">Blynk support</a>");
-    ui->wBlynkSupport->setTextFormat(Qt::RichText);
-    ui->wBlynkSupport->setTextInteractionFlags(Qt::TextBrowserInteraction);
-    ui->wBlynkSupport->setOpenExternalLinks(true);
-
-    // Add pages:
-    m_pCursorPage = new CursorPage(this);
-    ui->stackedWidget->addWidget(m_pCursorPage);
-    m_pScreenBreakPage = new ScreenBreakPage(this);
-    ui->stackedWidget->addWidget(m_pScreenBreakPage);
-    m_pBlueLightReducerPage = new BlueLightReducerPage(this);
-    ui->stackedWidget->addWidget(m_pBlueLightReducerPage);
-
     // Set title:
     setWindowTitle(m_sTitle);
 
@@ -51,61 +29,6 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     m_pCloseButton->setFlat(true);
     m_pCloseButton->resize(20, 20);
     connect(m_pCloseButton, &QPushButton::clicked, this, &CustomWindow::onCloseButtonClicked);
-
-    // Change tab:
-    QButtonGroup *pButtonGroup = new QButtonGroup(this);
-    pButtonGroup->setExclusive(true);
-    pButtonGroup->addButton(ui->wCursorButton);
-    connect(ui->wCursorButton, &QPushButton::clicked, this, &CustomWindow::onCursorButtonClicked);
-    pButtonGroup->addButton(ui->wScreenBreakButton);
-    connect(ui->wScreenBreakButton, &QPushButton::clicked, this, &CustomWindow::onScreenBreakButtonClicked);
-    pButtonGroup->addButton(ui->wBlueLightReducerButton);
-    connect(ui->wBlueLightReducerButton, &QPushButton::clicked, this, &CustomWindow::onBlueLightReducerButtonClicked);
-
-    // Menu button:
-    connect(ui->wMenuButton, &QPushButton::clicked, this, &CustomWindow::onMenuButtonClicked);
-}
-
-// Destructor:
-CustomWindow::~CustomWindow()
-{
-    delete ui;
-}
-
-// Set parameters:
-void CustomWindow::setParameters(Parameters *pParameters)
-{
-    m_pParameters = pParameters;
-    m_pCursorPage->setParameters(pParameters);
-    m_pScreenBreakPage->setParameters(pParameters);
-    m_pBlueLightReducerPage->setParameters(pParameters);
-}
-
-// Update blynk cursor area:
-void CustomWindow::updateBlynkCursorArea()
-{
-    m_pCursorPage->updateUI();
-}
-
-// Update screen break area:
-void CustomWindow::updateScreenBreakArea()
-{
-    m_pScreenBreakPage->updateUI();
-}
-
-// Update blue light reducer area:
-void CustomWindow::updateBlueLightReducerArea()
-{
-    m_pBlueLightReducerPage->updateUI();
-}
-
-// Update UI:
-void CustomWindow::updateUI()
-{
-    qDebug() << "CURRENT = " << ui->stackedWidget->currentIndex();
-    m_pCursorPage->updateUI();
-    m_pScreenBreakPage->updateUI();
-    m_pBlueLightReducerPage->updateUI();
 }
 
 // Set tooltips:
@@ -216,32 +139,8 @@ void CustomWindow::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-// Cursor button clicked:
-void CustomWindow::onCursorButtonClicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-// Screen break button clicked:
-void CustomWindow::onScreenBreakButtonClicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-// Blue light reducer button clicked:
-void CustomWindow::onBlueLightReducerButtonClicked()
-{
-    ui->stackedWidget->setCurrentIndex(2);
-}
-
 // Close button clicked:
 void CustomWindow::onCloseButtonClicked()
 {
     hide();
-}
-
-// Menu button clicked:
-void CustomWindow::onMenuButtonClicked()
-{
-    emit showApplicationMenuAtCursorPos();
 }

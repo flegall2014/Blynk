@@ -12,7 +12,7 @@
 // Application:
 #include "controller.h"
 #include "dimmerwidget.h"
-#include "customwindow.h"
+#include "settingswindow.h"
 #include "utils.h"
 #include "blynk.h"
 #include "fluxlib.h"
@@ -30,7 +30,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_pTrayIconMenu(new QMenu()),
     m_pParameters(new Parameters()),
     m_pDimmerWidget(new DimmerWidget(":/icons/ico-bigeye.gif")),
-    m_pCustomWindow(new CustomWindow("Blynk")),
+    m_pSettingsWindow(new SettingsWindow("Blynk")),
     m_iBlynkCursorElapsedTime(0),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
@@ -38,8 +38,8 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
-    // Set parameters on custom window:
-    connect(m_pCustomWindow, &CustomWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
+    // Set parameters on settings window:
+    connect(m_pSettingsWindow, &SettingsWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
 
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
@@ -72,8 +72,8 @@ void Controller::releaseAll()
     // Dimmer widget:
     delete m_pDimmerWidget;
 
-    // Custom window:
-    delete m_pCustomWindow;
+    // Settings window:
+    delete m_pSettingsWindow;
 }
 
 // Startup:
@@ -243,7 +243,7 @@ void Controller::createTooltip()
         QString sTooltipValue = node.attributes()["value"];
         mTooltipValues[sTooltipName] = sTooltipValue;
     }
-    m_pCustomWindow->setTooltips(mTooltipValues);
+    m_pSettingsWindow->setTooltips(mTooltipValues);
 }
 
 // Action triggered:
@@ -260,9 +260,9 @@ void Controller::onActionTriggered()
         if (sObjectName == "settings")
         {
             // Show window:
-            m_pCustomWindow->raise();
-            m_pCustomWindow->updateUI();
-            m_pCustomWindow->exec();
+            m_pSettingsWindow->raise();
+            m_pSettingsWindow->updateUI();
+            m_pSettingsWindow->exec();
 
             // Check blynk cursor random mode:
             bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
@@ -321,7 +321,7 @@ void Controller::loadParameters()
 
     // Update UI:
     m_pDimmerWidget->setParameters(m_pParameters);
-    m_pCustomWindow->setParameters(m_pParameters);
+    m_pSettingsWindow->setParameters(m_pParameters);
 }
 
 // Save parameters:
