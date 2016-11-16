@@ -10,6 +10,7 @@
 ScreenBreakPage::ScreenBreakPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ScreenBreakPage),
+    m_pButtonGroup(NULL),
     m_pParameters(NULL)
 {
     ui->setupUi(this);
@@ -35,6 +36,11 @@ void ScreenBreakPage::setParameters(Parameters *pParameters)
     m_pParameters = pParameters;
     ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
         m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
+
+    qDebug() << "ICI: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
+
+    ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
+
 }
 
 // Update UI:
@@ -47,7 +53,6 @@ void ScreenBreakPage::updateUI()
     // Screen break slider:
     ui->wScreenBreakSlider->setEnabled(bScreenBreakEnabled);
     ui->wScreenBreakSlider->setTitle(tr("Regularity (min):"));
-    ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
 
     // Screen break strength combo:
     Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();

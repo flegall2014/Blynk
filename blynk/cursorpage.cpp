@@ -12,7 +12,8 @@
 CursorPage::CursorPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CursorPage),
-    m_pParameters(NULL)
+    m_pParameters(NULL),
+    m_pButtonGroup(NULL)
 {
     ui->setupUi(this);
 

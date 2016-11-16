@@ -9,7 +9,7 @@
 Blynk *Blynk::sBlynk = 0;
 
 // Constructor:
-Blynk::Blynk(QObject *parent)
+Blynk::Blynk(QObject *parent) : m_pController(NULL)
 {
     Q_UNUSED(parent);
     m_pController = new Controller(this);

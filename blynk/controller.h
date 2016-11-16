@@ -16,6 +16,7 @@ class QSystemTrayIcon;
 class QMenu;
 class DimmerWidget;
 class SettingsWindow;
+class AboutWindow;
 
 class Controller : public QObject, public IService
 {
@@ -100,6 +101,9 @@ private:
 
     // Custom window:
     SettingsWindow *m_pSettingsWindow;
+
+    // About window:
+    AboutWindow *m_pAboutWindow;
 
     // Application timer:
     QTimer m_tApplicationTimer;

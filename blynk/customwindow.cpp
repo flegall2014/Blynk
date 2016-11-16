@@ -17,9 +17,6 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     m_iHeaderHeight(25),
     m_bCloseButtonPressed(false)
 {
-    // Set title:
-    setWindowTitle(m_sTitle);
-
     // Set attributes:
     setWindowFlags(Qt::FramelessWindowHint | Qt::SubWindow | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);

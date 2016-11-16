@@ -13,6 +13,7 @@
 #include "controller.h"
 #include "dimmerwidget.h"
 #include "settingswindow.h"
+#include "aboutwindow.h"
 #include "utils.h"
 #include "blynk.h"
 #include "fluxlib.h"
@@ -31,6 +32,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_pParameters(new Parameters()),
     m_pDimmerWidget(new DimmerWidget(":/icons/ico-bigeye.gif")),
     m_pSettingsWindow(new SettingsWindow("Blynk")),
+    m_pAboutWindow(new AboutWindow("About Blynk...")),
     m_iBlynkCursorElapsedTime(0),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
@@ -74,6 +76,9 @@ void Controller::releaseAll()
 
     // Settings window:
     delete m_pSettingsWindow;
+
+    // About window:
+    delete m_pAboutWindow;
 }
 
 // Startup:
@@ -276,35 +281,41 @@ void Controller::onActionTriggered()
             }
         }
         else
-            // Screen break disabled for an hour:
-            if (sObjectName == "screenBreakDisabledForOneHour")
-            {
-                m_iScreenBreakDelay = ONE_HOUR;
-                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
-                m_iScreenBreakElapsedTime = 0;
-            }
-            else
-            // Screen break disabled for three hour:
-            if (sObjectName == "screenBreakDisabledForThreeHours")
-            {
-                m_iScreenBreakDelay = THREE_HOURS;
-                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
-                m_iScreenBreakElapsedTime = 0;
-            }
-            else
-            // Screen break disabled until tomorrow:
-            if (sObjectName == "screenBreakDisabledUntilTomorrow")
-            {
-                m_iScreenBreakDelay = ONE_DAY;
-                m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
-                m_iScreenBreakElapsedTime = 0;
-            }
-            else
-            // Quit:
-            if (sObjectName == "quitBlynk")
-            {
-                qApp->quit();
-            }
+        // Screen break disabled for an hour:
+        if (sObjectName == "screenBreakDisabledForOneHour")
+        {
+            m_iScreenBreakDelay = ONE_HOUR;
+            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
+            m_iScreenBreakElapsedTime = 0;
+        }
+        else
+        // Screen break disabled for three hour:
+        if (sObjectName == "screenBreakDisabledForThreeHours")
+        {
+            m_iScreenBreakDelay = THREE_HOURS;
+            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
+            m_iScreenBreakElapsedTime = 0;
+        }
+        else
+        // Screen break disabled until tomorrow:
+        if (sObjectName == "screenBreakDisabledUntilTomorrow")
+        {
+            m_iScreenBreakDelay = ONE_DAY;
+            m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
+            m_iScreenBreakElapsedTime = 0;
+        }
+        else
+        if (sObjectName == "aboutBlynk")
+        {
+            // Show window:
+            m_pAboutWindow->raise();
+            m_pAboutWindow->exec();
+        }
+        // Quit:
+        if (sObjectName == "quitBlynk")
+        {
+            qApp->quit();
+        }
     }
 }
 

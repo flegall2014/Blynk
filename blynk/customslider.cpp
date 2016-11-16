@@ -30,6 +30,7 @@ void CustomSlider::setRange(int iMin, int iMax)
 void CustomSlider::setValue(int iValue)
 {
     ui->wSlider->setValue(iValue);
+    ui->wSliderValue->setText(QString::number(iValue));
 }
 
 // Slider value changed:

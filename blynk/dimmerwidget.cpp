@@ -20,7 +20,10 @@
 DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DimmerWidget),
+    m_pBigEyeMovie(NULL),
+    m_pAnimatedCursor(NULL),
     m_bDone(false),
+    m_eStrength(Parameters::LIGHT),
     m_pParameters(NULL),
     m_startColor(0, 0, 0),
     m_stopColor(255, 255, 255)
@@ -120,7 +123,9 @@ void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
         if (eStrength == Parameters::MEDIUM)
             sStyleSheet = "QLabel { color: rgba(0, 0, 0, 75%) }";
 
-    ui->movieArea->setStyleSheet(sStyleSheet);
+    ui->movieArea->setWindowOpacity(.25);
+
+    //ui->movieArea->setStyleSheet(sStyleSheet);
     ui->movieArea->show();
     m_pBigEyeMovie->start();
 }

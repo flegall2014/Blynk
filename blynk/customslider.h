@@ -31,6 +31,7 @@ public:
     // Set orientation:
     void setOrientation(const Qt::Orientation &orientation);
 
+    // Return value:
     int value() const;
 
 private:

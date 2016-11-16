@@ -11,6 +11,9 @@
 
 // Constructor:
 BlueLightReducerWidget::BlueLightReducerWidget(QWidget *parent) : QWidget(parent),
+    m_pLightButton(NULL),
+    m_pMediumButton(NULL),
+    m_pStrongButton(NULL),
     m_pParameters(NULL)
 {
     setContentsMargins(0, 0, 0, 0);
