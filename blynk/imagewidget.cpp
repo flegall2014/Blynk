@@ -30,17 +30,18 @@ void ImageWidget::setText(const QString &sText, const QColor &textColor)
 void ImageWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+    QPainter painter(this);
+    painter.fillRect(rect(), Qt::white);
     QImage image(m_sImagePath);
     if (!image.isNull())
     {
         // Compute image ratio:
         double ratio = qRound((double)image.width()/(double)image.height());
-        int targetHeight = rect().height();
+        int targetHeight = qRound(rect().height()*.75);
         int targetWidth = qRound(targetHeight*ratio);
-        QPainter painter(this);
         painter.setRenderHint(QPainter::SmoothPixmapTransform);
-        int x = (rect().width()/2-targetWidth);
-        int y = 0;
+        int x = (rect().width()-targetWidth)/2;
+        int y = (rect().height()-targetHeight)/2;
         painter.drawImage(QPoint(x, y), image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio));
         painter.setFont(QFont("times",24));
         QRect textRect(QPoint(rect().width()/2, 0), QSize(rect().width()/2-8, rect().height()));

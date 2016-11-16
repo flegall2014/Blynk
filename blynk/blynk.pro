@@ -58,7 +58,7 @@ HEADERS += \
     screenbreakpage.h \
     cursorpage.h \
     settingswindow.h \
-    bigeyewidget.h
+    aboutwindow.h
 
 SOURCES += \
     main.cpp \
@@ -76,7 +76,7 @@ SOURCES += \
     screenbreakpage.cpp \
     cursorpage.cpp \
     settingswindow.cpp \
-    bigeyewidget.cpp
+    aboutwindow.cpp
 
 RESOURCES += \
     resources.qrc
@@ -89,5 +89,6 @@ FORMS += \
     screenbreakpage.ui \
     bluelightreducerpage.ui \
     cursorpage.ui \
-    settingswindow.ui
+    settingswindow.ui \
+    aboutwindow.ui
 

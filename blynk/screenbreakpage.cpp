@@ -36,11 +36,7 @@ void ScreenBreakPage::setParameters(Parameters *pParameters)
     m_pParameters = pParameters;
     ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
         m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
-
-    qDebug() << "ICI: " << m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
-
     ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
-
 }
 
 // Update UI:

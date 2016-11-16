@@ -9,5 +9,6 @@
         <file>icons/ico-menu.png</file>
         <file>css/style.css</file>
         <file>icons/blynk-logo.jpg</file>
+        <file>html/About Blynk.htm</file>
     </qresource>
 </RCC>

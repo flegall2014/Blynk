@@ -267,7 +267,7 @@ void Controller::onActionTriggered()
             // Show window:
             m_pSettingsWindow->raise();
             m_pSettingsWindow->updateUI();
-            m_pSettingsWindow->exec();
+            m_pSettingsWindow->show();
 
             // Check blynk cursor random mode:
             bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
@@ -309,7 +309,7 @@ void Controller::onActionTriggered()
         {
             // Show window:
             m_pAboutWindow->raise();
-            m_pAboutWindow->exec();
+            m_pAboutWindow->show();
         }
         // Quit:
         if (sObjectName == "quitBlynk")
@@ -368,6 +368,7 @@ void Controller::onApplicationTimerTimeOut()
         return;
     bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
     bool bBlynkCursorRandomMode = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
+
     if (m_bBlynkCursorRandomModeOn != bBlynkCursorRandomMode)
     {
         if (bBlynkCursorRandomMode)

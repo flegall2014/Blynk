@@ -13,6 +13,10 @@ public:
     AboutWindow(const QString &sTitle, QWidget *parent=0);
 
 private:
+    // Load:
+    void load(const QString &sFilePath);
+
+private:
     Ui::AboutWindow *ui;
 };
 

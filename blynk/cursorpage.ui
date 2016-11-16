@@ -40,7 +40,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Disabled</string>
+          <string>Disable</string>
          </property>
         </widget>
        </item>
@@ -71,6 +71,9 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -171,6 +174,9 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

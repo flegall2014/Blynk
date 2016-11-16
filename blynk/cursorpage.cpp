@@ -94,26 +94,31 @@ void CursorPage::onButtonClicked(QAbstractButton *pButton)
     int iRegularity = 0;
     if (sObjectName == "wRadio2") {
         iRegularity = 2;
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
     }
     else
     if (sObjectName == "wRadio4") {
         iRegularity = 4;
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
     }
     else
     if (sObjectName == "wRadio6") {
         iRegularity = 6;
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
     }
     else
     if (sObjectName == "wRadio8") {
         iRegularity = 8;
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
     }
     else
     if (sObjectName == "wRadio10") {
         iRegularity = 10;
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
     }
     else
