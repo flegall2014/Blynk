@@ -409,6 +409,7 @@ QColor Fluxlib::colorForTemperature(int iTemperature)
     return QColor(qRound(r*255), qRound(g*255), qRound(b*255));
 }
 
+// Yet another method:
 QColor Fluxlib::colorForTemperature1(int kelvin)
 {
     if (kelvin <= 0)
