@@ -51,14 +51,14 @@ HEADERS += \
     utils.h \
     bluelightreducerwidget.h \
     customslider.h \
-    animatedcursor.h \
     dimmerwidget.h \
     bluelightreducerpage.h \
     customwindow.h \
     screenbreakpage.h \
     cursorpage.h \
     settingswindow.h \
-    aboutwindow.h
+    aboutwindow.h \
+    animatedimage.h
 
 SOURCES += \
     main.cpp \
@@ -69,14 +69,14 @@ SOURCES += \
     utils.cpp \
     bluelightreducerwidget.cpp \
     customslider.cpp \
-    animatedcursor.cpp \
     dimmerwidget.cpp \
     bluelightreducerpage.cpp \
     customwindow.cpp \
     screenbreakpage.cpp \
     cursorpage.cpp \
     settingswindow.cpp \
-    aboutwindow.cpp
+    aboutwindow.cpp \
+    animatedimage.cpp
 
 RESOURCES += \
     resources.qrc

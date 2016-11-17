@@ -9,7 +9,7 @@
 #include "parameters.h"
 
 class QMovie;
-class AnimatedCursor;
+class AnimatedImage;
 class Parameters;
 
 namespace Ui {
@@ -60,7 +60,7 @@ private:
     QMovie *m_pBigEyeMovie;
 
     // Animated cursor:
-    AnimatedCursor *m_pAnimatedCursor;
+    AnimatedImage *m_pAnimatedCursor;
 
     // Current cursor image:
     QImage m_currentCursorImage;

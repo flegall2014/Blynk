@@ -8,7 +8,7 @@
 // Application:
 #include "dimmerwidget.h"
 #include "ui_dimmerwidget.h"
-#include "animatedcursor.h"
+#include "animatedimage.h"
 #include "parameters.h"
 #include <gammaramp.h>
 #include "blynk.h"
@@ -52,9 +52,9 @@ DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
     ui->movieArea->setMovie(m_pBigEyeMovie);
 
     // Animated cursor:
-    m_pAnimatedCursor = new AnimatedCursor(this);
-    connect(m_pAnimatedCursor, &AnimatedCursor::nextImage, this, &DimmerWidget::onNextImageAvailable);
-    connect(m_pAnimatedCursor, &AnimatedCursor::done, this, &DimmerWidget::onDone);
+    m_pAnimatedCursor = new AnimatedImage(this);
+    connect(m_pAnimatedCursor, &AnimatedImage::nextImage, this, &DimmerWidget::onNextImageAvailable);
+    connect(m_pAnimatedCursor, &AnimatedImage::done, this, &DimmerWidget::onDone);
 }
 
 // Destructor:

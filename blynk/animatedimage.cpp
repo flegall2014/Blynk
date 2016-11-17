@@ -1,24 +1,24 @@
-#include "animatedcursor.h"
+#include "animatedimage.h"
 #include <QDebug>
 #include <QApplication>
 #include "utils.h"
 
 // Constructor:
-AnimatedCursor::AnimatedCursor(QWidget *parent) :
+AnimatedImage::AnimatedImage(QWidget *parent) :
     QObject(parent), m_iCurrentImageIndex(0)
 {
     loadCursorImages();
     m_tTimer.setInterval(25);
-    connect(&m_tTimer, &QTimer::timeout, this, &AnimatedCursor::onTimeOut);
+    connect(&m_tTimer, &QTimer::timeout, this, &AnimatedImage::onTimeOut);
 }
 
 // Destructor:
-AnimatedCursor::~AnimatedCursor()
+AnimatedImage::~AnimatedImage()
 {
 }
 
 // Load cursor images:
-void AnimatedCursor::loadCursorImages()
+void AnimatedImage::loadCursorImages()
 {
     QDir appDir = Utils::appDir();
     appDir.cdUp();
@@ -34,7 +34,7 @@ void AnimatedCursor::loadCursorImages()
 }
 
 // Play:
-void AnimatedCursor::play()
+void AnimatedImage::play()
 {
     m_iCurrentImageIndex = 0;
     m_tTimer.stop();
@@ -42,7 +42,7 @@ void AnimatedCursor::play()
 }
 
 // Time out:
-void AnimatedCursor::onTimeOut()
+void AnimatedImage::onTimeOut()
 {
     if (m_iCurrentImageIndex < m_vCursorImages.size()) {
         bool bIsLast =  m_iCurrentImageIndex == (m_vCursorImages.size()-1);
