@@ -42,7 +42,7 @@ public slots:
     void onButtonClicked(QAbstractButton *);
 
     // Blynk cursor enabled changed:
-    void onBlynkCursorEnabledChanged(bool bChecked);
+    void onBlynkCursorEnabledToggled(bool bChecked);
 };
 
 #endif // CURSORPAGE_H

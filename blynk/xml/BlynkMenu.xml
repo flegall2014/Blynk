@@ -3,10 +3,10 @@
     <Menu>
      <MenuItem name="Settings..." objectName="settings" bold="1"/>
      <Separator/>
-     <Menu name="Blynk Cursor">
-        <MenuItem name="1 hour" objectName="cursor1"/>
-        <MenuItem name="3 hours" objectName="cursor2"/>
-        <MenuItem name="Tomorrow" objectName="cursor3"/>
+     <Menu name="Blynk Cursor" exclusive="1">
+        <MenuItem name="Disable for 1 hour" objectName="blynkCursorDisabledForOneHour"/>
+        <MenuItem name="Disable for 3 hours" objectName="blynkCursorDisabledForThreeHours"/>
+        <MenuItem name="Disable until tomorrow" objectName="blynkCursorDisabledUntilTomorrow"/>
      </Menu>
      <Separator/>
      <Menu name="Screen Break" exclusive="1">

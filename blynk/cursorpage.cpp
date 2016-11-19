@@ -26,7 +26,7 @@ CursorPage::CursorPage(QWidget *parent) :
     m_pButtonGroup->addButton(ui->wBlynkRandomRadioButton);
 
     connect(m_pButtonGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(onButtonClicked(QAbstractButton*)));
-    connect(ui->wBlynkCursorEnabled, &QCheckBox::toggled, this, &CursorPage::onBlynkCursorEnabledChanged);
+    connect(ui->wBlynkCursorEnabled, &QCheckBox::toggled, this, &CursorPage::onBlynkCursorEnabledToggled);
 }
 
 // Destructor:
@@ -44,8 +44,9 @@ void CursorPage::setParameters(Parameters *pParameters)
 // Update UI:
 void CursorPage::updateUI()
 {
-    // Check enabled state:
-    bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
+    // Blynk cursor enabled:
+    QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+    bool bBlynkCursorEnabled = (sBlynkCursorState == BLYNK_CURSOR_ENABLED);
 
     // Check random mdode:
     bool bRandomModeOn = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
@@ -128,8 +129,18 @@ void CursorPage::onButtonClicked(QAbstractButton *pButton)
 }
 
 // Blynk cursor enabled changed:
-void CursorPage::onBlynkCursorEnabledChanged(bool bChecked)
+void CursorPage::onBlynkCursorEnabledToggled(bool bChecked)
 {
-    m_pParameters->setParameter(Parameters::BLYNK_CURSOR_ENABLED, QString::number((int)!bChecked));
+    bool bEnabled = !bChecked;
+    if (bEnabled)
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
+    else
+    {
+        QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+        if ((sBlynkCursorState != BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR) &&
+                (sBlynkCursorState != BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS) &&
+                (sBlynkCursorState != BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW))
+            m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED);
+    }
     updateUI();
 }

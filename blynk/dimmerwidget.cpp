@@ -146,6 +146,7 @@ void DimmerWidget::playCursor()
 // Play animated image:
 void DimmerWidget::playAnimatedImage(const Parameters::Strength &eStrength)
 {
+    Q_UNUSED(eStrength);
     m_bAnimatedImageDone = false;
     m_pAnimatedImage->play();
 }

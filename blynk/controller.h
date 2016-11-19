@@ -126,7 +126,10 @@ private:
     // Actions:
     QMap<QString, QAction *> m_mActions;
 
-    // Screen break state:
+    // Cursor delay:
+    int m_iBlynkCursorDelay;
+
+    // Screen break delay:
     int m_iScreenBreakDelay;
 
     // Current temperature:
@@ -144,6 +147,9 @@ public slots:
 
     // Show application menu at cursor pos:
     void onShowApplicationMenuAtCursorPos();
+
+    // Parameter changed:
+    void onParameterChanged(const Parameters::Parameter &Parameters);
 };
 
 #endif // CONTROLLER_H

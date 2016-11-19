@@ -11,6 +11,12 @@
 
 #define PARAMETER(x) m_parameters.parameter(x)
 
+#define BLYNK_CURSOR_ENABLED "Enabled"
+#define BLYNK_CURSOR_DISABLED "Disabled"
+#define BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR "Disabled For One Hour"
+#define BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS "Disabled For Three Hours"
+#define BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW "Disabled Until Tomorrow"
+
 #define SCREEN_BREAK_ENABLED "Enabled"
 #define SCREEN_BREAK_DISABLED "Disabled"
 #define SCREEN_BREAK_DISABLED_FOR_ONE_HOUR "Disabled For One Hour"
@@ -25,7 +31,7 @@ public:
     enum Parameter {
         UNDEFINED=0,
         BLYNK_CURSOR_REGULARITY,
-        BLYNK_CURSOR_ENABLED,
+        BLYNK_CURSOR_STATE,
         BLYNK_CURSOR_RANDOM_MODE,
         BLYNK_PER_MINUTE_REGULAR,
         BLYNK_PER_MINUTE_RANDOM,

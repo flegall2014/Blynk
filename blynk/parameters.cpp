@@ -85,14 +85,14 @@ void Parameters::deserialize(const CXMLNode &xRootNode)
 void Parameters::defineParameterName()
 {
     m_parameterName[BLYNK_CURSOR_REGULARITY] = "blynkCursorRegularity";
-    m_parameterName[BLYNK_CURSOR_ENABLED] = "blynkCursorEnabled";
+    m_parameterName[BLYNK_CURSOR_STATE] = "blynkCursorState";
     m_parameterName[BLYNK_CURSOR_RANDOM_MODE] = "blynkCursorRandomMode";
     m_parameterName[BLYNK_PER_MINUTE_REGULAR] = "blynkPerMinuteRegular";
     m_parameterName[BLYNK_PER_MINUTE_RANDOM] = "blynkPerMinuteRandom";
     m_parameterName[BLYNK_CURSOR_MIN] = "blynkCursorMin";
     m_parameterName[BLYNK_CURSOR_MAX] = "blynkCursorMax";
     m_parameterName[BLYNK_PER_MINUTE_RANGE] = "blynkPerMinuteRange";
-    m_parameterName[SCREEN_BREAK_STATE] = "enabled";
+    m_parameterName[SCREEN_BREAK_STATE] = "screenBreakState";
     m_parameterName[SCREEN_BREAK_STRENGTH] = "screenBreakStrength";
     m_parameterName[SCREEN_BREAK_MIN] = "screenBreakMin";
     m_parameterName[SCREEN_BREAK_MAX] = "screenBreakMax";
@@ -110,7 +110,7 @@ void Parameters::defineParameterName()
 void Parameters::defineParameterDefaultValues()
 {
     setParameter(BLYNK_CURSOR_REGULARITY, "4");
-    setParameter(BLYNK_CURSOR_ENABLED, "1");
+    setParameter(BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
     setParameter(BLYNK_CURSOR_RANDOM_MODE, "0");
     setParameter(BLYNK_PER_MINUTE_REGULAR, "2");
     setParameter(BLYNK_CURSOR_MIN, "2");

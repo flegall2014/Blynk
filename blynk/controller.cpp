@@ -38,6 +38,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakElapsedTime(0),
     m_iBlueLightReducerElapsedTime(0),
     m_bBlynkCursorRandomModeOn(false),
+    m_iBlynkCursorDelay(0),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
@@ -47,6 +48,9 @@ Controller::Controller(QObject *parent) : QObject(parent),
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
     connect(m_pTrayIconMenu, &QMenu::aboutToHide, this, &Controller::onContextMenuAboutToHide);
+
+    // Listen to parameter changed:
+    connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
 
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
@@ -267,11 +271,11 @@ void Controller::onActionTriggered()
         {
             // Show window:
             m_pSettingsWindow->raise();
-            m_pSettingsWindow->updateUI();
             m_pSettingsWindow->show();
 
-            // Check blynk cursor random mode:
-            bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
+            // Read blynk cursor state:
+            QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+            bool bBlynkCursorEnabled = (sBlynkCursorState == BLYNK_CURSOR_ENABLED);
             bool bBlynkCursorRandomMode = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
             if (bBlynkCursorEnabled)
             {
@@ -280,6 +284,30 @@ void Controller::onActionTriggered()
                 else
                     enterBlynCursorRegularMode();
             }
+        }
+        else
+        // Cursor disabled for an hour:
+        if (sObjectName == "blynkCursorDisabledForOneHour")
+        {
+            m_iBlynkCursorDelay = ONE_HOUR;
+            m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR);
+            m_iBlynkCursorElapsedTime = 0;
+        }
+        else
+        // Screen break disabled for three hour:
+        if (sObjectName == "blynkCursorDisabledForThreeHours")
+        {
+            m_iBlynkCursorDelay = THREE_HOURS;
+            m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS);
+            m_iBlynkCursorElapsedTime = 0;
+        }
+        else
+        // Screen break disabled until tomorrow:
+        if (sObjectName == "blynkCursorDisabledUntilTomorrow")
+        {
+            m_iBlynkCursorDelay = ONE_DAY;
+            m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW);
+            m_iBlynkCursorElapsedTime = 0;
         }
         else
         // Screen break disabled for an hour:
@@ -306,7 +334,7 @@ void Controller::onActionTriggered()
             m_iScreenBreakElapsedTime = 0;
         }
         else
-        // Vision aids oversar:
+        // Vision aids overseas:
         if (sObjectName == "visionAidsOverseas")
         {
             QDesktopServices::openUrl(QUrl(VISION_AIDS_OVERSEA_URL));
@@ -324,6 +352,9 @@ void Controller::onActionTriggered()
         {
             qApp->quit();
         }
+
+        // Update UI:
+        m_pSettingsWindow->updateUI();
     }
 }
 
@@ -374,10 +405,24 @@ void Controller::onApplicationTimerTimeOut()
 {
     if (!m_pParameters)
         return;
-    bool bBlynkCursorEnabled = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_ENABLED).toInt();
+
+    // Read blynk cursor state:
+    QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+    bool bBlynkCursorEnabled = (sBlynkCursorState == BLYNK_CURSOR_ENABLED);
+
+    // Read blynk cursor random mode:
     bool bBlynkCursorRandomMode = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
 
-    if (m_bBlynkCursorRandomModeOn != bBlynkCursorRandomMode)
+    // Check blynk cursor delay:
+    if ((m_iBlynkCursorDelay > 0) && (m_iBlynkCursorElapsedTime > m_iBlynkCursorDelay)) {
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
+        m_pSettingsWindow->updateUI();
+        bBlynkCursorEnabled = true;
+    }
+
+    qDebug() << m_iBlynkCursorElapsedTime << bBlynkCursorEnabled;
+
+    if (bBlynkCursorEnabled && (m_bBlynkCursorRandomModeOn != bBlynkCursorRandomMode))
     {
         if (bBlynkCursorRandomMode)
             enterBlynkCursorRandomMode();
@@ -386,14 +431,16 @@ void Controller::onApplicationTimerTimeOut()
         m_bBlynkCursorRandomModeOn = bBlynkCursorRandomMode;
     }
 
+    // Read screen break state:
     QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
     bool bScreenBreakEnabled = (sScreenBreakState == SCREEN_BREAK_ENABLED);
 
-    // Read screen break state:
-    if ((m_iScreenBreakDelay > 0) && (m_iScreenBreakElapsedTime > m_iScreenBreakDelay))
+    // Check screen break delay:
+    if ((m_iScreenBreakDelay > 0) && (m_iScreenBreakElapsedTime > m_iScreenBreakDelay)) {
         m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
-
-    bScreenBreakEnabled &= (m_iScreenBreakElapsedTime >= m_iScreenBreakDelay);
+        m_pSettingsWindow->updateUI();
+        bScreenBreakEnabled = true;
+    }
 
     // Blue light reducer enabled?
     bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
@@ -437,7 +484,7 @@ void Controller::onApplicationTimerTimeOut()
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();//*60;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*60;
 
         // Strength:
         Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
@@ -473,7 +520,21 @@ void Controller::onApplicationTimerTimeOut()
 // Context menu about to show:
 void Controller::onContextMenuAboutToShow()
 {
+    // Read blynk cursor state:
+    QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+
+    // Update blynk cursor options:
+    if (m_mActions["blynkCursorDisabledForOneHour"])
+        m_mActions["blynkCursorDisabledForOneHour"]->setChecked(sBlynkCursorState == BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR);
+    if (m_mActions["blynkCursorDisabledForThreeHours"])
+        m_mActions["blynkCursorDisabledForThreeHours"]->setChecked(sBlynkCursorState == BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS);
+    if (m_mActions["blynkCursorDisabledUntilTomorrow"])
+        m_mActions["blynkCursorDisabledUntilTomorrow"]->setChecked(sBlynkCursorState == BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW);
+
+    // Read screen break state:
     QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
+
+    // Update screen break options:
     if (m_mActions["screenBreakDisabledForOneHour"])
         m_mActions["screenBreakDisabledForOneHour"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
     if (m_mActions["screenBreakDisabledForThreeHours"])
@@ -556,4 +617,32 @@ void Controller::onShowApplicationMenuAtCursorPos()
     if (m_mActions["settings"])
         m_mActions["settings"]->setVisible(false);
     m_pTrayIconMenu->exec(QCursor::pos() + QPoint(0, -m_pTrayIconMenu->sizeHint().height()));
+}
+
+// Parameter changed:
+void Controller::onParameterChanged(const Parameters::Parameter &parameter)
+{
+    // Make sure to reset blynk cursor delay in this case:
+    if (parameter == Parameters::BLYNK_CURSOR_STATE)
+    {
+        qDebug() << "RESETTING BLYNK CURSOR DELAY";
+
+        // Read blynk cursor state:
+        QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+        bool bBlynkCursorEnabled = (sBlynkCursorState == BLYNK_CURSOR_ENABLED);
+        if (bBlynkCursorEnabled)
+            m_iBlynkCursorDelay = 0;
+    }
+
+    // Make sure to reset screen break delay in this case:
+    if (parameter == Parameters::SCREEN_BREAK_STATE)
+    {
+        qDebug() << "RESETTING SCREEN BREAK DELAY";
+
+        // Read screen break state:
+        QString sScreenBreakState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+        bool bScreenBreakEnabled = (sScreenBreakState == SCREEN_BREAK_ENABLED);
+        if (bScreenBreakEnabled)
+            m_iScreenBreakDelay = 0;
+    }
 }
