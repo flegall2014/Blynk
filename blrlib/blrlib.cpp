@@ -1,4 +1,4 @@
-#include "fluxlib.h"
+#include "blrlib.h"
 #include <QDebug>
 
 
@@ -389,7 +389,7 @@ double bb_spectrum(double wavelength)
 */
 
 // Return color for temperature:
-QColor Fluxlib::colorForTemperature(int iTemperature)
+QColor Blrlib::colorForTemperature(int iTemperature)
 {
     if (iTemperature <= 0)
         return QColor(255, 255, 255);
@@ -410,7 +410,7 @@ QColor Fluxlib::colorForTemperature(int iTemperature)
 }
 
 // Yet another method:
-QColor Fluxlib::colorForTemperature1(int kelvin)
+QColor Blrlib::colorForTemperature1(int kelvin)
 {
     if (kelvin <= 0)
         return QColor(255, 255, 255);

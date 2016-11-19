@@ -13,7 +13,7 @@
 #include <gammaramp.h>
 #include "blynk.h"
 #include "controller.h"
-#include <fluxlib.h>
+#include <blrlib.h>
 #include <utils.h>
 #define MAX_LOOP_TIMES 1
 
@@ -175,7 +175,7 @@ bool DimmerWidget::setColor(const QColor &startColor, const QColor &stopColor)
 // Set temperature:
 bool DimmerWidget::setTemperature(int iTemperature)
 {
-    return setColor(m_startColor, Fluxlib::colorForTemperature(iTemperature));
+    return setColor(m_startColor, Blrlib::colorForTemperature(iTemperature));
 }
 
 // Return strength:

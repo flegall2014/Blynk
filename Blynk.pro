@@ -3,7 +3,7 @@ CONFIG += ordered
 SUBDIRS += \
     singleapplication \
     gammaramp \
-    fluxlib \
+    blrlib \
     utils \
     blynk
 

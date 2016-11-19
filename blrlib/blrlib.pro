@@ -7,7 +7,7 @@
 QT       += core
 
 TEMPLATE = lib
-DEFINES += FLUXLIB_LIBRARY
+DEFINES += BLRLIB_LIBRARY
 
 unix {
     DESTDIR = ../bin
@@ -26,17 +26,17 @@ QMAKE_CLEAN *= $$MOC_DIR\\*$$TARGET*
 QMAKE_CLEAN *= $$OBJECTS_DIR\\*$$TARGET*
 
 CONFIG(debug, debug|release) {
-    TARGET = fluxlibd
+    TARGET = blrlibd
 } else {
-    TARGET = fluxlib
+    TARGET = blrlib
 }
 
 HEADERS += \
-    fluxlib.h \
-    fluxlib_global.h
+    blrlib.h \
+    blrlib_global.h
 
 SOURCES += \
-    fluxlib.cpp
+    blrlib.cpp
 
 
 

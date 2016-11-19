@@ -16,7 +16,7 @@
 #include "aboutwindow.h"
 #include "utils.h"
 #include "blynk.h"
-#include "fluxlib.h"
+#include "blrlib.h"
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
@@ -492,7 +492,7 @@ void Controller::onContextMenuAboutToHide()
 // Return color for temperature:
 QColor Controller::colorForTemperature(int iTemperature) const
 {
-    return Fluxlib::colorForTemperature1(iTemperature);
+    return Blrlib::colorForTemperature1(iTemperature);
 
     /* Keep this as a reference
     if (iTemperature <= 1700)

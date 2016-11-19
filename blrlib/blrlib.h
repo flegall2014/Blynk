@@ -1,9 +1,9 @@
-#ifndef FLUXLIB_H
-#define FLUXLIB_H
-#include "fluxlib_global.h"
+#ifndef BLRLIB_H
+#define BLRLIB_H
+#include "blrlib_global.h"
 #include <QColor>
 
-class FLUXLIBSHARED_EXPORT Fluxlib
+class BLRLIBSHARED_EXPORT Blrlib
 {
 public:
     // Return color for temperature:
@@ -11,4 +11,4 @@ public:
     static QColor colorForTemperature1(int kelvin);
 };
 
-#endif // FLUXLIB_H
+#endif // BLRLIB_H
