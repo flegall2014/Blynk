@@ -23,6 +23,7 @@
 #define ONE_HOUR 3600
 #define THREE_HOURS 10800
 #define ONE_DAY 86400
+#define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 
 // Constructor:
 Controller::Controller(QObject *parent) : QObject(parent),
@@ -30,7 +31,7 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_pTrayIcon(new QSystemTrayIcon()),
     m_pTrayIconMenu(new QMenu()),
     m_pParameters(new Parameters()),
-    m_pDimmerWidget(new DimmerWidget(":/icons/ico-bigeye.gif")),
+    m_pDimmerWidget(new DimmerWidget()),
     m_pSettingsWindow(new SettingsWindow("Blynk")),
     m_pAboutWindow(new AboutWindow("About Blynk...")),
     m_iBlynkCursorElapsedTime(0),
@@ -305,6 +306,13 @@ void Controller::onActionTriggered()
             m_iScreenBreakElapsedTime = 0;
         }
         else
+        // Vision aids oversar:
+        if (sObjectName == "visionAidsOverseas")
+        {
+            QDesktopServices::openUrl(QUrl(VISION_AIDS_OVERSEA_URL));
+        }
+        else
+        // About Blynk:
         if (sObjectName == "aboutBlynk")
         {
             // Show window:
@@ -429,12 +437,12 @@ void Controller::onApplicationTimerTimeOut()
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*60;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();//*60;
 
         // Strength:
         Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
         if (m_iScreenBreakElapsedTime%iScreenBreakRegularity == 0) {
-            m_pDimmerWidget->playBigEye(eScreenBreakStrength);
+            m_pDimmerWidget->playAnimatedImage(eScreenBreakStrength);
         }
     }
 

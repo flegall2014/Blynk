@@ -1,29 +1,29 @@
-#ifndef ANIMATEDIMAGE_H
-#define ANIMATEDIMAGE_H
+#ifndef ANIMATEDCURSOR_H
+#define ANIMATEDCURSOR_H
 
 // Qt:
 #include <QMovie>
 #include <QCursor>
 #include <QWidget>
 #include <QTimer>
-#include <QDir>
 
-class AnimatedImage : public QObject
+class AnimatedCursor : public QObject
 {
     Q_OBJECT
 
 public:
     // Constructor:
-    AnimatedImage(QWidget *parent=0);
+    AnimatedCursor(QWidget *parent=0);
 
     // Destructor:
-    ~AnimatedImage();
+    ~AnimatedCursor();
 
     // Play:
     void play();
 
+private:
     // Load cursor images:
-    void loadCursorImages(const QDir &imgDir);
+    void loadCursorImages();
 
 private:
     // Movie:
@@ -44,4 +44,4 @@ signals:
     void done();
 };
 
-#endif // ANIMATEDIMAGE_H
+#endif // ANIMATEDCURSOR_H

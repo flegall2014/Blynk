@@ -35,9 +35,15 @@ public:
     {
         if (CustomSlider->objectName().isEmpty())
             CustomSlider->setObjectName(QStringLiteral("CustomSlider"));
-        CustomSlider->resize(400, 300);
+        CustomSlider->resize(159, 24);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(CustomSlider->sizePolicy().hasHeightForWidth());
+        CustomSlider->setSizePolicy(sizePolicy);
         gridLayout = new QGridLayout(CustomSlider);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         wSlider = new QSlider(CustomSlider);
@@ -49,6 +55,7 @@ public:
         wSliderValue = new QLabel(CustomSlider);
         wSliderValue->setObjectName(QStringLiteral("wSliderValue"));
         QFont font;
+        font.setFamily(QStringLiteral("Segoe UI"));
         font.setPointSize(10);
         font.setBold(false);
         font.setWeight(50);
@@ -74,7 +81,7 @@ public:
     void retranslateUi(QWidget *CustomSlider)
     {
         CustomSlider->setWindowTitle(QApplication::translate("CustomSlider", "Form", 0));
-        wSliderValue->setText(QApplication::translate("CustomSlider", "TextLabel", 0));
+        wSliderValue->setText(QApplication::translate("CustomSlider", "0", 0));
         wSliderTitle->setText(QApplication::translate("CustomSlider", "TextLabel", 0));
     } // retranslateUi
 

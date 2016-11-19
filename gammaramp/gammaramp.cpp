@@ -9,17 +9,25 @@
 GammaRamp::GammaRamp()
 {
     // Initialize all variables:
+#ifdef Q_OS_WIN
     hGDI32 = NULL;
     hScreenDC = NULL;
     pGetDeviceGammaRamp = NULL;
     pSetDeviceGammaRamp = NULL;
+#elif defined(Q_OS_OSX)
+#endif
 }
 
 // Destructor:
 GammaRamp::~GammaRamp()
 {
+#ifdef Q_OS_WIN
     freeLibrary();
+#elif defined(Q_OS_OSX)
+#endif
 }
+
+#ifdef Q_OS_WIN
 
 // Load library:
 BOOL GammaRamp::loadLibrary()
@@ -132,10 +140,54 @@ bool GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std
 
     return (bool)bReturn;
 }
+#elif defined(Q_OS_OSX)
+// Set color palette:
+bool GammaRamp::setColorPalette(const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue)
+{
+    CGDirectDisplayID displayId = CGMainDisplayID();
+    uint32_t displayCount = 0;
+    uint32_t displayMaxCount = 16;
+    CGDirectDisplayID displayList[16];
+
+    CGError error = CGGetActiveDisplayList(displayMaxCount, displayList, &displayCount);
+
+    qDebug() << "setColorPalete" << displayId << displayCount << (int)error << vRed.size();
+
+    if (error != kCGErrorSuccess) {
+        qDebug() << "No Active Display";
+        return false;
+    }
+    else if (displayCount > 0) {
+        // gamma
+        uint32_t capacity = vRed.size();
+        uint32_t sampleCount = capacity;
+        CGGammaValue *redTable = new CGGammaValue[capacity];
+        CGGammaValue *greenTable = new CGGammaValue[capacity];
+        CGGammaValue *blueTable = new CGGammaValue[capacity];
+
+        for (int i = 0; i < vRed.size(); i++) {
+            redTable[i] = float(vRed[i]) / 256.0;
+            greenTable[i] = float(vGreen[i]) / 256.0;
+            blueTable[i] = float(vBlue[i]) / 256.0;
+            //qDebug() << "table value" << redTable[i] << greenTable[i] << blueTable[i];
+        }
+
+        for (int i = 0; i < displayCount; i++) {
+            displayId = displayList[i];
+
+            error = CGSetDisplayTransferByTable(displayId, sampleCount, redTable, greenTable, blueTable);
+            //qDebug() << "set table" << displayId << sampleCount << (int) error;
+        }
+    }
+
+    return true;
+}
+#endif
 
 // Set blue light parameters:
 bool GammaRamp::createColorPalette(const QColor &startColor, const QColor &stopColor)
 {
+    qDebug() << "createColorPalette" << startColor << stopColor;
     int iDeltaRed = abs(stopColor.red()-startColor.red());
     int iDeltaGreen = abs(stopColor.green()-startColor.green());
     int iDeltaBlue = abs(stopColor.blue()-startColor.blue());
@@ -159,8 +211,13 @@ bool GammaRamp::createColorPalette(const QColor &startColor, const QColor &stopC
         if (iBlueValue > 255)
             iBlueValue = 255;
         vBlue.push_back(iBlueValue);
+        //qDebug() << iRedValue << iGreenValue << iBlueValue;
     }
 
     // Apply color palette:
+#ifdef Q_OS_WIN
     return setColorPalette(NULL, vRed, vGreen, vBlue);
+#elif defined(Q_OS_OSX)
+    return setColorPalette(vRed, vGreen, vBlue);
+#endif
 }

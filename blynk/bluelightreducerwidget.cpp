@@ -8,12 +8,11 @@
 #include "blynk.h"
 #include "controller.h"
 #include "bluelightreducerwidget.h"
+#include "customslider.h"
 
 // Constructor:
 BlueLightReducerWidget::BlueLightReducerWidget(QWidget *parent) : QWidget(parent),
-    m_pLightButton(NULL),
-    m_pMediumButton(NULL),
-    m_pStrongButton(NULL),
+    m_pStrengthSlider(NULL),
     m_pParameters(NULL)
 {
     setContentsMargins(0, 0, 0, 0);
@@ -23,47 +22,17 @@ BlueLightReducerWidget::BlueLightReducerWidget(QWidget *parent) : QWidget(parent
     pLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(pLayout);
 
-    QButtonGroup *pGroup = new QButtonGroup(this);
-    pGroup->setExclusive(true);
-
-    m_pLightButton = new QPushButton(tr("LIGHT"), this);
-    m_pLightButton->setCheckable(true);
-    pLayout->addWidget(m_pLightButton);
-    connect(m_pLightButton, &QPushButton::clicked, this, &BlueLightReducerWidget::onButtonLightClicked);
-
-    // MEDIUM:
-    m_pMediumButton = new QPushButton(tr("MEDIUM"), this);
-    m_pMediumButton->setCheckable(true);
-    pLayout->addWidget(m_pMediumButton);
-    connect(m_pMediumButton, &QPushButton::clicked, this, &BlueLightReducerWidget::onButtonMediumClicked);
-
-    // STRONG:
-    m_pStrongButton = new QPushButton(tr("STRONG"), this);
-    m_pStrongButton->setCheckable(true);
-    pLayout->addWidget(m_pStrongButton);
-    connect(m_pStrongButton, &QPushButton::clicked, this, &BlueLightReducerWidget::onButtonStrongClicked);
-
-    pGroup->addButton(m_pLightButton);
-    pGroup->addButton(m_pMediumButton);
-    pGroup->addButton(m_pStrongButton);
+    m_pStrengthSlider = new CustomSlider(this);
+    m_pStrengthSlider->setRange(0, 2);
+    pLayout->addWidget(m_pStrengthSlider);
+    connect(m_pStrengthSlider, &CustomSlider::valueChanged, this, &BlueLightReducerWidget::onStrengthChanged);
 }
 
-// Button light clicked:
-void BlueLightReducerWidget::onButtonLightClicked()
+// Strength changed:
+void BlueLightReducerWidget::onStrengthChanged(int iValue)
 {
-    emit buttonClicked(Parameters::LIGHT);
-}
-
-// Button medium clicked:
-void BlueLightReducerWidget::onButtonMediumClicked()
-{
-    emit buttonClicked(Parameters::MEDIUM);
-}
-
-// Button strong clicked:
-void BlueLightReducerWidget::onButtonStrongClicked()
-{
-    emit buttonClicked(Parameters::STRONG);
+    Parameters::Strength eStrength = (Parameters::Strength)(iValue+1);
+    emit buttonClicked(eStrength);
 }
 
 // Update:
@@ -81,9 +50,7 @@ void BlueLightReducerWidget::update(const Parameters::Strength &eStrength)
     setButtonColor(m_pStrongButton, strongButtonColor);
     */
 
-    m_pLightButton->setChecked(eStrength == Parameters::LIGHT);
-    m_pMediumButton->setChecked(eStrength == Parameters::MEDIUM);
-    m_pStrongButton->setChecked(eStrength == Parameters::STRONG);
+    m_pStrengthSlider->setValue((int)eStrength - 1);
 }
 
 // Set parameters:

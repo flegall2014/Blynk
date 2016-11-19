@@ -8,7 +8,6 @@
 #include "dimmerwidget.h"
 #include "parameters.h"
 
-class QMovie;
 class AnimatedImage;
 class Parameters;
 
@@ -22,7 +21,7 @@ class DimmerWidget : public QDialog
 
 public:
     // Constructor:
-    explicit DimmerWidget(const QString &sMoviePath, QWidget *parent = 0);
+    explicit DimmerWidget(QWidget *parent = 0);
 
     // Destructor:
     ~DimmerWidget();
@@ -42,8 +41,8 @@ public:
     // Play cursor:
     void playCursor();
 
-    // Play big eye:
-    void playBigEye(const Parameters::Strength &eStrength);
+    // Play animated image:
+    void playAnimatedImage(const Parameters::Strength &eStrength);
 
     // Set parameters:
     void setParameters(Parameters *pParameters);
@@ -56,17 +55,23 @@ private:
     // UI:
     Ui::DimmerWidget *ui;
 
-    // Movie:
-    QMovie *m_pBigEyeMovie;
-
     // Animated cursor:
     AnimatedImage *m_pAnimatedCursor;
+
+    // Animated image:
+    AnimatedImage *m_pAnimatedImage;
 
     // Current cursor image:
     QImage m_currentCursorImage;
 
-    // Done:
-    bool m_bDone;
+    // Current animated image:
+    QImage m_currentAnimatedImage;
+
+    // Cursor done:
+    bool m_bCursorDone;
+
+    // Animated image done:
+    bool m_bAnimatedImageDone;
 
     // Strength:
     Parameters::Strength m_eStrength;
@@ -82,13 +87,16 @@ private:
 
 public slots:
     // Next image available:
-    void onNextImageAvailable(const QImage &image);
+    void onNextCursorImageAvailable(const QImage &image);
 
-    // Done:
-    void onDone();
+    // Next animated image available:
+    void onNextAnimatedImageAvailable(const QImage &image);
 
-    // Frame changed:
-    void onFrameChanged(int iFrameIndex);
+    // Cursor done:
+    void onCursorDone();
+
+    // Animated image done:
+    void onAnimatedImageDone();
 };
 
 #endif // DIMMERWIDGET_H

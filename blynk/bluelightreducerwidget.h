@@ -8,6 +8,7 @@
 #include "parameters.h"
 
 class QPushButton;
+class CustomSlider;
 
 class BlueLightReducerWidget : public QWidget
 {
@@ -27,24 +28,12 @@ public:
     void setButtonColor(QPushButton *pButton, const QColor &color);
 
 public slots:
-    // Button light clicked:
-    void onButtonLightClicked();
-
-    // Button medium clicked:
-    void onButtonMediumClicked();
-
-    // Button strong clicked:
-    void onButtonStrongClicked();
+    // Strength changed:
+    void onStrengthChanged(int iValue);
 
 private:
-    // Light button:
-    QPushButton *m_pLightButton;
-
-    // Medium
-    QPushButton *m_pMediumButton;
-
-    // Strong:
-    QPushButton *m_pStrongButton;
+    // Strength slider:
+    CustomSlider *m_pStrengthSlider;
 
     // Parameters:
     Parameters *m_pParameters;

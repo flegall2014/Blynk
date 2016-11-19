@@ -14,15 +14,17 @@
 #include "blynk.h"
 #include "controller.h"
 #include <fluxlib.h>
+#include <utils.h>
 #define MAX_LOOP_TIMES 1
 
 // Constructor:
-DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
+DimmerWidget::DimmerWidget(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DimmerWidget),
-    m_pBigEyeMovie(NULL),
     m_pAnimatedCursor(NULL),
-    m_bDone(false),
+    m_pAnimatedImage(NULL),
+    m_bCursorDone(false),
+    m_bAnimatedImageDone(false),
     m_eStrength(Parameters::LIGHT),
     m_pParameters(NULL),
     m_startColor(0, 0, 0),
@@ -44,17 +46,23 @@ DimmerWidget::DimmerWidget(const QString &sMoviePath, QWidget *parent) :
     QRect screenSize = qDesktopWidget.screenGeometry();
     setGeometry(screenSize);
 
-    // Create movie:
-    m_pBigEyeMovie = new QMovie(sMoviePath);
-    m_pBigEyeMovie->setCacheMode(QMovie::CacheAll);
-    connect(m_pBigEyeMovie, &QMovie::frameChanged, this, &DimmerWidget::onFrameChanged);
-    ui->movieArea->hide();
-    ui->movieArea->setMovie(m_pBigEyeMovie);
-
     // Animated cursor:
     m_pAnimatedCursor = new AnimatedImage(this);
-    connect(m_pAnimatedCursor, &AnimatedImage::nextImage, this, &DimmerWidget::onNextImageAvailable);
-    connect(m_pAnimatedCursor, &AnimatedImage::done, this, &DimmerWidget::onDone);
+    QDir cursorImageDir = Utils::appDir();
+    cursorImageDir.cdUp();
+    cursorImageDir.cd("blynk/cursor");
+    m_pAnimatedCursor->loadCursorImages(cursorImageDir);
+    connect(m_pAnimatedCursor, &AnimatedImage::nextImage, this, &DimmerWidget::onNextCursorImageAvailable);
+    connect(m_pAnimatedCursor, &AnimatedImage::done, this, &DimmerWidget::onCursorDone);
+
+    // Animated image:
+    m_pAnimatedImage = new AnimatedImage(this);
+    QDir animatedImageDir = Utils::appDir();
+    animatedImageDir.cdUp();
+    animatedImageDir.cd("blynk/animatedimage");
+    m_pAnimatedImage->loadCursorImages(animatedImageDir);
+    connect(m_pAnimatedImage, &AnimatedImage::nextImage, this, &DimmerWidget::onNextAnimatedImageAvailable);
+    connect(m_pAnimatedImage, &AnimatedImage::done, this, &DimmerWidget::onAnimatedImageDone);
 }
 
 // Destructor:
@@ -63,73 +71,84 @@ DimmerWidget::~DimmerWidget()
     delete ui;
 }
 
-// Frame changed:
-void DimmerWidget::onFrameChanged(int iFrameIndex)
-{
-    static int loopCount = 0;
-    if (iFrameIndex == (m_pBigEyeMovie->frameCount()-1))
-        loopCount++;
-    if (loopCount == 2)
-    {
-        ui->movieArea->hide();
-        m_pBigEyeMovie->stop();
-        loopCount = 0;
-    }
-}
-
 // Paint event:
 void DimmerWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
-    if (!m_bDone)
+    if (!m_bCursorDone)
     {
         QPainter painter(this);
         QSize size = m_currentCursorImage.size();
         QPoint pos = QCursor::pos()-QPoint(size.width()/2, size.height()/2);
+        painter.setOpacity(1);
         painter.drawImage(pos, m_currentCursorImage);
     }
-    else QDialog::paintEvent(event);
+    if (!m_bAnimatedImageDone)
+    {
+        QPainter painter(this);
+        QSize size = m_currentAnimatedImage.size();
+        QDesktopWidget qDesktopWidget;
+        QRect screenSize = qDesktopWidget.screenGeometry();
+        QPoint pos = QPoint((screenSize.width()-size.width())/2, (screenSize.height()-size.height())/2);
+
+        Parameters::Strength eStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
+        double dOpacity = 1.0;
+        if (eStrength == Parameters::LIGHT)
+            dOpacity = .25;
+        else
+        if (eStrength == Parameters::MEDIUM)
+            dOpacity = .5;
+        else
+        if (eStrength == Parameters::STRONG)
+            dOpacity = 1;
+
+        painter.setOpacity(dOpacity);
+        painter.drawImage(pos, m_currentAnimatedImage);
+    }
+    QDialog::paintEvent(event);
 }
 
-// Next image available:
-void DimmerWidget::onNextImageAvailable(const QImage &image)
+// Next cursor image available:
+void DimmerWidget::onNextCursorImageAvailable(const QImage &image)
 {
     m_currentCursorImage = image;
     update();
 }
 
-// Done:
-void DimmerWidget::onDone()
+// Next animated image available:
+void DimmerWidget::onNextAnimatedImageAvailable(const QImage &image)
 {
-    m_bDone = true;
+    m_currentAnimatedImage = image;
+    update();
+}
+
+// Animated cursor:
+void DimmerWidget::onCursorDone()
+{
+    m_bCursorDone = true;
+    update();
+}
+
+// Animated image done:
+void DimmerWidget::onAnimatedImageDone()
+{
+    m_bAnimatedImageDone = true;
     update();
 }
 
 // Play cursor:
 void DimmerWidget::playCursor()
 {
-    m_bDone = false;
+    m_bCursorDone = false;
     m_pAnimatedCursor->play();
 }
 
-// Play big eye:
-void DimmerWidget::playBigEye(const Parameters::Strength &eStrength)
+// Play animated image:
+void DimmerWidget::playAnimatedImage(const Parameters::Strength &eStrength)
 {
-    QString sStyleSheet("QLabel { color: rgba(0, 0, 0, 100%) }");
-
-    if (eStrength == Parameters::LIGHT)
-        sStyleSheet = "QLabel { color: rgba(0, 0, 0, 25%) }";
-    else
-        if (eStrength == Parameters::MEDIUM)
-            sStyleSheet = "QLabel { color: rgba(0, 0, 0, 75%) }";
-
-    ui->movieArea->setWindowOpacity(.25);
-
-    //ui->movieArea->setStyleSheet(sStyleSheet);
-    ui->movieArea->show();
-    m_pBigEyeMovie->start();
+    m_bAnimatedImageDone = false;
+    m_pAnimatedImage->play();
 }
-
 
 // Set strength:
 bool DimmerWidget::setStrength(const Parameters::Strength &eStrength)

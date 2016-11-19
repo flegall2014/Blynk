@@ -16,7 +16,6 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,7 +25,6 @@ class Ui_DimmerWidget
 public:
     QGridLayout *gridLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *movieArea;
 
     void setupUi(QWidget *DimmerWidget)
     {
@@ -42,12 +40,6 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        movieArea = new QLabel(DimmerWidget);
-        movieArea->setObjectName(QStringLiteral("movieArea"));
-        movieArea->setAlignment(Qt::AlignCenter);
-
-        horizontalLayout->addWidget(movieArea);
-
 
         gridLayout->addLayout(horizontalLayout, 0, 0, 1, 1);
 
@@ -60,7 +52,6 @@ public:
     void retranslateUi(QWidget *DimmerWidget)
     {
         DimmerWidget->setWindowTitle(QApplication::translate("DimmerWidget", "Form", 0));
-        movieArea->setText(QString());
     } // retranslateUi
 
 };

@@ -1,38 +1,40 @@
-// Qt:
+#include "animatedcursor.h"
 #include <QDebug>
 #include <QApplication>
-
-// Application:
-#include "animatedimage.h"
 #include "utils.h"
-#include "parameters.h"
 
 // Constructor:
-AnimatedImage::AnimatedImage(QWidget *parent) :
+AnimatedCursor::AnimatedCursor(QWidget *parent) :
     QObject(parent), m_iCurrentImageIndex(0)
 {
+    loadCursorImages();
     m_tTimer.setInterval(25);
-    connect(&m_tTimer, &QTimer::timeout, this, &AnimatedImage::onTimeOut);
+    connect(&m_tTimer, &QTimer::timeout, this, &AnimatedCursor::onTimeOut);
 }
 
 // Destructor:
-AnimatedImage::~AnimatedImage()
+AnimatedCursor::~AnimatedCursor()
 {
 }
 
 // Load cursor images:
-void AnimatedImage::loadCursorImages(const QDir &imgDir)
+void AnimatedCursor::loadCursorImages()
 {
+    QDir appDir = Utils::appDir();
+    appDir.cdUp();
+    appDir.cd("blynk");
+    appDir.cd("cursor");
+
     QStringList lFilters;
     lFilters << "*.png";
 
-    QStringList lPngFiles = Utils::files(imgDir.absolutePath(), lFilters);
+    QStringList lPngFiles = Utils::files(appDir.absolutePath(), lFilters);
     foreach (QString sPngFile, lPngFiles)
         m_vCursorImages << QImage(sPngFile);
 }
 
 // Play:
-void AnimatedImage::play()
+void AnimatedCursor::play()
 {
     m_iCurrentImageIndex = 0;
     m_tTimer.stop();
@@ -40,7 +42,7 @@ void AnimatedImage::play()
 }
 
 // Time out:
-void AnimatedImage::onTimeOut()
+void AnimatedCursor::onTimeOut()
 {
     if (m_iCurrentImageIndex < m_vCursorImages.size()) {
         bool bIsLast =  m_iCurrentImageIndex == (m_vCursorImages.size()-1);

@@ -2,7 +2,11 @@
 #define GAMMARAMP_H_
 
 // Qt:
-#include <Windows.h>
+#ifdef Q_OS_WIN
+#include <windows.h>
+#elif defined (Q_OS_OSX)
+#include <CoreGraphics/CoreGraphics.h>
+#endif
 #include <QVector>
 #include <QColor>
 
@@ -21,6 +25,7 @@ public:
     // Set blue light parameters:
     bool createColorPalette(const QColor &startColor, const QColor &stopColor);
 
+#ifdef Q_OS_WIN
 private:
     // Load library:
     BOOL loadLibrary();
@@ -46,5 +51,9 @@ protected:
     typedef BOOL (WINAPI *Type_SetDeviceGammaRamp)(HDC hDC, LPVOID lpRamp);
     Type_SetDeviceGammaRamp pGetDeviceGammaRamp;
     Type_SetDeviceGammaRamp pSetDeviceGammaRamp;
+#elif defined(Q_OS_OSX)
+private:
+    bool setColorPalette(const std::vector<int> &vRed, const std::vector<int> &vGreen, const std::vector<int> &vBlue);
+#endif
 };
 #endif
