@@ -13,7 +13,6 @@
 #include "controller.h"
 #include "dimmerwidget.h"
 #include "blynkwindow.h"
-#include "settingswindow.h"
 #include "aboutwindow.h"
 #include "utils.h"
 #include "blynk.h"
@@ -34,7 +33,6 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_pParameters(new Parameters()),
     m_pDimmerWidget(new DimmerWidget()),
     m_pBlynkWindow(new BlynkWindow("Blynk")),
-    //m_pSettingsWindow(new SettingsWindow("Blynk")),
     m_pAboutWindow(new AboutWindow("About Blynk...")),
     m_iBlynkCursorElapsedTime(0),
     m_iScreenBreakElapsedTime(0),
@@ -44,10 +42,6 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
-    // Set parameters on settings window:
-    //connect(m_pBlynkWindow, &BlynkWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
-    //connect(m_pSettingsWindow, &SettingsWindow::showApplicationMenuAtCursorPos, this, &Controller::onShowApplicationMenuAtCursorPos);
-
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
     connect(m_pTrayIconMenu, &QMenu::aboutToHide, this, &Controller::onContextMenuAboutToHide);
@@ -84,9 +78,6 @@ void Controller::releaseAll()
 
     // Blynk window:
     delete m_pBlynkWindow;
-
-    // Settings window:
-    //delete m_pSettingsWindow;
 
     // About window:
     delete m_pAboutWindow;
@@ -260,7 +251,6 @@ void Controller::createTooltip()
         mTooltipValues[sTooltipName] = sTooltipValue;
     }
     m_pBlynkWindow->setTooltips(mTooltipValues);
-    //m_pSettingsWindow->setTooltips(mTooltipValues);
 }
 
 // Action triggered:
@@ -279,10 +269,6 @@ void Controller::onActionTriggered()
             // Show window:
             m_pBlynkWindow->raise();
             m_pBlynkWindow->show();
-
-            // Show window:
-            //m_pSettingsWindow->raise();
-            //m_pSettingsWindow->show();
 
             // Read blynk cursor state:
             QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
@@ -366,7 +352,6 @@ void Controller::onActionTriggered()
 
         // Update UI:
         m_pBlynkWindow->updateUI();
-        //m_pSettingsWindow->updateUI();
     }
 }
 
@@ -384,7 +369,6 @@ void Controller::loadParameters()
     // Update UI:
     m_pDimmerWidget->setParameters(m_pParameters);
     m_pBlynkWindow->setParameters(m_pParameters);
-    //m_pSettingsWindow->setParameters(m_pParameters);
 }
 
 // Save parameters:
@@ -430,7 +414,6 @@ void Controller::onApplicationTimerTimeOut()
     if ((m_iBlynkCursorDelay > 0) && (m_iBlynkCursorElapsedTime > m_iBlynkCursorDelay)) {
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
         m_pBlynkWindow->updateUI();
-        //m_pSettingsWindow->updateUI();
         bBlynkCursorEnabled = true;
     }
 
@@ -451,7 +434,6 @@ void Controller::onApplicationTimerTimeOut()
     if ((m_iScreenBreakDelay > 0) && (m_iScreenBreakElapsedTime > m_iScreenBreakDelay)) {
         m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
         m_pBlynkWindow->updateUI();
-        //m_pSettingsWindow->updateUI();
         bScreenBreakEnabled = true;
     }
 

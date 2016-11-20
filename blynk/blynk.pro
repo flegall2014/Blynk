@@ -49,14 +49,9 @@ HEADERS += \
     imagewidget.h \
     parameters.h \
     utils.h \
-    bluelightreducerwidget.h \
     customslider.h \
     dimmerwidget.h \
-    bluelightreducerpage.h \
     customwindow.h \
-    screenbreakpage.h \
-    cursorpage.h \
-    settingswindow.h \
     aboutwindow.h \
     animatedimage.h \
     blynkwindow.h \
@@ -69,14 +64,9 @@ SOURCES += \
     imagewidget.cpp \
     parameters.cpp \
     utils.cpp \
-    bluelightreducerwidget.cpp \
     customslider.cpp \
     dimmerwidget.cpp \
-    bluelightreducerpage.cpp \
     customwindow.cpp \
-    screenbreakpage.cpp \
-    cursorpage.cpp \
-    settingswindow.cpp \
     aboutwindow.cpp \
     animatedimage.cpp \
     blynkwindow.cpp \
@@ -88,12 +78,6 @@ RESOURCES += \
 FORMS += \
     dimmerwidget.ui \
     customslider.ui \
-    customtooltip.ui \
-    cursorpage.ui \
-    screenbreakpage.ui \
-    bluelightreducerpage.ui \
-    cursorpage.ui \
-    settingswindow.ui \
     aboutwindow.ui \
     blynkwindow.ui
 

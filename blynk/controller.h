@@ -103,9 +103,6 @@ private:
     // Blynk window:
     BlynkWindow *m_pBlynkWindow;
 
-    // Custom window:
-    //SettingsWindow *m_pSettingsWindow;
-
     // About window:
     AboutWindow *m_pAboutWindow;
 
