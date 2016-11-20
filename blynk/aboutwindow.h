@@ -13,11 +13,14 @@ public:
     AboutWindow(const QString &sTitle, QWidget *parent=0);
 
 private:
-    // Load:
-    void load(const QString &sFilePath);
-
-private:
     Ui::AboutWindow *ui;
+
+public slots:
+    // Done:
+    void onDone();
+
+    // Show vision aid overseas:
+    void onShowVisionAidOverseas();
 };
 
 #endif // ABOUTWINDOW_H

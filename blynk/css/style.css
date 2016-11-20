@@ -68,3 +68,22 @@ height: 32px;
 border-radius: 16;
 background-color: "#5E5B5B";
 }
+
+QPushButton#wAboutDoneButton {
+border-radius: 16px;
+background-color: "#00CE6A";
+min-width: 196px;
+min-height: 32px;
+color: "white";
+font-size: 16px
+}
+
+QPushButton#wVisionAidOverseasButton {
+border-radius: 16px;
+background-color: "white";
+border: 1px solid black;
+min-width: 196px;
+min-height: 32px;
+color: "black";
+font-size: 16px
+}

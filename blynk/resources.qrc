@@ -12,5 +12,6 @@
         <file>icons/ico-drop.png</file>
         <file>icons/ico-blynklogo.png</file>
         <file>icons/ico-checked.png</file>
+        <file>icons/ico-facebook.png</file>
     </qresource>
 </RCC>

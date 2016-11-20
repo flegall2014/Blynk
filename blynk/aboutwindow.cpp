@@ -1,10 +1,12 @@
 #include <QFile>
 #include <QTextStream>
+#include <QDesktopServices>
+#include <QUrl>
 
 // Application:
 #include "aboutwindow.h"
 #include "ui_aboutwindow.h"
-
+#define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 
 // Constructor:
 AboutWindow::AboutWindow(const QString &sTitle, QWidget *parent) :
@@ -15,21 +17,23 @@ AboutWindow::AboutWindow(const QString &sTitle, QWidget *parent) :
     ui->setupUi(this);
 
     // Set image:
-    ui->logoWidget->setImage(":/icons/blynk-logo.jpg");
+    ui->wLogoArea->setImage(":/icons/ico-blynklogo.png");
 
-    // Load HTML contents:
-    load(":/html/About Blynk.htm");
+    // Vision aid overseas:
+    connect(ui->wVisionAidOverseasButton, &QPushButton::clicked, this, &AboutWindow::onShowVisionAidOverseas);
+
+    // Done:
+    connect(ui->wAboutDoneButton, &QPushButton::clicked, this, &AboutWindow::onDone);
 }
 
-// Load:
-void AboutWindow::load(const QString &sFilePath)
+// Done:
+void AboutWindow::onDone()
 {
-    QFile f(sFilePath);
-    if (f.open(QFile::ReadOnly | QFile::Text))
-    {
-        QTextStream in(&f);
-        QString sHtmlContents = in.readAll();
-        f.close();
-        ui->textEdit->setHtml(sHtmlContents);
-    }
+    onCloseButtonClicked();
+}
+
+// Show vision aid overseas dialog:
+void AboutWindow::onShowVisionAidOverseas()
+{
+    QDesktopServices::openUrl(QUrl(VISION_AIDS_OVERSEA_URL));
 }
