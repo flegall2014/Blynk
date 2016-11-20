@@ -58,7 +58,9 @@ HEADERS += \
     cursorpage.h \
     settingswindow.h \
     aboutwindow.h \
-    animatedimage.h
+    animatedimage.h \
+    blynkwindow.h \
+    bluelightreducerslider.h
 
 SOURCES += \
     main.cpp \
@@ -76,7 +78,9 @@ SOURCES += \
     cursorpage.cpp \
     settingswindow.cpp \
     aboutwindow.cpp \
-    animatedimage.cpp
+    animatedimage.cpp \
+    blynkwindow.cpp \
+    bluelightreducerslider.cpp
 
 RESOURCES += \
     resources.qrc
@@ -90,5 +94,6 @@ FORMS += \
     bluelightreducerpage.ui \
     cursorpage.ui \
     settingswindow.ui \
-    aboutwindow.ui
+    aboutwindow.ui \
+    blynkwindow.ui
 

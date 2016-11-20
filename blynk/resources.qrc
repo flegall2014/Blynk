@@ -10,5 +10,6 @@
         <file>css/style.css</file>
         <file>icons/blynk-logo.jpg</file>
         <file>html/About Blynk.htm</file>
+        <file>icons/ico-drop.png</file>
     </qresource>
 </RCC>

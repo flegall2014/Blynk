@@ -92,6 +92,7 @@ void Parameters::defineParameterName()
     m_parameterName[BLYNK_CURSOR_MIN] = "blynkCursorMin";
     m_parameterName[BLYNK_CURSOR_MAX] = "blynkCursorMax";
     m_parameterName[BLYNK_PER_MINUTE_RANGE] = "blynkPerMinuteRange";
+    m_parameterName[BLYNK_REGULARITY_RANGE] = "blynkRegularityRange";
     m_parameterName[SCREEN_BREAK_STATE] = "screenBreakState";
     m_parameterName[SCREEN_BREAK_STRENGTH] = "screenBreakStrength";
     m_parameterName[SCREEN_BREAK_MIN] = "screenBreakMin";
@@ -117,6 +118,7 @@ void Parameters::defineParameterDefaultValues()
     setParameter(BLYNK_CURSOR_MAX, "10");
     setParameter(BLYNK_PER_MINUTE_RANDOM, "8");
     setParameter(BLYNK_PER_MINUTE_RANGE, "6, 15");
+    setParameter(BLYNK_REGULARITY_RANGE, "2, 10");
     setParameter(SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
     setParameter(SCREEN_BREAK_STRENGTH, "1");
     setParameter(SCREEN_BREAK_MIN, "20");

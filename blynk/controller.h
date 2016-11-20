@@ -15,7 +15,8 @@ class QAction;
 class QSystemTrayIcon;
 class QMenu;
 class DimmerWidget;
-class SettingsWindow;
+class BlynkWindow;
+//class SettingsWindow;
 class AboutWindow;
 
 class Controller : public QObject, public IService
@@ -99,8 +100,11 @@ private:
     // Dimmer widget:
     DimmerWidget *m_pDimmerWidget;
 
+    // Blynk window:
+    BlynkWindow *m_pBlynkWindow;
+
     // Custom window:
-    SettingsWindow *m_pSettingsWindow;
+    //SettingsWindow *m_pSettingsWindow;
 
     // About window:
     AboutWindow *m_pAboutWindow;

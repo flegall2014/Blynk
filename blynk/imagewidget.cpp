@@ -1,5 +1,6 @@
 // Qt:
 #include <QPainter>
+#include <QBitmap>
 #include <QDebug>
 
 // Application:
@@ -9,7 +10,6 @@
 ImageWidget::ImageWidget(QWidget *parent) : QWidget(parent),
     m_sImagePath(""), m_sText(""), m_textColor(QColor(0, 0, 0))
 {
-
 }
 
 // Set image:
@@ -31,7 +31,9 @@ void ImageWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
-    painter.fillRect(rect(), Qt::white);
+    painter.fillRect(rect(), QColor("#F2F2F2"));
+    painter.setPen(QPen(QColor("#A5A5A7")));
+    painter.drawLine(QPoint(0, rect().height()-1), QPoint(rect().width()-0, rect().height()-1));
     QImage image(m_sImagePath);
     if (!image.isNull())
     {
@@ -42,10 +44,13 @@ void ImageWidget::paintEvent(QPaintEvent *event)
         painter.setRenderHint(QPainter::SmoothPixmapTransform);
         int x = (rect().width()-targetWidth)/2;
         int y = (rect().height()-targetHeight)/2;
-        painter.drawImage(QPoint(x, y), image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio));
-        painter.setFont(QFont("times",24));
-        QRect textRect(QPoint(rect().width()/2, 0), QSize(rect().width()/2-8, rect().height()));
-        painter.setPen(m_textColor);
-        painter.drawText(textRect, Qt::AlignVCenter, m_sText);
+
+        // Mask white pixels:
+        QImage scaledImage = image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio);
+        QPixmap pixmap = QPixmap::fromImage(scaledImage);
+        pixmap.createMaskFromColor(QColor(Qt::white));
+
+        // Draw:
+        painter.drawPixmap(QPoint(x, y), pixmap);
     }
 }

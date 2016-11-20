@@ -29,15 +29,15 @@ protected:
     virtual void paintEvent(QPaintEvent *event);
     virtual void closeEvent(QCloseEvent *e);
 
+    // Close button clicked:
+    void onCloseButtonClicked();
+
 private:
     // Center on screen:
     void positionOnScreen();
 
     // Contains mouse?
     bool containsMouse(const QPoint &point);
-
-    // Close button clicked:
-    void onCloseButtonClicked();
 
 private:
     QString m_sTitle;
