@@ -344,6 +344,9 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -385,6 +388,9 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -604,6 +610,9 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -652,6 +661,9 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -720,6 +732,9 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -771,6 +786,9 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
