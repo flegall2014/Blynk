@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>768</width>
+    <width>776</width>
     <height>648</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>768</width>
+    <width>776</width>
     <height>648</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>768</width>
+    <width>776</width>
     <height>648</height>
    </size>
   </property>
@@ -344,6 +344,12 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
        <property name="flat">
         <bool>true</bool>
        </property>
@@ -388,6 +394,12 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -610,6 +622,12 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
        <property name="flat">
         <bool>true</bool>
        </property>
@@ -661,6 +679,12 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -732,6 +756,12 @@
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
        </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
        <property name="flat">
         <bool>true</bool>
        </property>
@@ -786,6 +816,12 @@
        <property name="icon">
         <iconset resource="resources.qrc">
          <normaloff>:/icons/ico-question.png</normaloff>:/icons/ico-question.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
        </property>
        <property name="flat">
         <bool>true</bool>
