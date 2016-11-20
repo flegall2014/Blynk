@@ -42,7 +42,6 @@ private:
 private:
     QString m_sTitle;
     QPoint m_diff;
-    QColor m_backgroundColor;
     QColor m_headerColor;
     int m_iHeaderHeight;
     bool m_bCloseButtonPressed;

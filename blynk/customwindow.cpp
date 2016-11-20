@@ -12,7 +12,6 @@
 CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     QDialog(parent),
     m_sTitle(sTitle),
-    m_backgroundColor(QColor(229, 229, 229, 216)),
     m_headerColor(QColor(196, 196, 196)),
     m_iHeaderHeight(25),
     m_bCloseButtonPressed(false)
@@ -85,8 +84,11 @@ void CustomWindow::paintEvent(QPaintEvent *event)
 
     // Draw window background:
     QRect background = rect();
-    painter.setBrush(QBrush(m_backgroundColor));
-    painter.drawRoundedRect(background, 8, 8);
+
+    QLinearGradient gradient(background.topLeft(), background.bottomRight()); // diagonal gradient from top-left to bottom-right
+    gradient.setColorAt(0, QColor("#EEEEEE"));
+    gradient.setColorAt(1, QColor("#DDDDDD"));
+    painter.fillRect(background, gradient);
 
     // Draw inner rect:
     QRect innerRect = background.adjusted(32, 64, -32, -32);

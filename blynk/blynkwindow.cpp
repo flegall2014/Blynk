@@ -10,7 +10,7 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     m_pParameters(NULL)
 {
     ui->setupUi(this);
-    ui->wLogoArea->setImage(":/icons/blynk-logo.jpg");
+    ui->wLogoArea->setImage(":/icons/ico-blynklogo.png");
 
     // Blynk cursor:
     connect(ui->wBlynkRegularitySlider, &QSlider::valueChanged, this, &BlynkWindow::onBlynkRegularitySliderChanged);
@@ -42,6 +42,10 @@ BlynkWindow::~BlynkWindow()
 void BlynkWindow::setParameters(Parameters *pParameters)
 {
     m_pParameters = pParameters;
+
+    ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
+        m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
+    ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
 }
 
 // Update UI:

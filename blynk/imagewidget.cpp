@@ -31,9 +31,9 @@ void ImageWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
-    painter.fillRect(rect(), QColor("#F2F2F2"));
+    painter.fillRect(rect(), QColor(Qt::transparent));
     painter.setPen(QPen(QColor("#A5A5A7")));
-    painter.drawLine(QPoint(0, rect().height()-1), QPoint(rect().width()-0, rect().height()-1));
+    painter.drawLine(QPoint(8, rect().height()-1), QPoint(rect().width()-8, rect().height()-1));
     QImage image(m_sImagePath);
     if (!image.isNull())
     {

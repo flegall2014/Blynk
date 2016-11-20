@@ -468,7 +468,7 @@ void Controller::onApplicationTimerTimeOut()
             if (!bBlynkCursorRandomMode)
             {
                 int iBlynkCursorRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
-                if (m_iBlynkCursorElapsedTime%iBlynkCursorRegularity == 0) {
+                if ((iBlynkCursorRegularity > 0) && (m_iBlynkCursorElapsedTime%iBlynkCursorRegularity == 0)) {
                     m_pDimmerWidget->playCursor();
                 }
             }
@@ -477,7 +477,7 @@ void Controller::onApplicationTimerTimeOut()
             {
                 if (!m_lBlynkCursorSequence.isEmpty())
                 {
-                    if (m_iBlynkCursorElapsedTime%m_lBlynkCursorSequence.first() == 0)
+                    if ((m_lBlynkCursorSequence.first() > 0) && (m_iBlynkCursorElapsedTime%m_lBlynkCursorSequence.first() == 0))
                     {
                         m_pDimmerWidget->playCursor();
                         m_lBlynkCursorSequence.takeFirst();
@@ -500,9 +500,12 @@ void Controller::onApplicationTimerTimeOut()
         int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*60;
 
         // Strength:
-        Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
-        if (m_iScreenBreakElapsedTime%iScreenBreakRegularity == 0) {
-            m_pDimmerWidget->playAnimatedImage(eScreenBreakStrength);
+        if (iScreenBreakRegularity > 0)
+        {
+            Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
+            if ((iScreenBreakRegularity > 0) && (m_iScreenBreakElapsedTime%iScreenBreakRegularity == 0)) {
+                m_pDimmerWidget->playAnimatedImage(eScreenBreakStrength);
+            }
         }
     }
 
