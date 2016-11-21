@@ -12,6 +12,10 @@ public:
     // Constructor:
     AboutWindow(const QString &sTitle, QWidget *parent=0);
 
+protected:
+    // Paint:
+    virtual void paintEvent(QPaintEvent *event);
+
 private:
     Ui::AboutWindow *ui;
 

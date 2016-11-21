@@ -2,6 +2,8 @@
 #include <QTextStream>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QPainter>
+#include <QDebug>
 
 // Application:
 #include "aboutwindow.h"
@@ -46,4 +48,21 @@ void AboutWindow::onShowVisionAidOverseas()
 void AboutWindow::onShowFaceBook()
 {
     QDesktopServices::openUrl(QUrl(FACEBOOK_URL));
+}
+
+// Paint event:
+void AboutWindow::paintEvent(QPaintEvent *event)
+{
+    CustomWindow::paintEvent(event);
+    QPainter painter(this);
+    painter.setPen(QPen(QColor("#A5A5A7")));
+
+    QPoint mapped = ui->wSeparator1->mapToParent(QPoint(0, 0));
+    painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
+
+    mapped = ui->wSeparator2->mapToParent(QPoint(0, 0));
+    painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
+
+    mapped = ui->wSeparator3->mapToParent(QPoint(0, 0));
+    painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
 }

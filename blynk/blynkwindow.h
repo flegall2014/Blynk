@@ -68,6 +68,9 @@ public slots:
     // Screen break enabled changed:
     void onScreenBreakEnabledChanged(bool bChecked);
 
+    // Screen break strength changed:
+    void onScreenBreakStrengthChanged(int iIndex);
+
     // Blue light reducer value changed:
     void onBlueLightReducerValueChanged(int iBlueLightReducerValue);
 

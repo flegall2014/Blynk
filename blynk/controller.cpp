@@ -23,9 +23,7 @@
 #define ONE_HOUR_IN_SEC 3600
 #define THREE_HOURS_IN_SEC 10800
 #define ONE_DAY_IN_SEC 86400
-#define ONE_HOUR_IN_MIN 60
-#define THREE_HOURS_IN_MIN 180
-#define ONE_DAY_IN_MIN 1440
+#define ONE_MINUTE_IN_SEC 1
 #define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 
 // Constructor:
@@ -482,7 +480,7 @@ void Controller::onApplicationTimerTimeOut()
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*ONE_HOUR_IN_MIN;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*ONE_MINUTE_IN_SEC;
 
         // Strength:
         if (iScreenBreakRegularity > 0)

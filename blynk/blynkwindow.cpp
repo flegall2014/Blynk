@@ -34,6 +34,7 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     // Screen break area:
     connect(ui->wScreenBreakSlider, &Slider::valueChanged, this, &BlynkWindow::onScreenBreakRegularityChanged);
     connect(ui->wScreenBreakEnabled, &QCheckBox::toggled, this, &BlynkWindow::onScreenBreakEnabledChanged);
+    connect(ui->wScreenBreakStrengthCombo, SIGNAL(activated(int)), this, SLOT(onScreenBreakStrengthChanged(int)));
 
     // Blue light reducer:
     connect(ui->wBlueLightReducerSlider, &QSlider::valueChanged, this, &BlynkWindow::onBlueLightReducerValueChanged);
@@ -218,6 +219,14 @@ void BlynkWindow::onScreenBreakEnabledChanged(bool bChecked)
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED);
     }
     updateScreenBreakArea();
+}
+
+
+// Screen break strength changed:
+void BlynkWindow::onScreenBreakStrengthChanged(int iIndex)
+{
+    Parameters::Strength eStrength = (Parameters::Strength)(iIndex+1);
+    m_pParameters->setParameter(Parameters::SCREEN_BREAK_STRENGTH, QString::number(eStrength));
 }
 
 // Blue light reducer value changed:

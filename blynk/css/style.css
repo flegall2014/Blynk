@@ -1,9 +1,9 @@
 QToolTip {
-background-color: #FFF1E7;
-border: 2px solid green;
+background-color: "#EDEDED";
+border: 2px solid "#64D498";
 border-radius: 4px;
 padding: 2px;
-color: #555555
+color: "black";
 }
 
 QLabel {
@@ -115,16 +115,6 @@ font-size: 16px
 }
 
 QPushButton#wAboutDoneButton {
-border-radius: 16px;
-background-color: "white";
-border: 1px solid "black";
-min-width: 196px;
-min-height: 32px;
-color: "black";
-font-size: 16px
-}
-
-QPushButton#wAboutDoneButton:pressed {
 border-radius: 16px;
 background-color: "#66D495";
 border: 1px solid "black";
