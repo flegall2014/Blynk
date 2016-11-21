@@ -2,24 +2,37 @@
 #include "blynkwindow.h"
 #include "ui_blynkwindow.h"
 #include "parameters.h"
+#include <QDebug>
 
 // Constructor:
 BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     CustomWindow(sTitle, parent),
-    ui(new Ui::blynkwindow),
+    ui(new Ui::BlynkWindow),
     m_pParameters(NULL)
 {
     ui->setupUi(this);
+
+    // Set blynk slider labels:
+    QStringList lLabels1;
+    lLabels1 << "2 sec" << "4" << "6" << "8" << "10";
+    ui->wBlynkRegularitySlider->setMajorTickLabels(lLabels1);
+
+    // Set screen break slider labels:
+    QStringList lLabels2;
+    lLabels2 << "20 min" << "40" << "60" << "80" << "100";
+    ui->wScreenBreakSlider->setMajorTickLabels(lLabels2);
+
+    // Set logo:
     ui->wLogoArea->setImage(":/icons/ico-blynklogo.png");
 
     // Blynk cursor:
-    connect(ui->wBlynkRegularitySlider, &QSlider::valueChanged, this, &BlynkWindow::onBlynkRegularitySliderChanged);
+    connect(ui->wBlynkRegularitySlider, &Slider::valueChanged, this, &BlynkWindow::onBlynkRegularitySliderChanged);
     connect(ui->wBlynkRandomCheckBox, &QCheckBox::toggled, this, &BlynkWindow::onRandomCheckBoxToggled);
-    connect(ui->wBlynkCursorEnabled, &QCheckBox::toggled, this, &BlynkWindow::onRandomCheckBoxToggled);
+    connect(ui->wBlynkCursorEnabled, &QCheckBox::toggled, this, &BlynkWindow::onBlynkCursorEnabledChanged);
     connect(ui->wBlynkPerMinuteValues, SIGNAL(activated(int)), this, SLOT(onBlynkPerMinuteValueChanged(int)));
 
     // Screen break area:
-    connect(ui->wScreenBreakSlider, &QSlider::valueChanged, this, &BlynkWindow::onScreenBreakRegularityChanged);
+    connect(ui->wScreenBreakSlider, &Slider::valueChanged, this, &BlynkWindow::onScreenBreakRegularityChanged);
     connect(ui->wScreenBreakEnabled, &QCheckBox::toggled, this, &BlynkWindow::onScreenBreakEnabledChanged);
 
     // Blue light reducer:
@@ -76,8 +89,7 @@ void BlynkWindow::updateBlynkCursorArea()
         int iSecond = lBlynkRegularityRange[1].toInt();
         int iMinValue = qMin(iFirst, iSecond);
         int iMaxValue = qMax(iFirst, iSecond);
-        ui->wBlynkRegularitySlider->setMinimum(iMinValue);
-        ui->wBlynkRegularitySlider->setMaximum(iMaxValue);
+        ui->wBlynkRegularitySlider->setRange(iMinValue, iMaxValue);
 
         int iBlynkRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
         ui->wBlynkRegularitySlider->setValue(iBlynkRegularity);
@@ -160,6 +172,23 @@ void BlynkWindow::onBlynkRegularitySliderChanged(int iRegularity)
 void BlynkWindow::onRandomCheckBoxToggled(bool bChecked)
 {
     m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, bChecked ? "1" : "0");
+}
+
+// Blue light reducer enabled changed:
+void BlynkWindow::onBlynkCursorEnabledChanged(bool bChecked)
+{
+    bool bEnabled = !bChecked;
+    if (bEnabled)
+        m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
+    else
+    {
+        QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+        if ((sBlynkCursorState != BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR) &&
+                (sBlynkCursorState != BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS) &&
+                (sBlynkCursorState != BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW))
+            m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED);
+    }
+    updateBlynkCursorArea();
 }
 
 // Blynk per minute value changed:

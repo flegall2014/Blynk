@@ -1,5 +1,6 @@
 // Qt:
 #include <QPainter>
+#include <QDebug>
 
 // Application:
 #include "bluelightreducerslider.h"
@@ -8,6 +9,7 @@
 BlueLightReducerSlider::BlueLightReducerSlider(QWidget *parent) : QSlider(parent)
 {
     setOrientation(Qt::Horizontal);
+    setRange(0, 2);
     setPageStep(1);
 }
 

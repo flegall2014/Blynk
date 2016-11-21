@@ -187,7 +187,6 @@ bool GammaRamp::setColorPalette(const std::vector<int> &vRed, const std::vector<
 // Set blue light parameters:
 bool GammaRamp::createColorPalette(const QColor &startColor, const QColor &stopColor)
 {
-    qDebug() << "createColorPalette" << startColor << stopColor;
     int iDeltaRed = abs(stopColor.red()-startColor.red());
     int iDeltaGreen = abs(stopColor.green()-startColor.green());
     int iDeltaBlue = abs(stopColor.blue()-startColor.blue());

@@ -20,9 +20,12 @@
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
-#define ONE_HOUR 3600
-#define THREE_HOURS 10800
-#define ONE_DAY 86400
+#define ONE_HOUR_IN_SEC 3600
+#define THREE_HOURS_IN_SEC 10800
+#define ONE_DAY_IN_SEC 86400
+#define ONE_HOUR_IN_MIN 60
+#define THREE_HOURS_IN_MIN 180
+#define ONE_DAY_IN_MIN 1440
 #define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 
 // Constructor:
@@ -286,7 +289,7 @@ void Controller::onActionTriggered()
         // Cursor disabled for an hour:
         if (sObjectName == "blynkCursorDisabledForOneHour")
         {
-            m_iBlynkCursorDelay = ONE_HOUR;
+            m_iBlynkCursorDelay = ONE_HOUR_IN_SEC;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -294,7 +297,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for three hour:
         if (sObjectName == "blynkCursorDisabledForThreeHours")
         {
-            m_iBlynkCursorDelay = THREE_HOURS;
+            m_iBlynkCursorDelay = THREE_HOURS_IN_SEC;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -302,7 +305,7 @@ void Controller::onActionTriggered()
         // Screen break disabled until tomorrow:
         if (sObjectName == "blynkCursorDisabledUntilTomorrow")
         {
-            m_iBlynkCursorDelay = ONE_DAY;
+            m_iBlynkCursorDelay = ONE_DAY_IN_SEC;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -310,7 +313,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for an hour:
         if (sObjectName == "screenBreakDisabledForOneHour")
         {
-            m_iScreenBreakDelay = ONE_HOUR;
+            m_iScreenBreakDelay = ONE_HOUR_IN_SEC;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -318,7 +321,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for three hour:
         if (sObjectName == "screenBreakDisabledForThreeHours")
         {
-            m_iScreenBreakDelay = THREE_HOURS;
+            m_iScreenBreakDelay = THREE_HOURS_IN_SEC;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -326,7 +329,7 @@ void Controller::onActionTriggered()
         // Screen break disabled until tomorrow:
         if (sObjectName == "screenBreakDisabledUntilTomorrow")
         {
-            m_iScreenBreakDelay = ONE_DAY;
+            m_iScreenBreakDelay = ONE_DAY_IN_SEC;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -479,7 +482,7 @@ void Controller::onApplicationTimerTimeOut()
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*60;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*ONE_HOUR_IN_MIN;
 
         // Strength:
         if (iScreenBreakRegularity > 0)

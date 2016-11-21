@@ -7,5 +7,61 @@
         <file>icons/ico-drop.png</file>
         <file>icons/ico-blynklogo.png</file>
         <file>icons/ico-facebook.png</file>
+        <file>animatedimage/Eye_19.png</file>
+        <file>animatedimage/Eye_20.png</file>
+        <file>animatedimage/Eye_21.png</file>
+        <file>animatedimage/Eye_22.png</file>
+        <file>animatedimage/Eye_23.png</file>
+        <file>animatedimage/Eye_24.png</file>
+        <file>animatedimage/Eye_25.png</file>
+        <file>animatedimage/Eye_26.png</file>
+        <file>animatedimage/Eye_27.png</file>
+        <file>animatedimage/Eye_28.png</file>
+        <file>animatedimage/Eye_29.png</file>
+        <file>animatedimage/Eye_30.png</file>
+        <file>animatedimage/Eye_31.png</file>
+        <file>animatedimage/Eye_32.png</file>
+        <file>animatedimage/Eye_33.png</file>
+        <file>animatedimage/Eye_34.png</file>
+        <file>animatedimage/Eye_35.png</file>
+        <file>animatedimage/Eye_36.png</file>
+        <file>cursor/Fra_01.png</file>
+        <file>cursor/Fra_02.png</file>
+        <file>cursor/Fra_03.png</file>
+        <file>cursor/Fra_04.png</file>
+        <file>cursor/Fra_05.png</file>
+        <file>cursor/Fra_06.png</file>
+        <file>cursor/Fra_07.png</file>
+        <file>cursor/Fra_08.png</file>
+        <file>cursor/Fra_09.png</file>
+        <file>cursor/Fra_10.png</file>
+        <file>cursor/Fra_11.png</file>
+        <file>cursor/Fra_12.png</file>
+        <file>cursor/Fra_13.png</file>
+        <file>cursor/Fra_14.png</file>
+        <file>cursor/Fra_15.png</file>
+        <file>cursor/Fra_16.png</file>
+        <file>cursor/Fra_17.png</file>
+        <file>cursor/Fra_18.png</file>
+        <file>cursor/Fra_19.png</file>
+        <file>cursor/Fra_20.png</file>
+        <file>cursor/Fra_21.png</file>
+        <file>cursor/Fra_22.png</file>
+        <file>cursor/Fra_23.png</file>
+        <file>cursor/Fra_24.png</file>
+        <file>cursor/Fra_25.png</file>
+        <file>cursor/Fra_26.png</file>
+        <file>cursor/Fra_27.png</file>
+        <file>cursor/Fra_28.png</file>
+        <file>cursor/Fra_29.png</file>
+        <file>cursor/Fra_30.png</file>
+        <file>cursor/Fra_31.png</file>
+        <file>cursor/Fra_32.png</file>
+        <file>cursor/Fra_33.png</file>
+        <file>cursor/Fra_34.png</file>
+        <file>cursor/Fra_35.png</file>
+        <file>cursor/Fra_36.png</file>
+        <file>icons/ico-checked.png</file>
+        <file>icons/ico-unchecked.png</file>
     </qresource>
 </RCC>

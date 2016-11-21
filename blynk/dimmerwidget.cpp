@@ -48,19 +48,13 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
 
     // Animated cursor:
     m_pAnimatedCursor = new AnimatedImage(this);
-    QDir cursorImageDir = Utils::appDir();
-    cursorImageDir.cdUp();
-    cursorImageDir.cd("blynk/cursor");
-    m_pAnimatedCursor->loadCursorImages(cursorImageDir);
+    m_pAnimatedCursor->loadImages(AnimatedImage::CURSOR_IMAGES);
     connect(m_pAnimatedCursor, &AnimatedImage::nextImage, this, &DimmerWidget::onNextCursorImageAvailable);
     connect(m_pAnimatedCursor, &AnimatedImage::done, this, &DimmerWidget::onCursorDone);
 
     // Animated image:
     m_pAnimatedImage = new AnimatedImage(this);
-    QDir animatedImageDir = Utils::appDir();
-    animatedImageDir.cdUp();
-    animatedImageDir.cd("blynk/animatedimage");
-    m_pAnimatedImage->loadCursorImages(animatedImageDir);
+    m_pAnimatedImage->loadImages(AnimatedImage::BIGEYE_IMAGES);
     connect(m_pAnimatedImage, &AnimatedImage::nextImage, this, &DimmerWidget::onNextAnimatedImageAvailable);
     connect(m_pAnimatedImage, &AnimatedImage::done, this, &DimmerWidget::onAnimatedImageDone);
 }

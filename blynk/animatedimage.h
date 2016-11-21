@@ -13,6 +13,8 @@ class AnimatedImage : public QObject
     Q_OBJECT
 
 public:
+    enum What {CURSOR_IMAGES=0, BIGEYE_IMAGES};
+
     // Constructor:
     AnimatedImage(QWidget *parent=0);
 
@@ -22,8 +24,8 @@ public:
     // Play:
     void play();
 
-    // Load cursor images:
-    void loadCursorImages(const QDir &imgDir);
+    // Load images:
+    void loadImages(const What &what);
 
 private:
     // Movie:

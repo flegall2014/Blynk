@@ -8,7 +8,7 @@
 #include "customwindow.h"
 
 namespace Ui {
-class blynkwindow;
+class BlynkWindow;
 }
 class Parameters;
 
@@ -44,7 +44,7 @@ private:
 
 private:
     // UI:
-    Ui::blynkwindow *ui;
+    Ui::BlynkWindow *ui;
 
     // Parameters:
     Parameters *m_pParameters;
@@ -55,6 +55,9 @@ public slots:
 
     // Random checkbox toggled:
     void onRandomCheckBoxToggled(bool bChecked);
+
+    // Blue light reducer enabled changed:
+    void onBlynkCursorEnabledChanged(bool bChecked);
 
     // Blynk per minute value changed:
     void onBlynkPerMinuteValueChanged(int iBlynkPerMinute);

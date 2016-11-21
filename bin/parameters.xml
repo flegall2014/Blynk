@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Parameters>
- <blynkCursorRegularity>5</blynkCursorRegularity>
+ <blynkCursorRegularity>2</blynkCursorRegularity>
  <blynkCursorState>Enabled</blynkCursorState>
  <blynkCursorRandomMode>0</blynkCursorRandomMode>
  <blynkPerMinuteRegular>2</blynkPerMinuteRegular>
@@ -11,10 +11,10 @@
  <blynkRegularityRange>2, 10</blynkRegularityRange>
  <screenBreakRegularity>20</screenBreakRegularity>
  <screenBreakState>Enabled</screenBreakState>
- <screenBreakStrength>3</screenBreakStrength>
+ <screenBreakStrength>1</screenBreakStrength>
  <screenBreakMin>20</screenBreakMin>
  <screenBreakMax>100</screenBreakMax>
- <blueLightReducerEnabled>1</blueLightReducerEnabled>
+ <blueLightReducerEnabled>0</blueLightReducerEnabled>
  <blueLightReducerStrength>1</blueLightReducerStrength>
  <blueLightReducerStartTime>09:00:00</blueLightReducerStartTime>
  <startBlynkAtLogin>0</startBlynkAtLogin>

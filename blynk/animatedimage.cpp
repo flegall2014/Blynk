@@ -20,15 +20,27 @@ AnimatedImage::~AnimatedImage()
 {
 }
 
-// Load cursor images:
-void AnimatedImage::loadCursorImages(const QDir &imgDir)
-{
-    QStringList lFilters;
-    lFilters << "*.png";
-
-    QStringList lPngFiles = Utils::files(imgDir.absolutePath(), lFilters);
-    foreach (QString sPngFile, lPngFiles)
-        m_vCursorImages << QImage(sPngFile);
+// Load images:
+void AnimatedImage::loadImages(const What &what)
+{   
+    if (what == BIGEYE_IMAGES)
+    {
+        for (int i=19; i<=36; i++) {
+            QString sPngFile = QString(":/animatedimage/Eye_%1.png").arg(i);
+            m_vCursorImages << QImage(sPngFile);
+        }
+    }
+    else
+    if (what == CURSOR_IMAGES)
+    {
+        for (int i=1; i<=36; i++) {
+            QString sIndex = QString::number(i);
+            if (sIndex.length() < 2)
+                sIndex = "0"+sIndex;
+            QString sPngFile = QString(":/cursor/Fra_%1.png").arg(sIndex);
+            m_vCursorImages << QImage(sPngFile);
+        }
+    }
 }
 
 // Play:

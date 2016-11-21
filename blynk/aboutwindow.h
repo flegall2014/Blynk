@@ -21,6 +21,9 @@ public slots:
 
     // Show vision aid overseas:
     void onShowVisionAidOverseas();
+
+    // Show facebook:
+    void onShowFaceBook();
 };
 
 #endif // ABOUTWINDOW_H

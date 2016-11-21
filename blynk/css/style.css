@@ -7,47 +7,70 @@ color: #555555
 }
 
 QLabel {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
 QLabel#wBlynkCursorLabel {
-font-family: "Segoe UI";
-font-size: 28px;
+font-family: "Helvetica";
+font-size: 24px;
 }
 
 QLabel#wScreenBreakLabel {
-font-family: "Segoe UI";
-font-size: 28px;
+font-family: "Helvetica";
+font-size: 24px;
 }
 
 QLabel#wBlueLightReducerLabel {
-font-family: "Segoe UI";
-font-size: 28px;
+font-family: "Helvetica";
+font-size: 24px;
+}
+
+QLabel#wAboutBlynkLabel {
+font-family: "Helvetica";
+font-size: 24px;
+}
+
+QLabel#wNotJustYourEyesLabel {
+font-family: "Helvetica";
+font-size: 24px;
 }
 
 QCheckBox {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
+QCheckBox::indicator {
+width: 16px;
+height: 16px;
+}
+
+QCheckBox::indicator:unchecked {
+image: url(:/icons/ico-unchecked.png);
+}
+
+QCheckBox::indicator:checked {
+image: url(:/icons/ico-checked.png);
+}
+
 QRadioButton  {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
 QPushButton  {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
 QComboBox {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
 QMenu  {
-font-family: "Segoe UI";
+font-family: "Helvetica";
 font-size: 14px;
 }
 
@@ -55,6 +78,7 @@ QSlider#wBlueLightReducerSlider {
 height: 32px;
 border-radius: 16;
 }
+
 QSlider#wBlueLightReducerSlider::groove:horizontal {
 border: 1px solid;
 height: 32px;
@@ -62,6 +86,7 @@ border-radius: 16;
 background-color: "white";
 border-color: none;
 }
+
 QSlider#wBlueLightReducerSlider::handle:horizontal {
 width: 170px;
 height: 32px;
@@ -69,19 +94,60 @@ border-radius: 16;
 background-color: "#5E5B5B";
 }
 
-QPushButton#wAboutDoneButton {
+QPushButton#wDoneButton {
 border-radius: 16px;
-background-color: "#00CE6A";
+background-color: "white";
+border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
-color: "white";
+color: "black";
+font-size: 16px
+}
+
+QPushButton#wDoneButton:pressed {
+border-radius: 16px;
+background-color: "#66D495";
+border: 1px solid "black";
+min-width: 196px;
+min-height: 32px;
+color: "black";
+font-size: 16px
+}
+
+QPushButton#wAboutDoneButton {
+border-radius: 16px;
+background-color: "white";
+border: 1px solid "black";
+min-width: 196px;
+min-height: 32px;
+color: "black";
+font-size: 16px
+}
+
+QPushButton#wAboutDoneButton:pressed {
+border-radius: 16px;
+background-color: "#66D495";
+border: 1px solid "black";
+min-width: 196px;
+min-height: 32px;
+color: "black";
 font-size: 16px
 }
 
 QPushButton#wVisionAidOverseasButton {
 border-radius: 16px;
 background-color: "white";
-border: 1px solid black;
+border: 1px solid "black";
+min-width: 196px;
+min-height: 32px;
+color: "black";
+font-size: 16px
+}
+
+QPushButton#wVisionAidOverseasButton:pressed {
+border-radius: 16px;
+background-color: "#66D495";
+border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
 color: "black";

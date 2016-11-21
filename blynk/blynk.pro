@@ -55,7 +55,8 @@ HEADERS += \
     aboutwindow.h \
     animatedimage.h \
     blynkwindow.h \
-    bluelightreducerslider.h
+    bluelightreducerslider.h \
+    slider.h
 
 SOURCES += \
     main.cpp \
@@ -70,7 +71,8 @@ SOURCES += \
     aboutwindow.cpp \
     animatedimage.cpp \
     blynkwindow.cpp \
-    bluelightreducerslider.cpp
+    bluelightreducerslider.cpp \
+    slider.cpp
 
 RESOURCES += \
     resources.qrc
@@ -79,5 +81,6 @@ FORMS += \
     dimmerwidget.ui \
     customslider.ui \
     aboutwindow.ui \
-    blynkwindow.ui
+    blynkwindow.ui \
+    slider.ui
 
