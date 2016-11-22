@@ -86,7 +86,7 @@ void CustomWindow::paintEvent(QPaintEvent *event)
     QRect background = rect();
 
     QLinearGradient gradient(background.topLeft(), background.bottomRight()); // diagonal gradient from top-left to bottom-right
-    gradient.setColorAt(0, QColor("#EEEEEE"));
+    gradient.setColorAt(0, QColor("#CCCCCC"));
     gradient.setColorAt(1, QColor("#DDDDDD"));
     painter.fillRect(background, gradient);
 
