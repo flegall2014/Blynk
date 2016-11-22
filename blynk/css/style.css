@@ -7,37 +7,37 @@ color: "black";
 }
 
 QLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 
 QLabel#wBlynkCursorLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 24px;
 }
 
 QLabel#wScreenBreakLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 24px;
 }
 
 QLabel#wBlueLightReducerLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 24px;
 }
 
 QLabel#wAboutBlynkLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 24px;
 }
 
 QLabel#wNotJustYourEyesLabel {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 24px;
 }
 
 QCheckBox {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 
@@ -55,22 +55,22 @@ image: url(:/icons/ico-checked.png);
 }
 
 QRadioButton  {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 
 QPushButton  {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 
 QComboBox {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 
 QMenu  {
-font-family: "Helvetica";
+font-family: "Myriad Pro";
 font-size: 14px;
 }
 

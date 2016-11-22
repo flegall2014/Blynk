@@ -53,6 +53,12 @@ Controller::Controller(QObject *parent) : QObject(parent),
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
     connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
+
+    // Myriad font:
+    int id = QFontDatabase::addApplicationFont(":/fonts/Myriad-Pro_31655.ttf");
+    qDebug() << id;
+    QString sMyriadFamily = QFontDatabase::applicationFontFamilies(id).at(0);
+    m_MyriadFont.setFamily(sMyriadFamily);
 }
 
 // Destructor:
@@ -116,7 +122,6 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 {
     // Exclusive menu?
     bool bIsExclusiveMenu = false;
-    QFont segoeUIFont("Segoe-UI", 10);
     QActionGroup *pActionGroup = NULL;
     if (pRootMenu)
     {
@@ -147,8 +152,8 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             QAction *pAction = new QAction(sActionName, this);
 
             // Set font:
-            segoeUIFont.setBold(bBold);
-            pAction->setFont(segoeUIFont);
+            m_MyriadFont.setBold(bBold);
+            pAction->setFont(m_MyriadFont);
 
             // Store action:
             m_mActions[sObjectName] = pAction;
@@ -176,8 +181,7 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
 
             // Set font:
-            segoeUIFont.setBold(bBold);
-            pSubMenu->setFont(segoeUIFont);
+            m_MyriadFont.setBold(bBold);
 
             // Set enabled state:
             pSubMenu->setEnabled(bEnabled);
@@ -185,7 +189,8 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             pSubMenu->setEnabled(bEnabled);
 
             // Add menu:
-            pRootMenu->addMenu(pSubMenu);
+            QAction *pSubMenuAction = pRootMenu->addMenu(pSubMenu);
+            pSubMenuAction->setFont(m_MyriadFont);
             createMenu(node, pSubMenu);
         }
         else

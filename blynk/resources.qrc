@@ -63,5 +63,7 @@
         <file>cursor/Fra_36.png</file>
         <file>icons/ico-checked.png</file>
         <file>icons/ico-unchecked.png</file>
+        <file>fonts/Myriad-Pro_31655.ttf</file>
+        <file>fonts/Lato-Regular.ttf</file>
     </qresource>
 </RCC>

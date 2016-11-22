@@ -1,6 +1,8 @@
 // Qt:
 #include <QApplication>
 #include <QFile>
+#include <QFont>
+#include <QFontDatabase>
 #include <QDebug>
 
 // Application:

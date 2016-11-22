@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QElapsedTimer>
+#include <QFont>
 
 // Application:
 #include "iservice.h"
@@ -135,6 +136,9 @@ private:
 
     // Current temperature:
     int m_iCurrentTemperature;
+
+    // Myriad font:
+    QFont m_MyriadFont;
 
 public slots:
     // Action triggered:
