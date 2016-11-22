@@ -6,8 +6,8 @@
 // Constructor:
 Slider::Slider(QWidget *parent) : QWidget(parent), ui(new Ui::Slider),
     m_nMinorTicks(5),
-    m_majorTickColor(Qt::black),
-    m_minorTickColor("#AAAAAA"),
+    m_majorTickColor(Qt::gray),
+    m_minorTickColor(Qt::gray),
     m_iHorizontalMargin(24),
     m_iLabelAreaHeight(12)
 {
@@ -77,7 +77,7 @@ void Slider::paintEvent(QPaintEvent *event)
     int iRulerWidth = iSliderWidth-iDelta;
     QRect tickRect(iRulerX, rect().height()/2, iRulerWidth, rect().height()/2);
     painter.setPen(QPen(m_majorTickColor));
-    painter.drawLine(iRulerX, tickRect.top(), iRulerX+iRulerWidth-1, tickRect.top());
+    //painter.drawLine(iRulerX, tickRect.top(), iRulerX+iRulerWidth-1, tickRect.top());
 
     int iMajorTickHeight = tickRect.height()-m_iLabelAreaHeight;
     int iMinorTickHeight = iMajorTickHeight/2;

@@ -88,7 +88,7 @@ border-color: none;
 }
 
 QSlider#wBlueLightReducerSlider::handle:horizontal {
-width: 150px;
+width: 188px;
 height: 32px;
 border-radius: 16;
 background-color: "#5E5B5B";
