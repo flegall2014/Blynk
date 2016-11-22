@@ -37,7 +37,7 @@ void ImageWidget::paintEvent(QPaintEvent *event)
     {
         // Compute image ratio:
         double ratio = qRound((double)image.width()/(double)image.height());
-        int targetHeight = qRound(rect().height()*.75);
+        int targetHeight = qRound(rect().height()*.5);
         int targetWidth = qRound(targetHeight*ratio);
         painter.setRenderHint(QPainter::SmoothPixmapTransform);
         int x = (rect().width()-targetWidth)/2;
