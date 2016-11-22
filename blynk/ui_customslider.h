@@ -55,7 +55,7 @@ public:
         wSliderValue = new QLabel(CustomSlider);
         wSliderValue->setObjectName(QStringLiteral("wSliderValue"));
         QFont font;
-        font.setFamily(QStringLiteral("Segoe UI"));
+        font.setFamily(QStringLiteral("Helvetica"));
         font.setPointSize(10);
         font.setBold(false);
         font.setWeight(50);

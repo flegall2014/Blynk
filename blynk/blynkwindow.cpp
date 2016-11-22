@@ -11,6 +11,8 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     m_pParameters(NULL)
 {
     ui->setupUi(this);
+    ui->wBlynkRegularitySlider->setPageStep(1);
+    ui->wScreenBreakSlider->setPageStep(5);
 
     // Set blynk slider labels:
     QStringList lLabels1;

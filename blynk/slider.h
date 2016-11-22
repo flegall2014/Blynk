@@ -30,6 +30,12 @@ public:
     // Set value:
     void setValue(int iValue);
 
+    // Set page step:
+    void setPageStep(int iPageStep);
+
+    // Set single step:
+    void setSingleStep(int iSingleStep);
+
 protected:
     // Paint event:
     virtual void paintEvent(QPaintEvent *event);

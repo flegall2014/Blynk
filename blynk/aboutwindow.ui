@@ -45,7 +45,7 @@
     <widget class="QLabel" name="wNotJustYourEyesLabel">
      <property name="font">
       <font>
-       <family>Segoe UI</family>
+       <family>Helvetica</family>
        <pointsize>24</pointsize>
        <weight>50</weight>
        <bold>false</bold>
@@ -129,7 +129,7 @@
     <widget class="QLabel" name="wAboutBlynkLabel">
      <property name="font">
       <font>
-       <family>Segoe UI</family>
+       <family>Helvetica</family>
        <pointsize>24</pointsize>
        <weight>50</weight>
        <bold>false</bold>
