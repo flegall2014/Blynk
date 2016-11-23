@@ -17,6 +17,7 @@
 #include "utils.h"
 #include "blynk.h"
 #include "blrlib.h"
+#include "utils.h"
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
@@ -53,12 +54,6 @@ Controller::Controller(QObject *parent) : QObject(parent),
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
     connect(&m_tApplicationTimer, &QTimer::timeout, this, &Controller::onApplicationTimerTimeOut);
-
-    // Myriad font:
-    int id = QFontDatabase::addApplicationFont(":/fonts/Myriad-Pro_31655.ttf");
-    qDebug() << id;
-    QString sMyriadFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    m_MyriadFont.setFamily(sMyriadFamily);
 }
 
 // Destructor:
@@ -120,6 +115,10 @@ void Controller::shutdown()
 // Create actions:
 void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 {
+    QFont myriadFont;
+    myriadFont.setFamily(Utils::sMyriadProFont);
+    myriadFont.setPointSize(VERY_SMALL_FONT);
+
     // Exclusive menu?
     bool bIsExclusiveMenu = false;
     QActionGroup *pActionGroup = NULL;
@@ -152,8 +151,8 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             QAction *pAction = new QAction(sActionName, this);
 
             // Set font:
-            m_MyriadFont.setBold(bBold);
-            pAction->setFont(m_MyriadFont);
+            myriadFont.setBold(bBold);
+            pAction->setFont(myriadFont);
 
             // Store action:
             m_mActions[sObjectName] = pAction;
@@ -181,7 +180,7 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
             QMenu *pSubMenu = new QMenu(node.attributes()["name"]);
 
             // Set font:
-            m_MyriadFont.setBold(bBold);
+            myriadFont.setBold(bBold);
 
             // Set enabled state:
             pSubMenu->setEnabled(bEnabled);
@@ -190,7 +189,7 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 
             // Add menu:
             QAction *pSubMenuAction = pRootMenu->addMenu(pSubMenu);
-            pSubMenuAction->setFont(m_MyriadFont);
+            pSubMenuAction->setFont(myriadFont);
             createMenu(node, pSubMenu);
         }
         else
@@ -203,6 +202,9 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 // Start GUI:
 void Controller::startGUI()
 {
+    /*** LOAD FONTS ***/
+    Utils::loadFonts();
+
     /*** TRAY ICON ***/
 
     initializeTrayIcon();
@@ -650,3 +652,5 @@ void Controller::onParameterChanged(const Parameters::Parameter &parameter)
             m_iScreenBreakDelay = 0;
     }
 }
+
+

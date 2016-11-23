@@ -33,9 +33,7 @@ CONFIG(debug, debug|release) {
 
 HEADERS += \
     cxmlnode.h \
-    utils.h \
     utils_global.h
 
 SOURCES += \
-    cxmlnode.cpp \
-    utils.cpp
+    cxmlnode.cpp

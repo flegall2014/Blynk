@@ -8,6 +8,7 @@
 // Application:
 #include "aboutwindow.h"
 #include "ui_aboutwindow.h"
+#include "utils.h"
 #define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 #define FACEBOOK_URL "http://facebook.com/blynktech"
 
@@ -18,6 +19,9 @@ AboutWindow::AboutWindow(const QString &sTitle, QWidget *parent) :
 {
     // Setup UI:
     ui->setupUi(this);
+
+    // Set font for widget:
+    Utils::setFontForWidget(this);
 
     // Set image:
     ui->wLogoArea->setImage(":/icons/ico-blynklogo.png");

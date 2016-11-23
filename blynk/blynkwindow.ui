@@ -72,7 +72,7 @@
      <item>
       <widget class="QPushButton" name="wDoneButton">
        <property name="text">
-        <string>Done</string>
+        <string>DONE</string>
        </property>
       </widget>
      </item>

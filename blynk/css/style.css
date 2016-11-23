@@ -6,21 +6,6 @@ padding: 2px;
 color: "black";
 }
 
-QLabel#wAboutBlynkLabel {
-font-family: "Myriad Pro";
-font-size: 24px;
-}
-
-QLabel#wNotJustYourEyesLabel {
-font-family: "Myriad Pro";
-font-size: 24px;
-}
-
-QCheckBox {
-font-family: "Myriad Pro";
-font-size: 14px;
-}
-
 QCheckBox::indicator {
 width: 16px;
 height: 16px;
@@ -32,26 +17,6 @@ image: url(:/icons/ico-unchecked.png);
 
 QCheckBox::indicator:checked {
 image: url(:/icons/ico-checked.png);
-}
-
-QRadioButton  {
-font-family: "Myriad Pro";
-font-size: 14px;
-}
-
-QPushButton  {
-font-family: "Myriad Pro";
-font-size: 14px;
-}
-
-QComboBox {
-font-family: "Myriad Pro";
-font-size: 14px;
-}
-
-QMenu  {
-font-family: "Myriad Pro";
-font-size: 14px;
 }
 
 QSlider#wBlueLightReducerSlider {
@@ -81,7 +46,6 @@ border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
 color: "black";
-font-size: 16px
 }
 
 QPushButton#wDoneButton:pressed {
@@ -91,7 +55,6 @@ border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
 color: "black";
-font-size: 16px
 }
 
 QPushButton#wAboutDoneButton {
@@ -101,17 +64,15 @@ border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
 color: "black";
-font-size: 16px
 }
 
 QPushButton#wVisionAidOverseasButton {
 border-radius: 16px;
 background-color: "white";
 border: 1px solid "black";
-min-width: 196px;
+min-width: 228px;
 min-height: 32px;
 color: "black";
-font-size: 16px
 }
 
 QPushButton#wVisionAidOverseasButton:pressed {
@@ -121,5 +82,4 @@ border: 1px solid "black";
 min-width: 196px;
 min-height: 32px;
 color: "black";
-font-size: 16px
 }

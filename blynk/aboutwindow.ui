@@ -45,8 +45,8 @@
     <widget class="QLabel" name="wNotJustYourEyesLabel">
      <property name="font">
       <font>
-       <family>Helvetica</family>
-       <pointsize>24</pointsize>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -60,7 +60,7 @@
     </widget>
    </item>
    <item row="10" column="0">
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="wCopyRightLabel">
      <property name="text">
       <string>2016 © Blynk Tech Ltd. All Rights Reserved. www.getlbynk.org</string>
      </property>
@@ -70,17 +70,17 @@
     </widget>
    </item>
    <item row="3" column="0">
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="wAboutBlynkText">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>128</height>
+       <height>136</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>128</height>
+       <height>136</height>
       </size>
      </property>
      <property name="text">
@@ -129,8 +129,8 @@
     <widget class="QLabel" name="wAboutBlynkLabel">
      <property name="font">
       <font>
-       <family>Helvetica</family>
-       <pointsize>24</pointsize>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -180,6 +180,18 @@
      </item>
      <item>
       <widget class="QPushButton" name="wVisionAidOverseasButton">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="text">
         <string>VISION AID OVERSEAS</string>
        </property>
@@ -230,17 +242,17 @@
     </layout>
    </item>
    <item row="5" column="0">
-    <widget class="QLabel" name="label_4">
+    <widget class="QLabel" name="wNotJustYourEyesText">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>128</height>
+       <height>136</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>128</height>
+       <height>136</height>
       </size>
      </property>
      <property name="text">

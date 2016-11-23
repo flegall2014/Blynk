@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QTimer>
 #include <QElapsedTimer>
-#include <QFont>
 
 // Application:
 #include "iservice.h"
@@ -17,7 +16,6 @@ class QSystemTrayIcon;
 class QMenu;
 class DimmerWidget;
 class BlynkWindow;
-//class SettingsWindow;
 class AboutWindow;
 
 class Controller : public QObject, public IService
@@ -136,9 +134,6 @@ private:
 
     // Current temperature:
     int m_iCurrentTemperature;
-
-    // Myriad font:
-    QFont m_MyriadFont;
 
 public slots:
     // Action triggered:
