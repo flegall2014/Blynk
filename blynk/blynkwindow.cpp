@@ -1,3 +1,7 @@
+// Qt:
+#include <QWidget>
+#include <QFontDatabase>
+
 // Application:
 #include "blynkwindow.h"
 #include "ui_blynkwindow.h"
@@ -14,6 +18,20 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     ui->wBlynkRegularitySlider->setPageStep(1);
     ui->wScreenBreakSlider->setPageStep(5);
 
+    QList<QLabel *> lLabels = findChildren<QLabel *>();;
+    qDebug() << lLabels;
+
+    // Myriad font:
+    int id = QFontDatabase::addApplicationFont(":/fonts/Myriad-Pro_31655.ttf");
+    qDebug() << id;
+    QString sMyriadFamily = QFontDatabase::applicationFontFamilies(id).at(0);
+    QFont myriadFont;
+    myriadFont.setFamily(sMyriadFamily);
+    myriadFont.setPixelSize(48);
+
+    foreach (QLabel *pLabel, lLabels) {
+        pLabel->setFont(myriadFont);
+    }
     // Set blynk slider labels:
     QStringList lLabels1;
     lLabels1 << "2 sec" << "4" << "6" << "8" << "10";

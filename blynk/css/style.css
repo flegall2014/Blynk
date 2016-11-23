@@ -6,26 +6,6 @@ padding: 2px;
 color: "black";
 }
 
-QLabel {
-font-family: "Myriad Pro";
-font-size: 14px;
-}
-
-QLabel#wBlynkCursorLabel {
-font-family: "Myriad Pro";
-font-size: 24px;
-}
-
-QLabel#wScreenBreakLabel {
-font-family: "Myriad Pro";
-font-size: 24px;
-}
-
-QLabel#wBlueLightReducerLabel {
-font-family: "Myriad Pro";
-font-size: 24px;
-}
-
 QLabel#wAboutBlynkLabel {
 font-family: "Myriad Pro";
 font-size: 24px;
