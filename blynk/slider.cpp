@@ -72,7 +72,7 @@ void Slider::paintEvent(QPaintEvent *event)
     // Tick rect:
     QPoint sliderPos = ui->wSlider->pos();
     int iSliderWidth = ui->wSlider->width();
-    int iDelta = 6;
+    int iDelta = 0;
     int iRulerX = sliderPos.x()+iDelta;
     int iRulerWidth = iSliderWidth-iDelta;
     QRect tickRect(iRulerX, rect().height()/2, iRulerWidth, rect().height()/2);

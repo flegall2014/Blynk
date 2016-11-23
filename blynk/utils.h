@@ -8,6 +8,7 @@
 
 #define LARGE_FONT 24
 #define SMALL_FONT 18
+#define COMBO_FONT 16
 #define TEXT_FONT 13
 #define VERY_SMALL_FONT 12
 

@@ -9,6 +9,8 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include <QSlider>
+#include <QComboBox>
+#include <QTimeEdit>
 #include <QDebug>
 
 // Application:
@@ -202,10 +204,26 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                     pCheckBox->setFont(font);
             }
             else
-            if (sClassName.compare("QSLIDER", Qt::CaseInsensitive) == 0) {
+            if (sClassName.contains("SLIDER", Qt::CaseInsensitive)) {
                 QSlider *pSlider = dynamic_cast<QSlider *>(pWidget);
                 if (pSlider)
                     pSlider->setFont(font);
+            }
+            else
+            if (sClassName.compare("QCOMBOBOX", Qt::CaseInsensitive) == 0) {
+                QComboBox *pCombo = dynamic_cast<QComboBox *>(pWidget);
+                if (pCombo) {
+                    font.setPixelSize(COMBO_FONT);
+                    pCombo->setFont(font);
+                }
+            }
+            else
+            if (sClassName.compare("QTIMEEDIT", Qt::CaseInsensitive) == 0) {
+                QTimeEdit *pTimeEdit = dynamic_cast<QTimeEdit *>(pWidget);
+                if (pTimeEdit) {
+                    font.setPixelSize(SMALL_FONT);
+                    pTimeEdit->setFont(font);
+                }
             }
         }
     }

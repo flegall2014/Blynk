@@ -44,7 +44,7 @@
    <item row="11" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_12">
      <property name="leftMargin">
-      <number>12</number>
+      <number>8</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -71,6 +71,18 @@
      </item>
      <item>
       <widget class="QPushButton" name="wDoneButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>DONE</string>
        </property>
@@ -95,7 +107,7 @@
    <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <property name="leftMargin">
-      <number>12</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -191,6 +203,27 @@
      </item>
      <item>
       <widget class="QCheckBox" name="wBlynkRandomCheckBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>108</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
        <property name="text">
         <string>Random</string>
        </property>
@@ -201,7 +234,7 @@
    <item row="3" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <property name="leftMargin">
-      <number>12</number>
+      <number>8</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -227,7 +260,26 @@
       </spacer>
      </item>
      <item>
-      <widget class="QComboBox" name="wBlynkPerMinuteValues"/>
+      <widget class="QComboBox" name="wBlynkPerMinuteValues">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>108</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -246,9 +298,9 @@
     </layout>
    </item>
    <item row="8" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_10">
+    <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="0,0,0,0">
      <property name="leftMargin">
-      <number>12</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -329,8 +381,32 @@
      </item>
      <item>
       <widget class="QLabel" name="label_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>108</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="text">
         <string>Turn on at</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>
@@ -339,7 +415,7 @@
    <item row="6" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <property name="leftMargin">
-      <number>12</number>
+      <number>8</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -381,9 +457,9 @@
     </layout>
    </item>
    <item row="9" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_11">
+    <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,0,0">
      <property name="leftMargin">
-      <number>12</number>
+      <number>8</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -409,7 +485,26 @@
       </spacer>
      </item>
      <item>
-      <widget class="QTimeEdit" name="wStartTimeEdit"/>
+      <widget class="QTimeEdit" name="wStartTimeEdit">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>108</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -443,7 +538,7 @@
    <item row="5" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <property name="leftMargin">
-      <number>12</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -539,6 +634,24 @@
      </item>
      <item>
       <widget class="QComboBox" name="wScreenBreakStrengthCombo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>108</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>108</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <item>
         <property name="text">
          <string>LIGHT</string>
