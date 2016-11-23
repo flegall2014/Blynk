@@ -174,7 +174,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                     if ((sObjectName == "wAboutBlynkText") ||
                         (sObjectName == "wNotJustYourEyesText"))
                     {
-                        font.setFamily(sBellGothicStdBlackFont);
+                        font.setFamily(sBellGothicStdLightFont);
                         font.setPixelSize(TEXT_FONT);
                     }
                     else
