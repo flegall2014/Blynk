@@ -89,6 +89,7 @@ void BlynkWindow::paintEvent(QPaintEvent *event)
     CustomWindow::paintEvent(event);
     QPainter painter(this);
     QPoint mapped = ui->wSeparator->mapToParent(QPoint(0, 0));
+    painter.setPen(QPen(QColor("#A5A5A7")));
     painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
 }
 
