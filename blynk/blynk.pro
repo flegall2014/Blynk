@@ -49,7 +49,6 @@ HEADERS += \
     imagewidget.h \
     parameters.h \
     utils.h \
-    customslider.h \
     dimmerwidget.h \
     customwindow.h \
     aboutwindow.h \
@@ -65,7 +64,6 @@ SOURCES += \
     imagewidget.cpp \
     parameters.cpp \
     utils.cpp \
-    customslider.cpp \
     dimmerwidget.cpp \
     customwindow.cpp \
     aboutwindow.cpp \

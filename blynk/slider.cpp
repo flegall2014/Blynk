@@ -12,6 +12,7 @@ Slider::Slider(QWidget *parent) : QWidget(parent), ui(new Ui::Slider),
     m_iLabelAreaHeight(12)
 {
     ui->setupUi(this);
+    ui->wSlider->setObjectName("toto");
     ui->wSlider->setSingleStep(1);
     ui->wSlider->setPageStep(5);
     ui->wSliderLayout->setContentsMargins(m_iHorizontalMargin, 0, m_iHorizontalMargin, 0);

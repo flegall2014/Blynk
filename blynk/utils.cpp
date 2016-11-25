@@ -188,8 +188,13 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             else
             if (sClassName.compare("QPUSHBUTTON", Qt::CaseInsensitive) == 0) {
                 QPushButton *pButton = dynamic_cast<QPushButton *>(pWidget);
-                if (pButton)
+                if (pButton) {
+                    if (sObjectName == "wDoneButton") {
+                        font.setBold(true);
+                        font.setPointSize(COMBO_FONT);
+                    }
                     pButton->setFont(font);
+                }
             }
             else
             if (sClassName.compare("QCHECKBOX", Qt::CaseInsensitive) == 0) {

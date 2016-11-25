@@ -33,10 +33,10 @@ border-color: none;
 }
 
 QSlider#wBlueLightReducerSlider::handle:horizontal {
-width: 188px;
+width: 182px;
 height: 32px;
 border-radius: 16;
-background-color: "#5E5B5B";
+background-color: "#535151";
 }
 
 QPushButton#wDoneButton {
