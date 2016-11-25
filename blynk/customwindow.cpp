@@ -94,13 +94,13 @@ void CustomWindow::paintEvent(QPaintEvent *event)
     // Draw header:
     QRect headerRect(0, 0, rect().width(), m_iHeaderHeight);
     painter.setBrush(QBrush(m_headerColor));
-    painter.drawRect(0, 12, rect().width(), 13);
-    painter.drawRoundedRect(headerRect, 8, 8);
+    painter.drawRect(0, 0, rect().width(), m_iHeaderHeight);
 
     // Draw blynk icon:
     QImage img(":/icons/ico-eye.png");
-    painter.drawImage(4, (m_iHeaderHeight-img.height())/2, img);
-    QRect textRect(img.width()+8, 0, rect().width()-(img.width()+8), m_iHeaderHeight);
+    QImage scaledImage = img.scaled(28, 28, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    painter.drawImage(4, (m_iHeaderHeight-scaledImage.height())/2, scaledImage);
+    QRect textRect(scaledImage.width()+8, 0, rect().width()-(scaledImage.width()+8), m_iHeaderHeight);
     painter.setPen(QPen(QColor(72, 72, 72)));
     QFont segoeUIFont("Segoe-UI", 10);
     segoeUIFont.setBold(true);

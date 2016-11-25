@@ -29,6 +29,10 @@ public:
     // Update UI:
     void updateUI();
 
+protected:
+    // Paint event:
+    virtual void paintEvent(QPaintEvent *event);
+
 private:
     // Update blynk cursor area:
     void updateBlynkCursorArea();

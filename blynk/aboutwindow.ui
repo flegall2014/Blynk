@@ -41,50 +41,28 @@
    <property name="horizontalSpacing">
     <number>32</number>
    </property>
-   <item row="4" column="0">
-    <widget class="QLabel" name="wNotJustYourEyesLabel">
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>8</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
+   <item row="5" column="0">
+    <widget class="QLabel" name="wNotJustYourEyesText">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="text">
-      <string>NOT JUST YOUR EYES</string>
-     </property>
-     <property name="margin">
-      <number>8</number>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0">
-    <widget class="QLabel" name="wCopyRightLabel">
-     <property name="text">
-      <string>2016 © Blynk Tech Ltd. All Rights Reserved. www.getlbynk.org</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="wAboutBlynkText">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>136</height>
+       <height>116</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>136</height>
+       <height>116</height>
       </size>
      </property>
      <property name="text">
-      <string>Our aim at Blynk, ﬁrst and foremost, is to raise awareness about how screens aﬀect your eyes. So even if you’re not a fan of this software we hope that downloading it has got you thinking about how screens can permanently damage your eyes, because they really can. We would also like to be clear that using this software is not in any way a substitute for a full and comprehensive eye exam carried out by a qualiﬁed optometrist. So please look after your eyes, they really are very special… an amazing charity that helps change people’s lives with the gift of vision. If you would like to learn more about the work done by Blynk Tech and Vision Aid Overseas please hit the button below.
+      <string>Blynk cares about everyone’s eyes, which is why we have not only created this free eye care software but also formed a closed partnership with Vision Aid Overseas, an amazing charity that help change people’s lives with the gif of vision. If you would like to learn more about the work done by Blynk and Vision Aid Overseas please hit the button below.
 </string>
      </property>
      <property name="alignment">
@@ -98,52 +76,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_9">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_16">
-       <item>
-        <widget class="ImageWidget" name="wLogoArea" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>700</width>
-           <height>128</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>700</width>
-           <height>128</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="wAboutBlynkLabel">
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>8</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>ABOUT BLYNK</string>
-     </property>
-     <property name="margin">
-      <number>8</number>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
+   <item row="9" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="wFaceBookButton">
@@ -180,15 +113,21 @@
      </item>
      <item>
       <widget class="QPushButton" name="wVisionAidOverseasButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>264</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>264</width>
          <height>16777215</height>
         </size>
        </property>
@@ -241,22 +180,99 @@
      </item>
     </layout>
    </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="wNotJustYourEyesText">
+   <item row="2" column="0">
+    <widget class="QLabel" name="wAboutBlynkLabel">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>136</height>
+       <height>64</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>136</height>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>ABOUT BLYNK</string>
+     </property>
+     <property name="margin">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="wNotJustYourEyesLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>64</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>NOT JUST YOUR EYES</string>
+     </property>
+     <property name="margin">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="wCopyRightLabel">
+     <property name="text">
+      <string>2016 © Blynk Tech Ltd. All Rights Reserved. www.getlbynk.org</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="wAboutBlynkText">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>168</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>168</height>
       </size>
      </property>
      <property name="text">
-      <string>Blynk cares about everyone’s eyes, which is why we have not only created this free eye care software but also formed a closed partnership with Vision Aid Overseas, an amazing charity that help change people’s lives with the gif of vision. If you would like to learn more about the work done by Blynk and Vision Aid Overseas please hit the button below.
+      <string>Our aim at Blynk, ﬁrst and foremost, is to raise awareness about how screens aﬀect your eyes. So even if you’re not a fan of this software we hope that downloading it has got you thinking about how screens can permanently damage your eyes, because they really can.
+ We would also like to be clear that using this software is not in any way a substitute for a full and comprehensive eye exam carried out by a qualiﬁed optometrist. So please look after your eyes, they really are very special… an amazing charity that helps change people’s lives with the gift of vision. If you would like to learn more about the work done by Blynk Tech and Vision Aid Overseas please hit the button below.
 </string>
      </property>
      <property name="alignment">
@@ -270,23 +286,44 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_9">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_16">
+       <item>
+        <widget class="ImageWidget" name="wLogoArea" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>700</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>700</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="10" column="0">
+    <widget class="QWidget" name="wSeparator1" native="true">
+     <property name="maximumSize">
       <size>
-       <width>20</width>
-       <height>24</height>
+       <width>16777215</width>
+       <height>1</height>
       </size>
      </property>
-    </spacer>
+    </widget>
    </item>
-   <item row="6" column="0">
+   <item row="7" column="0">
     <widget class="QWidget" name="wSeparator2" native="true">
      <property name="minimumSize">
       <size>
@@ -294,10 +331,13 @@
        <height>1</height>
       </size>
      </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>1</height>
+      </size>
+     </property>
     </widget>
-   </item>
-   <item row="9" column="0">
-    <widget class="QWidget" name="wSeparator1" native="true"/>
    </item>
    <item row="1" column="0">
     <widget class="QWidget" name="wSeparator3" native="true">
@@ -314,6 +354,22 @@
       </size>
      </property>
     </widget>
+   </item>
+   <item row="6" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>32</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

@@ -42,7 +42,7 @@ background-color: "#535151";
 QPushButton#wDoneButton {
 border-radius: 16px;
 background-color: "white";
-border: 1px solid "black";
+border: 1px solid "#949191";
 min-width: 196px;
 min-height: 32px;
 color: "black";
@@ -60,17 +60,17 @@ color: "black";
 QPushButton#wAboutDoneButton {
 border-radius: 16px;
 background-color: "#66D495";
-border: 1px solid "black";
+border: none;
 min-width: 196px;
 min-height: 32px;
-color: "black";
+color: "white";
 }
 
 QPushButton#wVisionAidOverseasButton {
 border-radius: 16px;
 background-color: "white";
-border: 1px solid "black";
-min-width: 228px;
+border: 1px solid "#949191";
+min-width: 256px;
 min-height: 32px;
 color: "black";
 }
@@ -79,7 +79,7 @@ QPushButton#wVisionAidOverseasButton:pressed {
 border-radius: 16px;
 background-color: "#66D495";
 border: 1px solid "black";
-min-width: 196px;
+min-width: 256px;
 min-height: 32px;
 color: "black";
 }

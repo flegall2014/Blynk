@@ -117,7 +117,7 @@ void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 {
     QFont myriadFont;
     myriadFont.setFamily(Utils::sMyriadProFont);
-    myriadFont.setPointSize(VERY_SMALL_FONT);
+    myriadFont.setPointSize(FONT_12);
 
     // Exclusive menu?
     bool bIsExclusiveMenu = false;
@@ -238,7 +238,7 @@ void Controller::initializeTrayIcon()
     m_pTrayIcon->setContextMenu(m_pTrayIconMenu);
 
     // Set icon:
-    m_pTrayIcon->setIcon(QIcon(":/icons/ico-eye.png"));
+    m_pTrayIcon->setIcon(QIcon(":/icons/ico-tray.png"));
 
     // Show tray icon:
     m_pTrayIcon->setVisible(true);

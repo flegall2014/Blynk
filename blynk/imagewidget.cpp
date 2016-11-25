@@ -44,11 +44,9 @@ void ImageWidget::paintEvent(QPaintEvent *event)
         int y = (rect().height()-targetHeight)/2;
 
         // Mask white pixels:
-        QImage scaledImage = image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio);
-        QPixmap pixmap = QPixmap::fromImage(scaledImage);
-        pixmap.createMaskFromColor(QColor(Qt::white));
+        QImage scaledImage = image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // Draw:
-        painter.drawPixmap(QPoint(x, y), pixmap);
+        painter.drawImage(QPoint(x, y), scaledImage);
     }
 }

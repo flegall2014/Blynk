@@ -69,5 +69,6 @@
         <file>fonts/BellGothicStd-Black.otf</file>
         <file>fonts/BellGothicStd-Bold.otf</file>
         <file>fonts/BellGothicStd-Light.otf</file>
+        <file>icons/ico-tray.png</file>
     </qresource>
 </RCC>

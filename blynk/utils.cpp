@@ -157,7 +157,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             // Font:
             QFont font;
             font.setFamily(sLatoRegularFont);
-            font.setPixelSize(SMALL_FONT);
+            font.setPixelSize(FONT_18);
 
             // Set font based on class name and object name:
             if (sClassName.compare("QLABEL", Qt::CaseInsensitive) == 0) {
@@ -165,23 +165,30 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                 if (pLabel) {
                     if ((sObjectName == "wBlynkCursorLabel") ||
                         (sObjectName == "wScreenBreakLabel") ||
-                        (sObjectName == "wBlueLightReducerLabel") ||
-                        (sObjectName == "wAboutBlynkLabel") ||
+                        (sObjectName == "wBlueLightReducerLabel"))
+                    {
+                        font.setFamily(sBebasFont);
+                        font.setPixelSize(FONT_22);
+                        font.setBold(true);
+                    }
+                    else
+                    if ((sObjectName == "wAboutBlynkLabel") ||
                         (sObjectName == "wNotJustYourEyesLabel"))
                     {
-                        font.setFamily(sBellGothicStdBlackFont);
-                        font.setPixelSize(LARGE_FONT);
+                        font.setFamily(sLatoRegularFont);
+                        font.setPixelSize(FONT_22);
+                        font.setBold(true);
                     }
                     else
                     if ((sObjectName == "wAboutBlynkText") ||
                         (sObjectName == "wNotJustYourEyesText"))
                     {
-                        font.setFamily(sBellGothicStdLightFont);
-                        font.setPixelSize(TEXT_FONT);
+                        font.setFamily("Calibri");
+                        font.setPixelSize(FONT_15);
                     }
                     else
                     if (sObjectName == "wCopyRightLabel")
-                        font.setPixelSize(VERY_SMALL_FONT);
+                        font.setPixelSize(FONT_12);
                     pLabel->setFont(font);
                 }
             }
@@ -191,7 +198,16 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                 if (pButton) {
                     if (sObjectName == "wDoneButton") {
                         font.setBold(true);
-                        font.setPointSize(COMBO_FONT);
+                        font.setPointSize(FONT_14);
+                    }
+                    else
+                    if (sObjectName == "wAboutDoneButton") {
+                        font.setBold(true);
+                    }
+                    else
+                    if (sObjectName == "wVisionAidOverseasButton") {
+                        font.setBold(true);
+                        font.setPointSize(FONT_14);
                     }
                     pButton->setFont(font);
                 }
@@ -218,7 +234,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             if (sClassName.compare("QCOMBOBOX", Qt::CaseInsensitive) == 0) {
                 QComboBox *pCombo = dynamic_cast<QComboBox *>(pWidget);
                 if (pCombo) {
-                    font.setPixelSize(COMBO_FONT);
+                    font.setPixelSize(FONT_16);
                     pCombo->setFont(font);
                 }
             }
@@ -226,7 +242,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             if (sClassName.compare("QTIMEEDIT", Qt::CaseInsensitive) == 0) {
                 QTimeEdit *pTimeEdit = dynamic_cast<QTimeEdit *>(pWidget);
                 if (pTimeEdit) {
-                    font.setPixelSize(SMALL_FONT);
+                    font.setPixelSize(FONT_18);
                     pTimeEdit->setFont(font);
                 }
             }

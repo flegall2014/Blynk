@@ -1,6 +1,7 @@
 // Qt:
 #include <QWidget>
 #include <QFontDatabase>
+#include <QPainter>
 
 // Application:
 #include "blynkwindow.h"
@@ -80,6 +81,15 @@ void BlynkWindow::updateUI()
     updateScreenBreakArea();
     updateBlueLightReducerArea();
     updateStartBlynkAtLoginArea();
+}
+
+// Paint:
+void BlynkWindow::paintEvent(QPaintEvent *event)
+{
+    CustomWindow::paintEvent(event);
+    QPainter painter(this);
+    QPoint mapped = ui->wSeparator->mapToParent(QPoint(0, 0));
+    painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
 }
 
 // Update blynk cursor area:

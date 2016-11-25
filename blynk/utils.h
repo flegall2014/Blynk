@@ -6,11 +6,14 @@
 #include <QList>
 #include <QFont>
 
-#define LARGE_FONT 24
-#define SMALL_FONT 18
-#define COMBO_FONT 16
-#define TEXT_FONT 13
-#define VERY_SMALL_FONT 12
+#define FONT_12 12
+#define FONT_13 13
+#define FONT_14 14
+#define FONT_15 15
+#define FONT_16 16
+#define FONT_18 18
+#define FONT_22 22
+#define FONT_24 24
 
 class Utils
 {
