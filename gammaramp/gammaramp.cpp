@@ -124,11 +124,10 @@ bool GammaRamp::setColorPalette(HDC hDC, const std::vector<int> &vRed, const std
         // Generate color table:
         WORD GammaArray[3][256];
 
-        for (int iIndex = 0; iIndex < 256; iIndex++)
-        {
-            GammaArray[0][iIndex] = (WORD)vRed[iIndex]*257;
-            GammaArray[1][iIndex] = (WORD)vGreen[iIndex]*257;
-            GammaArray[2][iIndex] = (WORD)vBlue[iIndex]*257;
+        for( int iIndex = 0; iIndex < 256; iIndex++ ) {
+            GammaArray[0][iIndex] = ( ( ( WORD ) vRed[iIndex] ) << 8 ) | vRed[iIndex];
+            GammaArray[1][iIndex] = ( ( ( WORD ) vGreen[iIndex] ) << 8 ) | vGreen[iIndex];
+            GammaArray[2][iIndex] = ( ( ( WORD ) vBlue[iIndex] ) << 8 ) | vGreen[iIndex];
         }
 
         // Set the GammaArray values into the display device context:

@@ -624,7 +624,7 @@
         <enum>Qt::LeftToRight</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">left-padding: 8px</string>
+        <string notr="true">padding-left: 8px</string>
        </property>
        <property name="text">
         <string>Turn on at</string>
