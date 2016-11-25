@@ -12,6 +12,7 @@
 #define FONT_15 15
 #define FONT_16 16
 #define FONT_18 18
+#define FONT_20 20
 #define FONT_22 22
 #define FONT_24 24
 

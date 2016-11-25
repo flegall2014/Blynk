@@ -168,7 +168,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wBlueLightReducerLabel"))
                     {
                         font.setFamily(sBebasFont);
-                        font.setPixelSize(FONT_22);
+                        font.setPixelSize(FONT_20);
                         font.setBold(true);
                     }
                     else
@@ -203,11 +203,12 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                     else
                     if (sObjectName == "wAboutDoneButton") {
                         font.setBold(true);
+                        font.setPointSize(FONT_13);
                     }
                     else
                     if (sObjectName == "wVisionAidOverseasButton") {
                         font.setBold(true);
-                        font.setPointSize(FONT_14);
+                        font.setPointSize(FONT_13);
                     }
                     pButton->setFont(font);
                 }

@@ -12,7 +12,7 @@ Slider::Slider(QWidget *parent) : QWidget(parent), ui(new Ui::Slider),
     m_iLabelAreaHeight(12)
 {
     ui->setupUi(this);
-    ui->wSlider->setObjectName("toto");
+    ui->wSlider->setObjectName("privateSlider");
     ui->wSlider->setSingleStep(1);
     ui->wSlider->setPageStep(5);
     ui->wSliderLayout->setContentsMargins(m_iHorizontalMargin, 0, m_iHorizontalMargin, 0);
@@ -78,7 +78,6 @@ void Slider::paintEvent(QPaintEvent *event)
     int iRulerWidth = iSliderWidth-iDelta;
     QRect tickRect(iRulerX, rect().height()/2, iRulerWidth, rect().height()/2);
     painter.setPen(QPen(m_majorTickColor));
-    //painter.drawLine(iRulerX, tickRect.top(), iRulerX+iRulerWidth-1, tickRect.top());
 
     int iMajorTickHeight = tickRect.height()-m_iLabelAreaHeight;
     int iMinorTickHeight = iMajorTickHeight/2;

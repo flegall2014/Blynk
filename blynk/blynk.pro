@@ -55,7 +55,8 @@ HEADERS += \
     animatedimage.h \
     blynkwindow.h \
     bluelightreducerslider.h \
-    slider.h
+    slider.h \
+    customslider.h
 
 SOURCES += \
     main.cpp \

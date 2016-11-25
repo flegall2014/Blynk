@@ -11,12 +11,12 @@
  <blynkRegularityRange>2, 10</blynkRegularityRange>
  <screenBreakRegularity>20</screenBreakRegularity>
  <screenBreakState>Enabled</screenBreakState>
- <screenBreakStrength>1</screenBreakStrength>
+ <screenBreakStrength>3</screenBreakStrength>
  <screenBreakMin>20</screenBreakMin>
  <screenBreakMax>100</screenBreakMax>
  <blueLightReducerEnabled>0</blueLightReducerEnabled>
  <blueLightReducerStrength>1</blueLightReducerStrength>
- <blueLightReducerStartTime>09:00:00</blueLightReducerStartTime>
+ <blueLightReducerStartTime>07:00:00</blueLightReducerStartTime>
  <startBlynkAtLogin>0</startBlynkAtLogin>
  <lightTemperature>4000</lightTemperature>
  <mediumTemperature>3000</mediumTemperature>

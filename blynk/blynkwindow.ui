@@ -442,6 +442,9 @@
        <property name="autoFillBackground">
         <bool>false</bool>
        </property>
+       <property name="styleSheet">
+        <string notr="true">padding-left: 6px</string>
+       </property>
        <property name="text">
         <string>Random</string>
        </property>
@@ -619,6 +622,9 @@
        </property>
        <property name="layoutDirection">
         <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">left-padding: 8px</string>
        </property>
        <property name="text">
         <string>Turn on at</string>
