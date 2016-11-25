@@ -129,6 +129,7 @@ void BlynkWindow::updateBlynkCursorArea()
     QString sBlynkPerMinuteRange = m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANGE);
     QStringList lBlynkPerMinuteRange = sBlynkPerMinuteRange.split(",");
 
+    ui->wBlynkPerMinuteValues->clear();
     if (lBlynkPerMinuteRange.size() > 1)
     {
         QStringList lBlynkPerMinuteValues;
