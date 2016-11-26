@@ -3,7 +3,6 @@
         <file>xml/BlynkMenu.xml</file>
         <file>icons/ico-question.png</file>
         <file>icons/ico-eye.png</file>
-        <file>css/style.css</file>
         <file>icons/ico-drop.png</file>
         <file>icons/ico-blynklogo.png</file>
         <file>icons/ico-facebook.png</file>
@@ -70,5 +69,7 @@
         <file>fonts/BellGothicStd-Bold.otf</file>
         <file>fonts/BellGothicStd-Light.otf</file>
         <file>icons/ico-tray.png</file>
+        <file>css/style_macos.css</file>
+        <file>css/style_windows.css</file>
     </qresource>
 </RCC>

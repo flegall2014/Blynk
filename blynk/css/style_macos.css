@@ -1,0 +1,89 @@
+QToolTip {
+background-color: "#EDEDED";
+border: 2px solid "#64D498";
+border-radius: 4px;
+padding: 2px;
+color: "black";
+}
+
+QCheckBox::indicator {
+width: 16px;
+height: 16px;
+}
+
+QCheckBox::indicator:unchecked {
+image: url(:/icons/ico-unchecked.png);
+}
+
+QCheckBox::indicator:checked {
+image: url(:/icons/ico-checked.png);
+}
+
+QSlider#wBlueLightReducerSlider {
+height: 32px;
+border-radius: 16;
+}
+
+QSlider#wBlueLightReducerSlider::groove:horizontal {
+border: 1px solid;
+height: 32px;
+border-radius: 16;
+background-color: "white";
+border-color: none;
+}
+
+QSlider#wBlueLightReducerSlider::handle:horizontal {
+width: 150px;
+height: 32px;
+border-radius: 16;
+background-color: "#535151";
+}
+
+QSlider#privateSlider::handle:horizontal {
+background: "545151";
+}
+
+QPushButton#wDoneButton {
+border-radius: 16px;
+background-color: "white";
+border: 1px solid "#949191";
+min-width: 196px;
+min-height: 32px;
+color: "black";
+}
+
+QPushButton#wDoneButton:pressed {
+border-radius: 16px;
+background-color: "#66D495";
+border: 1px solid "black";
+min-width: 196px;
+min-height: 32px;
+color: "black";
+}
+
+QPushButton#wAboutDoneButton {
+border-radius: 16px;
+background-color: "#66D495";
+border: none;
+min-width: 196px;
+min-height: 32px;
+color: "white";
+}
+
+QPushButton#wVisionAidOverseasButton {
+border-radius: 16px;
+background-color: "white";
+border: 1px solid "#949191";
+min-width: 256px;
+min-height: 32px;
+color: "black";
+}
+
+QPushButton#wVisionAidOverseasButton:pressed {
+border-radius: 16px;
+background-color: "#66D495";
+border: 1px solid "black";
+min-width: 256px;
+min-height: 32px;
+color: "black";
+}

@@ -12,7 +12,11 @@
 // Set style sheet:
 void setStyleSheet()
 {
-    QFile file(":/css/style.css");
+#ifdef Q_OS_WIN
+    QFile file(":/css/style_windows.css");
+#elif defined(Q_OS_OSX)
+    QFile file(":/css/style_macos.css");
+#endif
     if (file.open(QFile::ReadOnly))
     {
         QString sStyleSheet = QLatin1String(file.readAll());
