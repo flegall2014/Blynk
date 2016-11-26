@@ -360,6 +360,7 @@ void Controller::onActionTriggered()
 
         // Update UI:
         m_pBlynkWindow->updateUI();
+        m_pBlynkWindow->setEnabledState();
     }
 }
 
@@ -421,7 +422,7 @@ void Controller::onApplicationTimerTimeOut()
     // Check blynk cursor delay:
     if ((m_iBlynkCursorDelay > 0) && (m_iBlynkCursorElapsedTime > m_iBlynkCursorDelay)) {
         m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
-        m_pBlynkWindow->updateUI();
+        m_pBlynkWindow->updateBlynkCursorArea();
         bBlynkCursorEnabled = true;
     }
 
@@ -441,7 +442,7 @@ void Controller::onApplicationTimerTimeOut()
     // Check screen break delay:
     if ((m_iScreenBreakDelay > 0) && (m_iScreenBreakElapsedTime > m_iScreenBreakDelay)) {
         m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_ENABLED);
-        m_pBlynkWindow->updateUI();
+        m_pBlynkWindow->updateScreenBreakArea();
         bScreenBreakEnabled = true;
     }
 
@@ -469,6 +470,7 @@ void Controller::onApplicationTimerTimeOut()
                 {
                     if ((m_lBlynkCursorSequence.first() > 0) && (m_iBlynkCursorElapsedTime%m_lBlynkCursorSequence.first() == 0))
                     {
+                        qDebug() << "PLAYING RANDOM CURSOR WHEN: " << m_lBlynkCursorSequence.first();
                         m_pDimmerWidget->playCursor();
                         m_lBlynkCursorSequence.takeFirst();
 

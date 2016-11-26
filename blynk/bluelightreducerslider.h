@@ -14,6 +14,9 @@ public:
 protected:
     // Paint event:
     virtual void paintEvent(QPaintEvent *event);
+
+    // Mouse press event:
+    virtual void mousePressEvent(QMouseEvent *event);
 };
 
 #endif // BLUELIGHTREDUCERSLIDER_H

@@ -1,5 +1,6 @@
 // Qt:
 #include <QPainter>
+#include <QMouseEvent>
 #include <QDebug>
 
 // Application:
@@ -44,4 +45,12 @@ void BlueLightReducerSlider::paintEvent(QPaintEvent *event)
     painter.drawText(r3, Qt::AlignVCenter|Qt::AlignHCenter, tr("STRONG"));
 }
 
-
+// Mouse press events:
+void BlueLightReducerSlider::mousePressEvent(QMouseEvent *event)
+{
+    QSlider::mousePressEvent(event);
+    int iStepSize = width()/3;
+    int iIndex = event->x()/iStepSize;
+    if (iIndex != value())
+        setValue(iIndex);
+}

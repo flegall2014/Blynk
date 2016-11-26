@@ -29,11 +29,9 @@ public:
     // Update UI:
     void updateUI();
 
-protected:
-    // Paint event:
-    virtual void paintEvent(QPaintEvent *event);
+    // Set UI elements enabled state:
+    void setEnabledState();
 
-private:
     // Update blynk cursor area:
     void updateBlynkCursorArea();
 
@@ -45,6 +43,10 @@ private:
 
     // Update start blynk at login area:
     void updateStartBlynkAtLoginArea();
+
+protected:
+    // Paint event:
+    virtual void paintEvent(QPaintEvent *event);
 
 private:
     // UI:
@@ -64,7 +66,7 @@ public slots:
     void onBlynkCursorEnabledChanged(bool bChecked);
 
     // Blynk per minute value changed:
-    void onBlynkPerMinuteValueChanged(int iBlynkPerMinute);
+    void onBlynkPerMinuteValueChanged(const QString &sBlynkPerMinute);
 
     // Screen break regularity changed:
     void onScreenBreakRegularityChanged(int iScreenBreakRegularity);
