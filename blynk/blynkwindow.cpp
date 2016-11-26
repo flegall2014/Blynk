@@ -41,7 +41,7 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     connect(ui->wBlynkRegularitySlider, &Slider::valueChanged, this, &BlynkWindow::onBlynkRegularitySliderChanged);
     connect(ui->wBlynkRandomCheckBox, &QCheckBox::toggled, this, &BlynkWindow::onRandomCheckBoxToggled);
     connect(ui->wBlynkCursorEnabled, &QCheckBox::toggled, this, &BlynkWindow::onBlynkCursorEnabledChanged);
-    connect(ui->wBlynkPerMinuteValues, SIGNAL(activated(int)), this, SLOT(onBlynkPerMinuteValueChanged(int)));
+    connect(ui->wBlynkPerMinuteValues, SIGNAL(activated(QString)), this, SLOT(onBlynkPerMinuteValueChanged(QString)));
 
     // Screen break area:
     connect(ui->wScreenBreakSlider, &Slider::valueChanged, this, &BlynkWindow::onScreenBreakRegularityChanged);
@@ -67,11 +67,31 @@ BlynkWindow::~BlynkWindow()
 // Set parameters:
 void BlynkWindow::setParameters(Parameters *pParameters)
 {
+    // Set parameters:
     m_pParameters = pParameters;
 
+    // Set blynk cursor range:
+    QString sBlynkRegularityRange = m_pParameters->parameter(Parameters::BLYNK_REGULARITY_RANGE);
+    QStringList lBlynkRegularityRange = sBlynkRegularityRange.split(",");
+
+    // Read min and max values:
+    int iMinValue = qMin(lBlynkRegularityRange.first().toInt(), lBlynkRegularityRange[1].toInt());
+    int iMaxValue = qMax(lBlynkRegularityRange.first().toInt(), lBlynkRegularityRange[1].toInt());
+    int iBlynkRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
+    ui->wBlynkRegularitySlider->blockSignals(true);
+    ui->wBlynkRegularitySlider->setRange(iMinValue, iMaxValue);
+    ui->wBlynkRegularitySlider->blockSignals(false);
+    ui->wBlynkRegularitySlider->setValue(iBlynkRegularity);
+
+    // Screen break regularity:
+    int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
+    ui->wScreenBreakSlider->blockSignals(true);
     ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
         m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
-    ui->wScreenBreakSlider->setValue(m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt());
+    ui->wScreenBreakSlider->blockSignals(false);
+    ui->wScreenBreakSlider->setValue(iScreenBreakRegularity);
+
+    setEnabledState();
 }
 
 // Update UI:
@@ -103,24 +123,8 @@ void BlynkWindow::updateBlynkCursorArea()
     // Check random mode:
     bool bRandomModeOn = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
 
-    // Read blynk regularity range:
-    QString sBlynkRegularityRange = m_pParameters->parameter(Parameters::BLYNK_REGULARITY_RANGE);
-    QStringList lBlynkRegularityRange = sBlynkRegularityRange.split(",");
-    if (lBlynkRegularityRange.size() > 1)
-    {
-        int iFirst = lBlynkRegularityRange.first().toInt();
-        int iSecond = lBlynkRegularityRange[1].toInt();
-        int iMinValue = qMin(iFirst, iSecond);
-        int iMaxValue = qMax(iFirst, iSecond);
-        ui->wBlynkRegularitySlider->setRange(iMinValue, iMaxValue);
-
-        int iBlynkRegularity = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
-        ui->wBlynkRegularitySlider->setValue(iBlynkRegularity);
-    }
-
     // Update blynk random checkbox:
     ui->wBlynkRandomCheckBox->setChecked(bRandomModeOn);
-    ui->wBlynkRandomCheckBox->setEnabled(bBlynkCursorEnabled);
 
     // Update blynk cursor enabled checkbox:
     ui->wBlynkCursorEnabled->setChecked(!bBlynkCursorEnabled);
@@ -129,18 +133,13 @@ void BlynkWindow::updateBlynkCursorArea()
     QString sBlynkPerMinuteRange = m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANGE);
     QStringList lBlynkPerMinuteRange = sBlynkPerMinuteRange.split(",");
 
-    ui->wBlynkPerMinuteValues->clear();
-    if (lBlynkPerMinuteRange.size() > 1)
-    {
-        QStringList lBlynkPerMinuteValues;
-        for (int i=lBlynkPerMinuteRange[0].toInt(); i<=lBlynkPerMinuteRange[1].toInt(); i++)
-            lBlynkPerMinuteValues << QString::number(i);
+    QStringList lBlynkPerMinuteValues;
+    for (int i=lBlynkPerMinuteRange[0].toInt(); i<=lBlynkPerMinuteRange[1].toInt(); i++)
+        lBlynkPerMinuteValues << QString::number(i);
+    QString sCurrentBlynkPerMinuteRandom = QString::number(m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt());
+    if ((ui->wBlynkPerMinuteValues->count() == 0) && (lBlynkPerMinuteRange.size() > 1))
         ui->wBlynkPerMinuteValues->insertItems(0, lBlynkPerMinuteValues);
-        ui->wBlynkPerMinuteValues->setProperty("values", lBlynkPerMinuteValues);
-        QString sCurrentBlynkPerMinuteRandom = QString::number(m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt());
-        ui->wBlynkPerMinuteValues->setCurrentIndex(lBlynkPerMinuteValues.indexOf(sCurrentBlynkPerMinuteRandom));
-    }
-    ui->wBlynkPerMinuteValues->setEnabled(bBlynkCursorEnabled);
+    ui->wBlynkPerMinuteValues->setCurrentIndex(lBlynkPerMinuteValues.indexOf(sCurrentBlynkPerMinuteRandom));
 }
 
 // Update screen break area:
@@ -150,12 +149,8 @@ void BlynkWindow::updateScreenBreakArea()
     QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
     bool bScreenBreakEnabled = (sScreenBreakState == SCREEN_BREAK_ENABLED);
 
-    // Screen break slider:
-    ui->wScreenBreakSlider->setEnabled(bScreenBreakEnabled);
-
     // Screen break strength combo:
     Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
-    ui->wScreenBreakStrengthCombo->setEnabled(bScreenBreakEnabled);
     if (eScreenBreakStrength > Parameters::NO_STRENGTH)
         ui->wScreenBreakStrengthCombo->setCurrentIndex((int)eScreenBreakStrength-1);
 
@@ -168,13 +163,15 @@ void BlynkWindow::updateBlueLightReducerArea()
 {
     // Blue light reducer enabled:
     bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
-
-    ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
     ui->wBlueLightReducerEnabled->setChecked(!bBlueLightReducerEnabled);
 
     // Blue light reducer start time:
-    ui->wStartTimeEdit->setEnabled(bBlueLightReducerEnabled);
     ui->wStartTimeEdit->setTime(QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME)));
+
+    // Blue light reducer slider:
+    Parameters::Strength eBlueLightReducerStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
+    if (eBlueLightReducerStrength > Parameters::NO_STRENGTH)
+        ui->wBlueLightReducerSlider->setValue(eBlueLightReducerStrength-1);
 }
 
 // Update start blynk at login area:
@@ -187,8 +184,6 @@ void BlynkWindow::updateStartBlynkAtLoginArea()
 // Blynk regularity slider changed:
 void BlynkWindow::onBlynkRegularitySliderChanged(int iRegularity)
 {
-    m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, "0");
-    ui->wBlynkRandomCheckBox->setChecked(false);
     m_pParameters->setParameter(Parameters::BLYNK_CURSOR_REGULARITY, QString::number(iRegularity));
 }
 
@@ -196,6 +191,7 @@ void BlynkWindow::onBlynkRegularitySliderChanged(int iRegularity)
 void BlynkWindow::onRandomCheckBoxToggled(bool bChecked)
 {
     m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, bChecked ? "1" : "0");
+    setEnabledState();
 }
 
 // Blue light reducer enabled changed:
@@ -212,13 +208,13 @@ void BlynkWindow::onBlynkCursorEnabledChanged(bool bChecked)
                 (sBlynkCursorState != BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW))
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED);
     }
-    updateBlynkCursorArea();
+    setEnabledState();
 }
 
 // Blynk per minute value changed:
-void BlynkWindow::onBlynkPerMinuteValueChanged(int iBlynkPerMinute)
+void BlynkWindow::onBlynkPerMinuteValueChanged(const QString &sBlynkPerMinute)
 {
-    m_pParameters->setParameter(Parameters::BLYNK_PER_MINUTE_RANDOM, QString::number(iBlynkPerMinute));
+    m_pParameters->setParameter(Parameters::BLYNK_PER_MINUTE_RANDOM, sBlynkPerMinute);
 }
 
 // Screen break regularity changed:
@@ -241,7 +237,7 @@ void BlynkWindow::onScreenBreakEnabledChanged(bool bChecked)
                 (sScreenBreakState != SCREEN_BREAK_DISABLED_UNTIL_TOMORROW))
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED);
     }
-    updateScreenBreakArea();
+    setEnabledState();
 }
 
 
@@ -263,7 +259,7 @@ void BlynkWindow::onBlueLightReducerValueChanged(int iBlueLightReducerValue)
 void BlynkWindow::onBlueLightReducerEnabledChanged(bool bChecked)
 {
     m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED, QString::number((int)!bChecked));
-    updateBlueLightReducerArea();
+    setEnabledState();
 }
 
 // Start time changed:
@@ -284,3 +280,33 @@ void BlynkWindow::onDone()
     onCloseButtonClicked();
 }
 
+// Set enabled state:
+void BlynkWindow::setEnabledState()
+{
+    /*** BLYNK CURSOR AREA ***/
+
+    // Blynk cursor enabled:
+    QString sBlynkCursorState = m_pParameters->parameter(Parameters::BLYNK_CURSOR_STATE);
+    bool bBlynkCursorEnabled = (sBlynkCursorState == BLYNK_CURSOR_ENABLED);
+
+    // Check random mode:
+    bool bRandomModeOn = (bool)m_pParameters->parameter(Parameters::BLYNK_CURSOR_RANDOM_MODE).toInt();
+    ui->wBlynkRegularitySlider->setEnabled(bBlynkCursorEnabled && !bRandomModeOn);
+    ui->wBlynkRandomCheckBox->setEnabled(bBlynkCursorEnabled);
+    ui->wBlynkPerMinuteValues->setEnabled(bBlynkCursorEnabled && bRandomModeOn);
+
+    /*** SCREEN BREAK AREA ***/
+
+    // Screen break enabled:
+    QString sScreenBreakState = m_pParameters->parameter(Parameters::SCREEN_BREAK_STATE);
+    bool bScreenBreakEnabled = (sScreenBreakState == SCREEN_BREAK_ENABLED);
+    ui->wScreenBreakSlider->setEnabled(bScreenBreakEnabled);
+    ui->wScreenBreakStrengthCombo->setEnabled(bScreenBreakEnabled);
+
+    /*** BLUE LIGHT REDUCER ***/
+
+    // Blue light reducer enabled:
+    bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
+    ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
+    ui->wStartTimeEdit->setEnabled(bBlueLightReducerEnabled);
+}

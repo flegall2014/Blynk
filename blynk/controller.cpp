@@ -470,7 +470,6 @@ void Controller::onApplicationTimerTimeOut()
                 {
                     if ((m_lBlynkCursorSequence.first() > 0) && (m_iBlynkCursorElapsedTime%m_lBlynkCursorSequence.first() == 0))
                     {
-                        qDebug() << "PLAYING RANDOM CURSOR WHEN: " << m_lBlynkCursorSequence.first();
                         m_pDimmerWidget->playCursor();
                         m_lBlynkCursorSequence.takeFirst();
 
