@@ -21,10 +21,10 @@
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
-#define ONE_HOUR_IN_SEC 3600
-#define THREE_HOURS_IN_SEC 10800
-#define ONE_DAY_IN_SEC 86400
-#define ONE_MINUTE_IN_SEC 60
+#define NSEC_PER_HOUR 3600
+#define NSEC_IN_THREE_HOURS 10800
+#define NSEC_IN_ONE_DAY 86400
+#define NSEC_PER_MINUTE 60
 #define VISION_AIDS_OVERSEA_URL "http://getblynk.org/visionaid-overseas-blynk"
 
 // Constructor:
@@ -44,12 +44,18 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iScreenBreakDelay(0),
     m_iCurrentTemperature(0)
 {
+#ifdef QT_DEBUG
+    m_debugDialog.setParameters(m_pParameters);
+    m_debugDialog.show();
+#endif
+
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
     connect(m_pTrayIconMenu, &QMenu::aboutToHide, this, &Controller::onContextMenuAboutToHide);
 
     // Listen to parameter changed:
     connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
+    connect(m_pParameters, &Parameters::parameterChanged, &m_debugDialog, &DebugDialog::onParameterChanged);
 
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
@@ -294,7 +300,7 @@ void Controller::onActionTriggered()
         // Cursor disabled for an hour:
         if (sObjectName == "blynkCursorDisabledForOneHour")
         {
-            m_iBlynkCursorDelay = ONE_HOUR_IN_SEC;
+            m_iBlynkCursorDelay = NSEC_PER_HOUR;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_ONE_HOUR);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -302,7 +308,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for three hour:
         if (sObjectName == "blynkCursorDisabledForThreeHours")
         {
-            m_iBlynkCursorDelay = THREE_HOURS_IN_SEC;
+            m_iBlynkCursorDelay = NSEC_IN_THREE_HOURS;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_FOR_THREE_HOURS);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -310,7 +316,7 @@ void Controller::onActionTriggered()
         // Screen break disabled until tomorrow:
         if (sObjectName == "blynkCursorDisabledUntilTomorrow")
         {
-            m_iBlynkCursorDelay = ONE_DAY_IN_SEC;
+            m_iBlynkCursorDelay = NSEC_IN_ONE_DAY;
             m_pParameters->setParameter(Parameters::BLYNK_CURSOR_STATE, BLYNK_CURSOR_DISABLED_UNTIL_TOMORROW);
             m_iBlynkCursorElapsedTime = 0;
         }
@@ -318,7 +324,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for an hour:
         if (sObjectName == "screenBreakDisabledForOneHour")
         {
-            m_iScreenBreakDelay = ONE_HOUR_IN_SEC;
+            m_iScreenBreakDelay = NSEC_PER_HOUR;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_ONE_HOUR);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -326,7 +332,7 @@ void Controller::onActionTriggered()
         // Screen break disabled for three hour:
         if (sObjectName == "screenBreakDisabledForThreeHours")
         {
-            m_iScreenBreakDelay = THREE_HOURS_IN_SEC;
+            m_iScreenBreakDelay = NSEC_IN_THREE_HOURS;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -334,7 +340,7 @@ void Controller::onActionTriggered()
         // Screen break disabled until tomorrow:
         if (sObjectName == "screenBreakDisabledUntilTomorrow")
         {
-            m_iScreenBreakDelay = ONE_DAY_IN_SEC;
+            m_iScreenBreakDelay = NSEC_IN_ONE_DAY;
             m_pParameters->setParameter(Parameters::SCREEN_BREAK_STATE, SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
             m_iScreenBreakElapsedTime = 0;
         }
@@ -488,7 +494,7 @@ void Controller::onApplicationTimerTimeOut()
     if (bScreenBreakEnabled && (m_iScreenBreakElapsedTime > 0))
     {
         // Regularity:
-        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*ONE_MINUTE_IN_SEC;
+        int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt()*NSEC_PER_MINUTE;
 
         // Strength:
         if (iScreenBreakRegularity > 0)

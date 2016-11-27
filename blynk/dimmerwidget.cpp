@@ -44,7 +44,10 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
     // Retrieve desktop information:
     QDesktopWidget qDesktopWidget;
     QRect screenSize = qDesktopWidget.screenGeometry();
-    setGeometry(screenSize);
+    QSize sSingleImageSize(770, 441);
+    setGeometry((screenSize.width()-sSingleImageSize.width())/2,
+        (screenSize.height()-sSingleImageSize.height())/2,
+                sSingleImageSize.width(), sSingleImageSize.height());
 
     // Animated cursor:
     m_pAnimatedCursor = new AnimatedImage(this);

@@ -132,13 +132,13 @@ void BlynkWindow::updateBlynkCursorArea()
     // Update blynk per minute:
     QString sBlynkPerMinuteRange = m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANGE);
     QStringList lBlynkPerMinuteRange = sBlynkPerMinuteRange.split(",");
-
     QStringList lBlynkPerMinuteValues;
     for (int i=lBlynkPerMinuteRange[0].toInt(); i<=lBlynkPerMinuteRange[1].toInt(); i++)
         lBlynkPerMinuteValues << QString::number(i);
-    QString sCurrentBlynkPerMinuteRandom = QString::number(m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt());
-    if ((ui->wBlynkPerMinuteValues->count() == 0) && (lBlynkPerMinuteRange.size() > 1))
+    if ((ui->wBlynkPerMinuteValues->count() == 0) && (lBlynkPerMinuteRange.size() > 1)) {
         ui->wBlynkPerMinuteValues->insertItems(0, lBlynkPerMinuteValues);
+    }
+    QString sCurrentBlynkPerMinuteRandom = QString::number(m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt());
     ui->wBlynkPerMinuteValues->setCurrentIndex(lBlynkPerMinuteValues.indexOf(sCurrentBlynkPerMinuteRandom));
 }
 

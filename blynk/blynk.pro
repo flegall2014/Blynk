@@ -55,7 +55,9 @@ HEADERS += \
     animatedimage.h \
     blynkwindow.h \
     bluelightreducerslider.h \
-    slider.h
+    slider.h \
+    parameterdebug.h \
+    debugdialog.h
 
 SOURCES += \
     main.cpp \
@@ -70,7 +72,9 @@ SOURCES += \
     animatedimage.cpp \
     blynkwindow.cpp \
     bluelightreducerslider.cpp \
-    slider.cpp
+    slider.cpp \
+    parameterdebug.cpp \
+    debugdialog.cpp
 
 RESOURCES += \
     resources.qrc
@@ -80,5 +84,6 @@ FORMS += \
     customslider.ui \
     aboutwindow.ui \
     blynkwindow.ui \
-    slider.ui
+    slider.ui \
+    debugdialog.ui
 

@@ -10,6 +10,7 @@
 #include "iservice.h"
 #include <cxmlnode.h>
 #include "parameters.h"
+#include "debugdialog.h"
 
 class QAction;
 class QSystemTrayIcon;
@@ -104,6 +105,9 @@ private:
 
     // About window:
     AboutWindow *m_pAboutWindow;
+
+    // Debug dialog:
+    DebugDialog m_debugDialog;
 
     // Application timer:
     QTimer m_tApplicationTimer;

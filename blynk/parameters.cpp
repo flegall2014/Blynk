@@ -42,6 +42,12 @@ Parameters::Parameter Parameters::parameterKey(const QString &sParameterName) co
     return Parameters::UNDEFINED;
 }
 
+// Return parameter count:
+int Parameters::count() const
+{
+    return m_parameters.size();
+}
+
 // Show:
 void Parameters::debug()
 {

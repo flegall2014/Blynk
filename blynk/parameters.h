@@ -69,6 +69,9 @@ public:
     // Return parameter key:
     Parameter parameterKey(const QString &sParameterName) const;
 
+    // Return parameters count:
+    int count() const;
+
     // Show parameters:
     void debug();
 
