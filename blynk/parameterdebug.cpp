@@ -2,7 +2,8 @@
 #include "parameters.h"
 
 // Constructor:
-ParameterDebug::ParameterDebug(QObject *parent) : QAbstractListModel(parent)
+ParameterDebug::ParameterDebug(QObject *parent) : QAbstractListModel(parent),
+    m_pParameters(NULL)
 {
 
 }
@@ -19,7 +20,7 @@ void ParameterDebug::setParameters(Parameters *pParameters)
 int ParameterDebug::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_pParameters->count();
+    return m_pParameters ? m_pParameters->count() : 0;
 }
 
 // Data:
