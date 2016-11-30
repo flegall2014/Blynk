@@ -10,6 +10,9 @@
 class GAMMARAMPSHARED_EXPORT MacMonitor : public Monitor
 {
 public:
+    // Constructor:
+    MacMonitor();
+
     // Init:
     virtual bool init();
 
@@ -21,6 +24,10 @@ public:
 
     // Set temperature:
     virtual bool setTemperature(int iTemperature, bool bForce=false);
+
+protected:
+    // Saved ramps:
+    float *m_pSavedRamps;
 
 private:
     // Color ramp fill:

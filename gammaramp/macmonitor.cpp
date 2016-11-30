@@ -5,6 +5,12 @@
 // Qt:
 #include <QDebug>
 
+// Constructor:
+MacMonitor::MacMonitor() : m_pSavedRamps(NULL)
+{
+
+}
+
 // Init:
 bool MacMonitor::init()
 {
