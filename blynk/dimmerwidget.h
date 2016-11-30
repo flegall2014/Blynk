@@ -10,6 +10,7 @@
 
 class AnimatedImage;
 class Parameters;
+class Monitor;
 
 namespace Ui {
 class DimmerWidget;
@@ -26,12 +27,6 @@ public:
     // Destructor:
     ~DimmerWidget();
 
-    // Set strength:
-    bool setStrength(const Parameters::Strength &eStrength);
-
-    // Set color:
-    bool setColor(const QColor &startColor, const QColor &stopColor);
-
     // Set temperature:
     bool setTemperature(int iTemperature);
 
@@ -46,6 +41,9 @@ public:
 
     // Set parameters:
     void setParameters(Parameters *pParameters);
+
+    // Return monitor:
+    Monitor *monitor();
 
 protected:
     // Paint event:
@@ -73,17 +71,14 @@ private:
     // Animated image done:
     bool m_bAnimatedImageDone;
 
-    // Strength:
-    Parameters::Strength m_eStrength;
-
     // Parameters:
     Parameters *m_pParameters;
 
-    // Start color:
-    QColor m_startColor;
+    // Monitor:
+    Monitor *m_pMonitor;
 
-    // Stop color:
-    QColor m_stopColor;
+    // Support gamma ramp?
+    bool m_bSupportGammaRamp;
 
 public slots:
     // Next image available:

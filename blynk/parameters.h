@@ -52,7 +52,7 @@ public:
         STRONG_TEMPERATURE
     };
 
-    enum Strength {NO_STRENGTH=0, LIGHT, MEDIUM, STRONG};
+    enum Strength {LIGHT=0, MEDIUM, STRONG};
 
     // Constructor:
     Parameters(QObject *parent=0);

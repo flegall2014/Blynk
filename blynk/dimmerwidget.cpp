@@ -10,10 +10,13 @@
 #include "ui_dimmerwidget.h"
 #include "animatedimage.h"
 #include "parameters.h"
-#include <gammaramp.h>
+#ifdef Q_OS_WIN
+#include <windowsmonitor.h>
+#elif defined(Q_OS_OSX)
+#include <macmonitor.h>
+#endif
 #include "blynk.h"
 #include "controller.h"
-#include <blrlib.h>
 #include <utils.h>
 #define MAX_LOOP_TIMES 1
 
@@ -25,10 +28,9 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
     m_pAnimatedImage(NULL),
     m_bCursorDone(false),
     m_bAnimatedImageDone(false),
-    m_eStrength(Parameters::LIGHT),
     m_pParameters(NULL),
-    m_startColor(0, 0, 0),
-    m_stopColor(255, 255, 255)
+    m_pMonitor(NULL),
+    m_bSupportGammaRamp(false)
 {
     // Setup UI:
     ui->setupUi(this);
@@ -60,12 +62,21 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
     m_pAnimatedImage->loadImages(AnimatedImage::BIGEYE_IMAGES);
     connect(m_pAnimatedImage, &AnimatedImage::nextImage, this, &DimmerWidget::onNextAnimatedImageAvailable);
     connect(m_pAnimatedImage, &AnimatedImage::done, this, &DimmerWidget::onAnimatedImageDone);
+
+    // Create monitor:
+#ifdef Q_OS_WIN
+    m_pMonitor = new WindowsMonitor();
+#elif defined(Q_OS_OSX)
+     m_pMonitor = new MacMonitor();
+#endif
+    m_bSupportGammaRamp = m_pMonitor->start();
 }
 
 // Destructor:
 DimmerWidget::~DimmerWidget()
 {
     delete ui;
+    delete m_pMonitor;
 }
 
 // Paint event:
@@ -148,42 +159,22 @@ void DimmerWidget::playAnimatedImage(const Parameters::Strength &eStrength)
     m_pAnimatedImage->play();
 }
 
-// Set strength:
-bool DimmerWidget::setStrength(const Parameters::Strength &eStrength)
-{
-    // Set strength:
-    m_eStrength = eStrength;
-    return setColor(m_startColor, Blynk::instance()->controller()->colorForStrength(eStrength));
-}
-
-// Set color:
-bool DimmerWidget::setColor(const QColor &startColor, const QColor &stopColor)
-{
-    if ((m_startColor != startColor) || (m_stopColor != stopColor))
-    {
-        m_startColor = startColor;
-        m_stopColor = stopColor;
-        GammaRamp gammaRamp;
-        return gammaRamp.createColorPalette(startColor, stopColor);
-    }
-
-    return false;
-}
-
 // Set temperature:
 bool DimmerWidget::setTemperature(int iTemperature)
 {
-    return setColor(m_startColor, Blrlib::colorForTemperature(iTemperature));
-}
-
-// Return strength:
-const Parameters::Strength &DimmerWidget::strength() const
-{
-    return m_eStrength;
+    if (m_bSupportGammaRamp)
+        return m_pMonitor->setTemperature(iTemperature);
+    return false;
 }
 
 // Set parameters:
 void DimmerWidget::setParameters(Parameters *pParameters)
 {
     m_pParameters = pParameters;
+}
+
+// Return monitor:
+Monitor *DimmerWidget::monitor()
+{
+    return m_pMonitor;
 }

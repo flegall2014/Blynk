@@ -129,10 +129,10 @@ void Parameters::defineParameterDefaultValues()
     setParameter(SCREEN_BREAK_MAX, "100");
     setParameter(SCREEN_BREAK_REGULARITY, "20");
     setParameter(BLUE_LIGHT_REDUCER_ENABLED, "1");
-    setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "1");
+    setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "2");
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(START_BLYNK_AT_LOGIN, "0");
-    setParameter(LIGHT_TEMPERATURE, "4000");
-    setParameter(MEDIUM_TEMPERATURE, "3000");
-    setParameter(STRONG_TEMPERATURE, "2700");
+    setParameter(LIGHT_TEMPERATURE, "4500");
+    setParameter(MEDIUM_TEMPERATURE, "4000");
+    setParameter(STRONG_TEMPERATURE, "3400");
 }

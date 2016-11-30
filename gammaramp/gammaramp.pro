@@ -37,10 +37,23 @@ CONFIG(debug, debug|release) {
 }
 
 HEADERS += \
-    gammaramp.h \
+    imonitor.h \
+    monitor.h \
     gammaramp_global.h
 
+win32 {
+    HEADERS += windowsmonitor.h
+}
+macx {
+    HEADERS += macmonitor.h
+}
+
 SOURCES += \
-    gammaramp.cpp
+    monitor.cpp
 
-
+win32 {
+    SOURCES += windowsmonitor.cpp
+}
+macx {
+    SOURCES += macmonitor.cpp
+}

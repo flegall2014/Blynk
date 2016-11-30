@@ -23,6 +23,9 @@ public:
     // Set parameters:
     void setParameters(Parameters *pParameters);
 
+    // Initialize:
+    void initialize(double dBrightness, double dRedGamma, double dGreenGamma, double dBlueGamma);
+
 private:
     // UI:
     Ui::DebugDialog *ui;
@@ -33,6 +36,20 @@ private:
 public slots:
     // Parameter changed:
     void onParameterChanged(const Parameters::Parameter &parameter);
+
+    // Brightness changed:
+    void onBrightnessChanged(int iBrightness);
+
+    // Gamma changed:
+    void onRedGammaChanged(int iValue);
+    void onGreenGammaChanged(int iValue);
+    void onBlueGammaChanged(int iValue);
+
+signals:
+    void brightnessChanged(double dBrightness);
+    void redGammaChanged(double dRedGamma);
+    void greenGammaChanged(double dGreenGamma);
+    void blueGammaChanged(double dBlueGamma);
 };
 
 #endif // DEBUGDIALOG_H

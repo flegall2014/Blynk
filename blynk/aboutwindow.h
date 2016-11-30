@@ -1,5 +1,7 @@
 #ifndef ABOUTWINDOW_H
 #define ABOUTWINDOW_H
+
+// Application:
 #include "customwindow.h"
 
 namespace Ui {

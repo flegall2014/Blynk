@@ -15,9 +15,8 @@
 #include "blynkwindow.h"
 #include "aboutwindow.h"
 #include "utils.h"
-#include "blynk.h"
-#include "blrlib.h"
 #include "utils.h"
+#include <windowsmonitor.h>
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
@@ -41,13 +40,13 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iBlueLightReducerElapsedTime(0),
     m_bBlynkCursorRandomModeOn(false),
     m_iBlynkCursorDelay(0),
-    m_iScreenBreakDelay(0),
-    m_iCurrentTemperature(0)
+    m_iScreenBreakDelay(0)
 {
-#ifdef QT_DEBUG
     m_debugDialog.setParameters(m_pParameters);
+    m_debugDialog.initialize(m_pDimmerWidget->monitor()->brightness(),
+        m_pDimmerWidget->monitor()->redGamma(), m_pDimmerWidget->monitor()->greenGamma(),
+            m_pDimmerWidget->monitor()->blueGamma());
     m_debugDialog.show();
-#endif
 
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
@@ -56,6 +55,10 @@ Controller::Controller(QObject *parent) : QObject(parent),
     // Listen to parameter changed:
     connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
     connect(m_pParameters, &Parameters::parameterChanged, &m_debugDialog, &DebugDialog::onParameterChanged);
+    connect(&m_debugDialog, &DebugDialog::brightnessChanged, this, &Controller::onBrightnessChanged);
+    connect(&m_debugDialog, &DebugDialog::redGammaChanged, this, &Controller::onRedGammaChanged);
+    connect(&m_debugDialog, &DebugDialog::greenGammaChanged, this, &Controller::onGreenGammaChanged);
+    connect(&m_debugDialog, &DebugDialog::blueGammaChanged, this, &Controller::onBlueGammaChanged);
 
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
@@ -112,7 +115,7 @@ void Controller::shutdown()
     qDebug() << "SHUTDOWN";
 
     // Reset dimmer:
-    m_pDimmerWidget->setStrength(Parameters::NO_STRENGTH);
+    m_pDimmerWidget->setTemperature(0);
 
     // Save parameters:
     saveParameters();
@@ -518,8 +521,8 @@ void Controller::onApplicationTimerTimeOut()
                 m_pDimmerWidget->setTemperature(0);
             else {
                 // Set current temperature:
-                m_iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
-                m_pDimmerWidget->setTemperature(m_iCurrentTemperature);
+                int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
+                m_pDimmerWidget->setTemperature(iCurrentTemperature);
             }
         }
         else m_pDimmerWidget->setTemperature(0);
@@ -563,49 +566,6 @@ void Controller::onContextMenuAboutToHide()
         m_mActions["settings"]->setVisible(true);
 }
 
-// Return color for temperature:
-QColor Controller::colorForTemperature(int iTemperature) const
-{
-    return Blrlib::colorForTemperature1(iTemperature);
-
-    /* Keep this as a reference
-    if (iTemperature <= 1700)
-        return QColor(255, 122, 0);
-    if ((iTemperature > 1700) && (iTemperature <= 1850))
-        return QColor(255, 130, 0);
-    if ((iTemperature > 1850) && (iTemperature <= 2400))
-        return QColor(255, 157, 60);
-    if ((iTemperature > 2400) && (iTemperature <= 2550))
-        return QColor(255, 164, 72);
-    if ((iTemperature > 2550) && (iTemperature <= 2700))
-        return QColor(255, 170, 84);
-    if ((iTemperature > 2700) && (iTemperature <= 3000))
-        return QColor(255, 181, 105);
-    if ((iTemperature > 3000) && (iTemperature <= 3200))
-        return QColor(255, 188, 118);
-    if ((iTemperature > 3200) && (iTemperature <= 3350))
-        return QColor(255, 192, 127);
-    if ((iTemperature > 3350) && (iTemperature <= 4100))
-        return QColor(255, 212, 168);
-    if ((iTemperature > 4100) && (iTemperature <= 5000))
-        return QColor(255, 229, 206);
-    if ((iTemperature > 5000) && (iTemperature <= 6000))
-        return QColor(255, 240, 232);
-    if ((iTemperature > 6000) && (iTemperature <= 6200))
-        return QColor(255, 246, 246);
-    if (iTemperature > 6200)
-        return QColor(255, 249, 255);
-    return QColor(255, 255, 255);
-    */
-}
-
-// Return color for strength:
-QColor Controller::colorForStrength(const Parameters::Strength &eStrength)
-{
-    int iTemperature = temperatureForStrength(eStrength);
-    return colorForTemperature(iTemperature);
-}
-
 // Return temperature for strength:
 int Controller::temperatureForStrength(const Parameters::Strength &eStrength)
 {
@@ -616,12 +576,6 @@ int Controller::temperatureForStrength(const Parameters::Strength &eStrength)
     if (eStrength == Parameters::STRONG)
         return m_pParameters->parameter(Parameters::STRONG_TEMPERATURE).toInt();
     return 0;
-}
-
-// Set temperature:
-void Controller::setTemperature(int iTemperature)
-{
-    m_iCurrentTemperature = iTemperature;
 }
 
 // Show application menu at cursor pos:
@@ -660,4 +614,22 @@ void Controller::onParameterChanged(const Parameters::Parameter &parameter)
     }
 }
 
+void Controller::onBrightnessChanged(double dBrightness)
+{
+    m_pDimmerWidget->monitor()->setBrightness(dBrightness);
+}
 
+void Controller::onRedGammaChanged(double dRedGamma)
+{
+    m_pDimmerWidget->monitor()->setRedGamma(dRedGamma);
+}
+
+void Controller::onGreenGammaChanged(double dGreenGamma)
+{
+    m_pDimmerWidget->monitor()->setGreenGamma(dGreenGamma);
+}
+
+void Controller::onBlueGammaChanged(double dBlueGamma)
+{
+    m_pDimmerWidget->monitor()->setBlueGamma(dBlueGamma);
+}

@@ -87,7 +87,7 @@ void BlynkWindow::setParameters(Parameters *pParameters)
     int iScreenBreakRegularity = m_pParameters->parameter(Parameters::SCREEN_BREAK_REGULARITY).toInt();
     ui->wScreenBreakSlider->blockSignals(true);
     ui->wScreenBreakSlider->setRange(m_pParameters->parameter(Parameters::SCREEN_BREAK_MIN).toInt(),
-        m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
+                                     m_pParameters->parameter(Parameters::SCREEN_BREAK_MAX).toInt());
     ui->wScreenBreakSlider->blockSignals(false);
     ui->wScreenBreakSlider->setValue(iScreenBreakRegularity);
 
@@ -151,8 +151,7 @@ void BlynkWindow::updateScreenBreakArea()
 
     // Screen break strength combo:
     Parameters::Strength eScreenBreakStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::SCREEN_BREAK_STRENGTH).toInt();
-    if (eScreenBreakStrength > Parameters::NO_STRENGTH)
-        ui->wScreenBreakStrengthCombo->setCurrentIndex((int)eScreenBreakStrength-1);
+    ui->wScreenBreakStrengthCombo->setCurrentIndex((int)eScreenBreakStrength);
 
     // Check state:
     ui->wScreenBreakEnabled->setChecked(!bScreenBreakEnabled);
@@ -170,8 +169,7 @@ void BlynkWindow::updateBlueLightReducerArea()
 
     // Blue light reducer slider:
     Parameters::Strength eBlueLightReducerStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
-    if (eBlueLightReducerStrength > Parameters::NO_STRENGTH)
-        ui->wBlueLightReducerSlider->setValue(eBlueLightReducerStrength-1);
+    ui->wBlueLightReducerSlider->setValue(eBlueLightReducerStrength);
 }
 
 // Update start blynk at login area:
@@ -244,14 +242,14 @@ void BlynkWindow::onScreenBreakEnabledChanged(bool bChecked)
 // Screen break strength changed:
 void BlynkWindow::onScreenBreakStrengthChanged(int iIndex)
 {
-    Parameters::Strength eStrength = (Parameters::Strength)(iIndex+1);
+    Parameters::Strength eStrength = (Parameters::Strength)(iIndex);
     m_pParameters->setParameter(Parameters::SCREEN_BREAK_STRENGTH, QString::number(eStrength));
 }
 
 // Blue light reducer value changed:
 void BlynkWindow::onBlueLightReducerValueChanged(int iBlueLightReducerValue)
 {
-    Parameters::Strength eStrength = (Parameters::Strength)(iBlueLightReducerValue+1);
+    Parameters::Strength eStrength = (Parameters::Strength)(iBlueLightReducerValue);
     m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH, QString::number(eStrength));
 }
 

@@ -37,17 +37,8 @@ public:
     // Shutdown:
     virtual void shutdown();
 
-    // Return color for temperature:
-    QColor colorForTemperature(int iTemperature) const;
-
-    // Color for strength:
-    QColor colorForStrength(const Parameters::Strength &eStrength);
-
     // Return temperature for strength:
     int temperatureForStrength(const Parameters::Strength &eStrength);
-
-    // Set temperature:
-    void setTemperature(int iTemperature);
 
 protected:
     // Constructor:
@@ -106,9 +97,6 @@ private:
     // About window:
     AboutWindow *m_pAboutWindow;
 
-    // Debug dialog:
-    DebugDialog m_debugDialog;
-
     // Application timer:
     QTimer m_tApplicationTimer;
 
@@ -136,8 +124,8 @@ private:
     // Screen break delay:
     int m_iScreenBreakDelay;
 
-    // Current temperature:
-    int m_iCurrentTemperature;
+    // Debug dialog:
+    DebugDialog m_debugDialog;
 
 public slots:
     // Action triggered:
@@ -154,6 +142,11 @@ public slots:
 
     // Parameter changed:
     void onParameterChanged(const Parameters::Parameter &Parameters);
+
+    void onBrightnessChanged(double dBrightness);
+    void onRedGammaChanged(double dRedGamma);
+    void onGreenGammaChanged(double dGreenGamma);
+    void onBlueGammaChanged(double dBlueGamma);
 };
 
 #endif // CONTROLLER_H
