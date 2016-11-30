@@ -90,6 +90,7 @@ void Parameters::deserialize(const CXMLNode &xRootNode)
 // Define parameters name:
 void Parameters::defineParameterName()
 {
+    m_parameterName[UNDEFINED] = "undefined";
     m_parameterName[BLYNK_CURSOR_REGULARITY] = "blynkCursorRegularity";
     m_parameterName[BLYNK_CURSOR_STATE] = "blynkCursorState";
     m_parameterName[BLYNK_CURSOR_RANDOM_MODE] = "blynkCursorRandomMode";
@@ -115,6 +116,7 @@ void Parameters::defineParameterName()
 // Define parameter default value:
 void Parameters::defineParameterDefaultValues()
 {
+    setParameter(UNDEFINED, "");
     setParameter(BLYNK_CURSOR_REGULARITY, "2");
     setParameter(BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
     setParameter(BLYNK_CURSOR_RANDOM_MODE, "0");
@@ -132,7 +134,7 @@ void Parameters::defineParameterDefaultValues()
     setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "2");
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(START_BLYNK_AT_LOGIN, "0");
-    setParameter(LIGHT_TEMPERATURE, "4500");
-    setParameter(MEDIUM_TEMPERATURE, "4000");
-    setParameter(STRONG_TEMPERATURE, "3400");
+    setParameter(LIGHT_TEMPERATURE, "3500");
+    setParameter(MEDIUM_TEMPERATURE, "3000");
+    setParameter(STRONG_TEMPERATURE, "2500");
 }
