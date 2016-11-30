@@ -1,5 +1,6 @@
 // Application:
 #include "macmonitor.h"
+#include <QCoreGraphics/CoreGraphics.h>
 
 // Qt:
 #include <QDebug>

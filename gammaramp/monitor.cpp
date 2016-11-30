@@ -4,21 +4,11 @@
 #include <qglobal.h>
 
 // Constructor:
-Monitor::Monitor() : m_pSavedRamps(NULL), m_dRedGamma(1.0),
+Monitor::Monitor() : m_dRedGamma(1.0),
     m_dGreenGamma(1.0), m_dBlueGamma(1.0),
     m_dBrightness(1.0), m_iCurrentTemperature(0)
 {
 
-}
-
-// Destructor:
-Monitor::~Monitor()
-{
-    if (m_pSavedRamps)
-    {
-        free(m_pSavedRamps);
-        m_pSavedRamps = NULL;
-    }
 }
 
 // Init:

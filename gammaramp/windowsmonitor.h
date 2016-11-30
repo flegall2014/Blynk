@@ -10,6 +10,12 @@
 class GAMMARAMPSHARED_EXPORT WindowsMonitor : public Monitor
 {
 public:
+    // Constructor:
+    WindowsMonitor();
+
+    // Destructor:
+    virtual ~WindowsMonitor();
+
     // Init:
     virtual bool init();
 
@@ -29,6 +35,9 @@ protected:
     Type_SetDeviceGammaRamp pGetDeviceGammaRamp;
     Type_SetDeviceGammaRamp pSetDeviceGammaRamp;
     Type_GetDeviceCaps pGetDeviceCaps;
+
+    // Saved ramps:
+    unsigned short *m_pSavedRamps;
 
 private:
     // Load library:

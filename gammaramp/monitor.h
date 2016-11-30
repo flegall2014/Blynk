@@ -258,9 +258,6 @@ public:
     // Constructor:
     Monitor();
 
-    // Destructor:
-    virtual ~Monitor();
-
     // Init:
     virtual bool init();
 
@@ -305,9 +302,6 @@ protected:
     double fillFunction(float *pWhitePoint, double dScaledGamma, int iIndex);
 
 protected:
-    // Saved ramps:
-    unsigned short *m_pSavedRamps;
-
     // Gamma:
     double m_dRedGamma;
     double m_dGreenGamma;

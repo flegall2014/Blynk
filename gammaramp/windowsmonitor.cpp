@@ -4,6 +4,22 @@
 // Qt:
 #include <QDebug>
 
+// Constructor:
+WindowsMonitor::WindowsMonitor() : m_pSavedRamps(NULL)
+{
+
+}
+
+// Destructor:
+WindowsMonitor::~WindowsMonitor()
+{
+    if (m_pSavedRamps)
+    {
+        free(m_pSavedRamps);
+        m_pSavedRamps = NULL;
+    }
+}
+
 // Load library:
 bool WindowsMonitor::loadLibrary()
 {
