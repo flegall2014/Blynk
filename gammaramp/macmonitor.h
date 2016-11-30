@@ -4,7 +4,6 @@
 // Application:
 #include "monitor.h"
 #include <stdint.h>
-#include <windows.h>
 #include "gammaramp_global.h"
 
 class GAMMARAMPSHARED_EXPORT MacMonitor : public Monitor
