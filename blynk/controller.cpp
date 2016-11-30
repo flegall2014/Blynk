@@ -15,8 +15,7 @@
 #include "blynkwindow.h"
 #include "aboutwindow.h"
 #include "utils.h"
-#include "utils.h"
-#include <windowsmonitor.h>
+#include <monitor.h>
 
 // Defines:
 #define PARAMETERS_FILE "parameters.xml"
