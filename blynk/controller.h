@@ -10,7 +10,9 @@
 #include "iservice.h"
 #include <cxmlnode.h>
 #include "parameters.h"
+#ifdef QT_DEBUG
 #include "debugdialog.h"
+#endif
 
 class QAction;
 class QSystemTrayIcon;
@@ -124,8 +126,10 @@ private:
     // Screen break delay:
     int m_iScreenBreakDelay;
 
+    #ifdef QT_DEBUG
     // Debug dialog:
     DebugDialog m_debugDialog;
+    #endif
 
 public slots:
     // Action triggered:

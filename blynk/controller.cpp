@@ -41,11 +41,13 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iBlynkCursorDelay(0),
     m_iScreenBreakDelay(0)
 {
+    #ifdef QT_DEBUG
     m_debugDialog.setParameters(m_pParameters);
     m_debugDialog.initialize(m_pDimmerWidget->monitor()->brightness(),
         m_pDimmerWidget->monitor()->redGamma(), m_pDimmerWidget->monitor()->greenGamma(),
             m_pDimmerWidget->monitor()->blueGamma());
     m_debugDialog.show();
+    #endif
 
     // Context menu about to show:
     connect(m_pTrayIconMenu, &QMenu::aboutToShow, this, &Controller::onContextMenuAboutToShow);
@@ -53,11 +55,13 @@ Controller::Controller(QObject *parent) : QObject(parent),
 
     // Listen to parameter changed:
     connect(m_pParameters, &Parameters::parameterChanged, this, &Controller::onParameterChanged);
+    #ifdef QT_DEBUG
     connect(m_pParameters, &Parameters::parameterChanged, &m_debugDialog, &DebugDialog::onParameterChanged);
     connect(&m_debugDialog, &DebugDialog::brightnessChanged, this, &Controller::onBrightnessChanged);
     connect(&m_debugDialog, &DebugDialog::redGammaChanged, this, &Controller::onRedGammaChanged);
     connect(&m_debugDialog, &DebugDialog::greenGammaChanged, this, &Controller::onGreenGammaChanged);
     connect(&m_debugDialog, &DebugDialog::blueGammaChanged, this, &Controller::onBlueGammaChanged);
+    #endif
 
     // Parametrize timer:
     m_tApplicationTimer.setInterval(1000);
