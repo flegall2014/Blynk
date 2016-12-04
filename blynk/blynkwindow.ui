@@ -481,6 +481,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Blynks per minute</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QComboBox" name="wBlynkPerMinuteValues">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
