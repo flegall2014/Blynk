@@ -48,7 +48,7 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
     QRect screenSize = qDesktopWidget.screenGeometry();
     QSize sSingleImageSize(770, 441);
     setGeometry((screenSize.width()-sSingleImageSize.width())/2,
-        (screenSize.height()-sSingleImageSize.height())/2,
+                (screenSize.height()-sSingleImageSize.height())/2,
                 sSingleImageSize.width(), sSingleImageSize.height());
 
     // Animated cursor:
@@ -67,7 +67,7 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
 #ifdef Q_OS_WIN
     m_pMonitor = new WindowsMonitor();
 #elif defined(Q_OS_OSX)
-     m_pMonitor = new MacMonitor();
+    m_pMonitor = new MacMonitor();
 #endif
     m_bSupportGammaRamp = m_pMonitor->start();
 }
@@ -83,6 +83,7 @@ DimmerWidget::~DimmerWidget()
 void DimmerWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
+    QDialog::paintEvent(event);
     if (!m_bCursorDone)
     {
         QPainter painter(this);
@@ -104,16 +105,15 @@ void DimmerWidget::paintEvent(QPaintEvent *event)
         if (eStrength == Parameters::LIGHT)
             dOpacity = .25;
         else
-        if (eStrength == Parameters::MEDIUM)
-            dOpacity = .5;
-        else
-        if (eStrength == Parameters::STRONG)
-            dOpacity = 1;
+            if (eStrength == Parameters::MEDIUM)
+                dOpacity = .5;
+            else
+                if (eStrength == Parameters::STRONG)
+                    dOpacity = 1;
 
         painter.setOpacity(dOpacity);
         painter.drawImage(pos, m_currentAnimatedImage);
     }
-    QDialog::paintEvent(event);
 }
 
 // Next cursor image available:

@@ -15,11 +15,6 @@ AnimatedImage::AnimatedImage(QWidget *parent) :
     connect(&m_tTimer, &QTimer::timeout, this, &AnimatedImage::onTimeOut);
 }
 
-// Destructor:
-AnimatedImage::~AnimatedImage()
-{
-}
-
 // Load images:
 void AnimatedImage::loadImages(const What &what)
 {   
@@ -33,11 +28,12 @@ void AnimatedImage::loadImages(const What &what)
     else
     if (what == CURSOR_IMAGES)
     {
-        for (int i=1; i<=36; i++) {
+        for (int i=11; i<=33; i++) {
             QString sIndex = QString::number(i);
             if (sIndex.length() < 2)
                 sIndex = "0"+sIndex;
             QString sPngFile = QString(":/cursor/Fra_%1.png").arg(sIndex);
+            qDebug() << "LOADING: " << sPngFile;
             m_vCursorImages << QImage(sPngFile);
         }
     }

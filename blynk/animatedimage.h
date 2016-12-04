@@ -18,9 +18,6 @@ public:
     // Constructor:
     AnimatedImage(QWidget *parent=0);
 
-    // Destructor:
-    ~AnimatedImage();
-
     // Play:
     void play();
 
