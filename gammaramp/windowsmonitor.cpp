@@ -5,7 +5,8 @@
 #include <QDebug>
 
 // Constructor:
-WindowsMonitor::WindowsMonitor() : m_pSavedRamps(NULL)
+WindowsMonitor::WindowsMonitor() : m_pSavedRamps(NULL),
+    hGDI32(NULL)
 {
 
 }
