@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Parameters>
+ <undefined/>
  <blynkCursorRegularity>3</blynkCursorRegularity>
  <blynkCursorState>Enabled</blynkCursorState>
- <blynkCursorRandomMode>1</blynkCursorRandomMode>
- <blynkPerMinuteRandom>11</blynkPerMinuteRandom>
+ <blynkCursorRandomMode>0</blynkCursorRandomMode>
+ <blynkPerMinuteRandom>8</blynkPerMinuteRandom>
  <blynkCursorMin>2</blynkCursorMin>
  <blynkCursorMax>10</blynkCursorMax>
  <blynkPerMinuteRange>6, 15</blynkPerMinuteRange>
  <blynkRegularityRange>2, 10</blynkRegularityRange>
  <screenBreakRegularity>20</screenBreakRegularity>
  <screenBreakState>Enabled</screenBreakState>
- <screenBreakStrength>3</screenBreakStrength>
+ <screenBreakStrength>1</screenBreakStrength>
  <screenBreakMin>20</screenBreakMin>
  <screenBreakMax>100</screenBreakMax>
  <blueLightReducerEnabled>1</blueLightReducerEnabled>
- <blueLightReducerStrength>1</blueLightReducerStrength>
- <blueLightReducerStartTime>11:00:00</blueLightReducerStartTime>
- <startBlynkAtLogin>1</startBlynkAtLogin>
- <lightTemperature>4000</lightTemperature>
+ <blueLightReducerStrength>2</blueLightReducerStrength>
+ <blueLightReducerStartTime>07:00:00</blueLightReducerStartTime>
+ <startBlynkAtLogin>0</startBlynkAtLogin>
+ <lightTemperature>3500</lightTemperature>
  <mediumTemperature>3000</mediumTemperature>
- <strongTemperature>2700</strongTemperature>
+ <strongTemperature>2500</strongTemperature>
 </Parameters>
