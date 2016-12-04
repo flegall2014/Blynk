@@ -85,5 +85,6 @@ FORMS += \
     aboutwindow.ui \
     blynkwindow.ui \
     slider.ui \
-    debugdialog.ui
+    debugdialog.ui \
+    blynkwindow-mac.ui
 

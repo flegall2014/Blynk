@@ -5,7 +5,14 @@
 
 // Application:
 #include "blynkwindow.h"
+
+// Create monitor:
+#ifdef Q_OS_WIN
 #include "ui_blynkwindow.h"
+#elif defined(Q_OS_OSX)
+#include "ui_blynkwindow-mac.h"
+#endif
+
 #include "parameters.h"
 #include "utils.h"
 #include <QDebug>
