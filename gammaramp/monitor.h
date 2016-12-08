@@ -252,6 +252,50 @@ static const float blackbody_color[] = {
     0.62740336,  0.75282962,  1.00000000  // 25100K
 };
 
+// Color setting:
+typedef struct {
+    int temperature;
+    float gamma[3];
+    float brightness;
+} color_setting_t;
+
+// Transition scheme.
+// The solar elevations at which the transition begins/ends,
+// and the association color settings:
+typedef struct {
+    double high;
+    double low;
+    color_setting_t day;
+    color_setting_t night;
+} transitionScheme;
+
+// Location:
+typedef struct {
+    float lat;
+    float lon;
+} geoLoc;
+
+/* Periods of day. */
+typedef enum {
+    PERIOD_NONE = 0,
+    PERIOD_DAYTIME,
+    PERIOD_NIGHT,
+    PERIOD_TRANSITION
+} period_t;
+
+#define RAD(x)  ((x)*(M_PI/180))
+#define DEG(x)  ((x)*(180/M_PI))
+#define CLAMP(lo,mid,up)  (((lo) > (mid)) ? (lo) : (((mid) < (up)) ? (mid) : (up)))
+
+// Model of atmospheric refraction near horizon (in degrees):
+#define SOLAR_ATM_REFRAC  0.833
+#define SOLAR_ASTRO_TWILIGHT_ELEV   -18.0
+#define SOLAR_NAUT_TWILIGHT_ELEV    -12.0
+#define SOLAR_CIVIL_TWILIGHT_ELEV    -6.0
+#define SOLAR_DAYTIME_ELEV           (0.0 - SOLAR_ATM_REFRAC)
+#define TRANSITION_LOW     SOLAR_CIVIL_TWILIGHT_ELEV
+#define TRANSITION_HIGH    3.0
+
 class GAMMARAMPSHARED_EXPORT Monitor : public IMonitor
 {
 public:
@@ -294,12 +338,104 @@ public:
     // Return blue gamma:
     double blueGamma() const;
 
-protected:
-    // Interpolate color:
-    void interpolateColor(float a, const float *c1, const float *c2, float *c);
+    // Run continual mode:
+    int runContinualMode(const geoLoc *loc,
+                         const transitionScheme *scheme,
+                         int transition);
 
+protected:
     // Fill function:
     double fillFunction(float *pWhitePoint, double dScaledGamma, int iIndex);
+
+    // Interpolate color:
+    static void interpolateColor(float a, const float *c1, const float *c2, float *c);
+
+    // Return elevation from hour angle:
+    static double elevationFromHourAngle(double dLat, double dDecl, double dHa);
+
+    // Julian day from Julian centuries since J2000.0:
+    static double jdFromJCent(double dTime);
+
+    //Julian centuries since J2000.0 from Julian day::
+    static double jcentFromJd(double jd);
+
+    // Mean obliquity of the ecliptic
+    // t: Julian centuries since J2000.0
+    // Return: Mean obliquity in radians
+    static double meanEclipticObliquity(double dTime);
+
+    // Corrected obliquity of the ecliptic.
+    // t: Julian centuries since J2000.0
+    // Return: Currected obliquity in radians
+    static double obliquityCorr(double dTime);
+
+    // Geometric mean longitude of the sun.
+    // t: Julian centuries since J2000.0
+    // Return: Geometric mean logitude in radians.
+    static double sunGeomMeanLon(double dTime);
+
+    // Geometric mean anomaly of the sun.
+    // t: Julian centuries since J2000.0
+    // Return: Geometric mean anomaly in radians.
+    static double sunGeomMeanAnomaly(double dTime);
+
+    /* Equation of center of the sun.
+       t: Julian centuries since J2000.0
+       Return: Center(?) in radians */
+    static double sunEquationOfCenter(double dTime);
+
+    // Eccentricity of earth orbit.
+    // t: Julian centuries since J2000.0
+    // Return: Eccentricity (unitless).
+    static double earthOrbitEccentricity(double dTime);
+
+    // Difference between true solar time and mean solar time.
+    // t: Julian centuries since J2000.0
+    // Return: Difference in minutes
+    static double equationOfTime(double dTime);
+
+    // True longitude of the sun.
+    // t: Julian centuries since J2000.0
+    // Return: True longitude in radians.
+    static double sunTrueLon(double dTime);
+
+    // Apparent longitude of the sun. (Right ascension).
+    // t: Julian centuries since J2000.0
+    // Return: Apparent longitude in radians.
+    static double sunApparentLon(double dTime);
+
+    // Declination of the sun.
+    // t: Julian centuries since J2000.0
+    // Return: Declination in radians.
+    static double solarDeclination(double dTime);
+
+    // Return solar elevation from time:
+    static double solarElevationFromTime(double dTime, double dLat, double dLon);
+
+    // Julian day from unix epoch:
+    static double jdFromEpoch(double dTime);
+
+    // Return solar elevation:
+    static double solarElevation(double dDate, double dLat, double dLon);
+
+    // Return current time in T as the number of seconds since the epoch:
+    static int systemTimeGetTime(double *dTime);
+
+    // Interpolate color setting structs based on solar elevation:
+    static void interpolateColorSettings(const transitionScheme *transition,
+                                         double elevation,
+                                         color_setting_t *result);
+
+    // Determine which period we are currently in:
+    static period_t getPeriod(const transitionScheme *transition,
+                              double elevation);
+
+    // Determine how far through the transition we are:
+    static double getTransitionProgress(const transitionScheme *transition,
+                                        double elevation);
+
+    // Print verbose description of the given period:
+    static void printPeriod(period_t period, double transition);
 
 protected:
     // Gamma:

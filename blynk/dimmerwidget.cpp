@@ -70,6 +70,28 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
     m_pMonitor = new MacMonitor();
 #endif
     m_bSupportGammaRamp = m_pMonitor->start();
+
+#ifdef TEST
+    /* Settings for day, night and transition.
+           Initialized to indicate that the values are not set yet. */
+    transitionScheme scheme =
+    { TRANSITION_HIGH, TRANSITION_LOW };
+
+    scheme.day.temperature = 5700;
+    scheme.day.gamma[0] = 0.8;
+    scheme.day.gamma[1] = 0.7;
+    scheme.day.gamma[2] = 0.8;
+    scheme.day.brightness = 0.7;
+
+    scheme.night.temperature = 3500;
+    scheme.night.gamma[0] = 0.6;
+    scheme.night.gamma[1] = 1;
+    scheme.night.gamma[2] = 1;
+    scheme.night.brightness = 0.4;
+
+    geoLoc loc = {48.85, 2.35};
+    m_pMonitor->runContinualMode(&loc, &scheme, 1);
+#endif
 }
 
 // Destructor:

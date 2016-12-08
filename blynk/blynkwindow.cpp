@@ -168,15 +168,20 @@ void BlynkWindow::updateScreenBreakArea()
 void BlynkWindow::updateBlueLightReducerArea()
 {
     // Blue light reducer enabled:
-    bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
-    ui->wBlueLightReducerEnabled->setChecked(!bBlueLightReducerEnabled);
+    QString sBlueLightReducerState = m_pParameters->parameter(Parameters::BLUELIGHTREDUCER_STATE);
+    bool bBlueLightReducerEnabled = (sBlueLightReducerState == BLUELIGHTREDUCER_ENABLED);
 
     // Blue light reducer start time:
+    ui->wStartTimeEdit->setEnabled(bBlueLightReducerEnabled);
     ui->wStartTimeEdit->setTime(QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME)));
 
     // Blue light reducer slider:
     Parameters::Strength eBlueLightReducerStrength = (Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt();
+    ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
     ui->wBlueLightReducerSlider->setValue(eBlueLightReducerStrength);
+
+    // Check state:
+    ui->wBlueLightReducerEnabled->setChecked(!bBlueLightReducerEnabled);
 }
 
 // Update start blynk at login area:
@@ -245,7 +250,6 @@ void BlynkWindow::onScreenBreakEnabledChanged(bool bChecked)
     setEnabledState();
 }
 
-
 // Screen break strength changed:
 void BlynkWindow::onScreenBreakStrengthChanged(int iIndex)
 {
@@ -263,7 +267,17 @@ void BlynkWindow::onBlueLightReducerValueChanged(int iBlueLightReducerValue)
 // Blue light reducer enabled changed:
 void BlynkWindow::onBlueLightReducerEnabledChanged(bool bChecked)
 {
-    m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED, QString::number((int)!bChecked));
+    bool bEnabled = !bChecked;
+    if (bEnabled)
+        m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_ENABLED);
+    else
+    {
+        QString sBlueLightReducerState = m_pParameters->parameter(Parameters::BLUELIGHTREDUCER_STATE);
+        if ((sBlueLightReducerState != BLUELIGHTREDUCER_DISABLED_FOR_ONE_HOUR) &&
+                (sBlueLightReducerState != BLUELIGHTREDUCER_DISABLED_FOR_THREE_HOURS) &&
+                (sBlueLightReducerState != BLUELIGHTREDUCER_DISABLED_UNTIL_TOMORROW))
+            m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED);
+    }
     setEnabledState();
 }
 
@@ -311,7 +325,8 @@ void BlynkWindow::setEnabledState()
     /*** BLUE LIGHT REDUCER ***/
 
     // Blue light reducer enabled:
-    bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
+    QString sBlueLightReducerState = m_pParameters->parameter(Parameters::BLUELIGHTREDUCER_STATE);
+    bool bBlueLightReducerEnabled = (sBlueLightReducerState == BLUELIGHTREDUCER_ENABLED);
     ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
     ui->wStartTimeEdit->setEnabled(bBlueLightReducerEnabled);
 }

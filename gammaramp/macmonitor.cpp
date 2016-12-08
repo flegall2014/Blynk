@@ -130,8 +130,8 @@ void MacMonitor::colorRampFill(float *gamma_r, float *gamma_g, float *gamma_b,
               &blackbody_color[temp_index+3], white_point);
 
     for (int i = 0; i < iSize; i++) {
-        gamma_r[i] = fillFunction(white_point, (double)gamma_r[i], 0);
-        gamma_g[i] = fillFunction(white_point, (double)gamma_g[i], 1);
-        gamma_b[i] = fillFunction(white_point, (double)gamma_b[i], 2);
+        gamma_r[i] = Monitor::fillFunction(white_point, (double)gamma_r[i], 0);
+        gamma_g[i] = Monitor::fillFunction(white_point, (double)gamma_g[i], 1);
+        gamma_b[i] = Monitor::fillFunction(white_point, (double)gamma_b[i], 2);
     }
 }

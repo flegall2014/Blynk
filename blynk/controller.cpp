@@ -39,7 +39,8 @@ Controller::Controller(QObject *parent) : QObject(parent),
     m_iBlueLightReducerElapsedTime(0),
     m_bBlynkCursorRandomModeOn(false),
     m_iBlynkCursorDelay(0),
-    m_iScreenBreakDelay(0)
+    m_iScreenBreakDelay(0),
+    m_iBlueLightReducerDelay(0)
 {
     #ifdef QT_DEBUG
     m_debugDialog.setParameters(m_pParameters);
@@ -351,6 +352,30 @@ void Controller::onActionTriggered()
             m_iScreenBreakElapsedTime = 0;
         }
         else
+        // Blue light reducer disabled for an hour:
+        if (sObjectName == "blueLightReducerDisabledForOneHour")
+        {
+            m_iBlueLightReducerDelay = NSEC_PER_HOUR;
+            m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED_FOR_ONE_HOUR);
+            m_iBlueLightReducerElapsedTime = 0;
+        }
+        else
+        // Blue light reducer disabled for three hour:
+        if (sObjectName == "blueLightReducerDisabledForThreeHours")
+        {
+            m_iBlueLightReducerDelay = NSEC_IN_THREE_HOURS;
+            m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED_FOR_THREE_HOURS);
+            m_iBlueLightReducerElapsedTime = 0;
+        }
+        else
+        // Blue light reducer disabled until tomorrow:
+        if (sObjectName == "blueLightReducerDisabledUntilTomorrow")
+        {
+            m_iBlueLightReducerDelay = NSEC_IN_ONE_DAY;
+            m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED_UNTIL_TOMORROW);
+            m_iBlueLightReducerElapsedTime = 0;
+        }
+        else
         // Vision aids overseas:
         if (sObjectName == "visionAidsOverseas")
         {
@@ -459,9 +484,17 @@ void Controller::onApplicationTimerTimeOut()
     }
 
     // Blue light reducer enabled?
-    bool bBlueLightReducerEnabled = (bool)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ENABLED).toInt();
+    QString sBlueLightReducerState = m_pParameters->parameter(Parameters::BLUELIGHTREDUCER_STATE);
+    bool bBlueLightReducerEnabled = (sBlueLightReducerState == BLUELIGHTREDUCER_ENABLED);
 
-    // Blynk cursor only:
+    // Check blue light reducer delay:
+    if ((m_iBlueLightReducerDelay > 0) && (m_iBlueLightReducerElapsedTime > m_iBlueLightReducerDelay)) {
+        m_pParameters->setParameter(Parameters::BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_ENABLED);
+        m_pBlynkWindow->updateBlueLightReducerArea();
+        bBlueLightReducerEnabled = true;
+    }
+
+    // Read blue light reducer state:
     if (m_iBlynkCursorElapsedTime > 0)
     {
         // Blynk cursor enabled:
@@ -513,23 +546,19 @@ void Controller::onApplicationTimerTimeOut()
     }
 
     // Blue light reducer:
-    if (m_iBlueLightReducerElapsedTime > 0)
+    if (bBlueLightReducerEnabled && (m_iBlueLightReducerElapsedTime > 0))
     {
-        // Blynk light reducer:
-        if (bBlueLightReducerEnabled)
-        {
-            QTime tTriggerTime = QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME));
+        QTime tTriggerTime = QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME));
 
-            if (QTime::currentTime() < tTriggerTime)
-                m_pDimmerWidget->setTemperature(0);
-            else {
-                // Set current temperature:
-                int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
-                m_pDimmerWidget->setTemperature(iCurrentTemperature);
-            }
+        if (QTime::currentTime() < tTriggerTime)
+            m_pDimmerWidget->setTemperature(0);
+        else {
+            // Set current temperature:
+            int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
+            m_pDimmerWidget->setTemperature(iCurrentTemperature);
         }
-        else m_pDimmerWidget->setTemperature(0);
     }
+    else m_pDimmerWidget->setTemperature(0);
 
     m_iBlynkCursorElapsedTime++;
     m_iScreenBreakElapsedTime++;
@@ -560,6 +589,17 @@ void Controller::onContextMenuAboutToShow()
         m_mActions["screenBreakDisabledForThreeHours"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_FOR_THREE_HOURS);
     if (m_mActions["screenBreakDisabledUntilTomorrow"])
         m_mActions["screenBreakDisabledUntilTomorrow"]->setChecked(sScreenBreakState == SCREEN_BREAK_DISABLED_UNTIL_TOMORROW);
+
+    // Read blue light reducer state:
+    QString sBlueLightReducerState = m_pParameters->parameter(Parameters::BLUELIGHTREDUCER_STATE);
+
+    // Update screen break options:
+    if (m_mActions["blueLightReducerDisabledForOneHour"])
+        m_mActions["blueLightReducerDisabledForOneHour"]->setChecked(sBlueLightReducerState == BLUELIGHTREDUCER_DISABLED_FOR_ONE_HOUR);
+    if (m_mActions["blueLightReducerDisabledForThreeHours"])
+        m_mActions["blueLightReducerDisabledForThreeHours"]->setChecked(sBlueLightReducerState == BLUELIGHTREDUCER_DISABLED_FOR_THREE_HOURS);
+    if (m_mActions["blueLightReducerDisabledUntilTomorrow"])
+        m_mActions["blueLightReducerDisabledUntilTomorrow"]->setChecked(sBlueLightReducerState == BLUELIGHTREDUCER_DISABLED_UNTIL_TOMORROW);
 }
 
 // Context menu about to hide:

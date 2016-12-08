@@ -226,14 +226,14 @@ void WindowsMonitor::colorRampFill(uint16_t *gamma_r, uint16_t *gamma_g, uint16_
     float white_point[3];
     float alpha = (iTemperature % 100) / 100.0;
     int temp_index = ((iTemperature - 1000) / 100)*3;
-    interpolateColor(alpha, &blackbody_color[temp_index], &blackbody_color[temp_index+3], white_point);
+    Monitor::interpolateColor(alpha, &blackbody_color[temp_index], &blackbody_color[temp_index+3], white_point);
 
     for (int i = 0; i < iSize; i++) {
-        gamma_r[i] = fillFunction(white_point, (double)gamma_r[i]/(UINT16_MAX+1), 0) *
+        gamma_r[i] = Monitor::fillFunction(white_point, (double)gamma_r[i]/(UINT16_MAX+1), 0) *
                 (UINT16_MAX+1);
-        gamma_g[i] = fillFunction(white_point, (double)gamma_g[i]/(UINT16_MAX+1), 1) *
+        gamma_g[i] = Monitor::fillFunction(white_point, (double)gamma_g[i]/(UINT16_MAX+1), 1) *
                 (UINT16_MAX+1);
-        gamma_b[i] = fillFunction(white_point, (double)gamma_b[i]/(UINT16_MAX+1), 2) *
+        gamma_b[i] = Monitor::fillFunction(white_point, (double)gamma_b[i]/(UINT16_MAX+1), 2) *
                 (UINT16_MAX+1);
     }
 }

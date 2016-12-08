@@ -15,12 +15,18 @@
         <MenuItem name="Disable until tomorrow" objectName="screenBreakDisabledUntilTomorrow"/>
      </Menu>
      <Separator/>
+     <Menu name="Blue Light Reducer" exclusive="1">
+        <MenuItem name="Disable for 1 hour" objectName="blueLightReducerDisabledForOneHour"/>
+        <MenuItem name="Disable for 3 hours" objectName="blueLightReducerDisabledForThreeHours"/>
+        <MenuItem name="Disable until tomorrow" objectName="blueLightReducerDisabledUntilTomorrow"/>
+     </Menu>
+     <Separator/>
      <MenuItem name="Vision aids overseas" objectName="visionAidsOverseas"/>
      <MenuItem name="About Blynk..." objectName="aboutBlynk"/>
      <MenuItem name="Quit Blynk" objectName="quitBlynk"/>
     </Menu>
     <Tooltip>
-        <TooltipItem name="wBlynkCursorHelp" value="Choose how often you would like to be prompted to blink, a healthy blink rate is roughly every 6 seconds."/>
+        <TooltipItem name="wBlynkCursorHelp" value="If you are using flux you will need to switch it off as it clashes with our Blue Light Reducer. Choose how often you would like to be prompted to blink, a healthy blink rate is roughly every 6 seconds."/>
         <TooltipItem name="wBlynkCursorRandomHelp" value="If you prefer less regular blink prompts select Random and choose how many times a minute you would like to blink. 10 times a minute is a healthy, normal blink rate."/>
         <TooltipItem name="wScreenBreakHelp" value="It is very important to remember to take breaks from your screen, not just for your eyes but for your whole body. Optometrists recommend looking away from your screen for 20 seconds every 20 minutes and so do we."/>
         <TooltipItem name="wScreenBreakStrengthHelp" value="Choose how light or dark your Screen Break prompt will be when it appears in the middle of your screen."/>

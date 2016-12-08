@@ -126,6 +126,9 @@ private:
     // Screen break delay:
     int m_iScreenBreakDelay;
 
+    // Blue light reducer delay:
+    int m_iBlueLightReducerDelay;
+
     #ifdef QT_DEBUG
     // Debug dialog:
     DebugDialog m_debugDialog;
