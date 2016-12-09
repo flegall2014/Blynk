@@ -33,7 +33,6 @@ void AnimatedImage::loadImages(const What &what)
             if (sIndex.length() < 2)
                 sIndex = "0"+sIndex;
             QString sPngFile = QString(":/cursor/Fra_%1.png").arg(sIndex);
-            qDebug() << "LOADING: " << sPngFile;
             m_vCursorImages << QImage(sPngFile);
         }
     }

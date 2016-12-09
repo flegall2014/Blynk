@@ -2,9 +2,13 @@
 #include <QWidget>
 #include <QFontDatabase>
 #include <QPainter>
+#include <QSizeGrip>
+#include <QDebug>
 
 // Application:
 #include "blynkwindow.h"
+#include "parameters.h"
+#include "utils.h"
 
 // Create monitor:
 #ifdef Q_OS_WIN
@@ -13,15 +17,12 @@
 #include "ui_blynkwindow-mac.h"
 #endif
 
-#include "parameters.h"
-#include "utils.h"
-#include <QDebug>
-
 // Constructor:
 BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     CustomWindow(sTitle, parent),
     ui(new Ui::BlynkWindow),
-    m_pParameters(NULL)
+    m_pParameters(NULL),
+    m_pSizeGrip(new QSizeGrip(this))
 {
     ui->setupUi(this);
 
@@ -118,6 +119,14 @@ void BlynkWindow::paintEvent(QPaintEvent *event)
     QPoint mapped = ui->wSeparator->mapToParent(QPoint(0, 0));
     painter.setPen(QPen(QColor("#A5A5A7")));
     painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
+}
+
+// Resize event:
+void BlynkWindow::resizeEvent(QResizeEvent *event)
+{
+    Q_UNUSED(event);
+    m_pSizeGrip->move(width()-40, height()-40);
+    m_pSizeGrip->resize(40, 40);
 }
 
 // Update blynk cursor area:

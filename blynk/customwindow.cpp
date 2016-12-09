@@ -24,6 +24,7 @@ CustomWindow::CustomWindow(const QString &sTitle, QWidget *parent) :
     m_pCloseButton = new QPushButton("X", this);
     m_pCloseButton->setFlat(true);
     m_pCloseButton->resize(20, 20);
+
     connect(m_pCloseButton, &QPushButton::clicked, this, &CustomWindow::onCloseButtonClicked);
 }
 
@@ -44,10 +45,10 @@ void CustomWindow::setTooltips(const QMap<QString, QString> &mTooltipValues)
 }
 
 // Handle close event:
-void CustomWindow::closeEvent(QCloseEvent *e)
+void CustomWindow::closeEvent(QCloseEvent *event)
 {
     hide();
-    e->ignore();
+    event->ignore();
 }
 
 // Contains mouse?
