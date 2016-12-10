@@ -54,3 +54,16 @@ void BlueLightReducerSlider::mousePressEvent(QMouseEvent *event)
     if (iIndex != value())
         setValue(iIndex);
 }
+
+// Resize events:
+void BlueLightReducerSlider::resizeEvent(QResizeEvent *event)
+{
+    QString sStyleSheet = "QSlider#wBlueLightReducerSlider::handle:horizontal {"
+    "width: %1px;"
+    "height: 32px;"
+    "border-radius: 16;"
+    "background-color: \"#535151\";"
+    "}";
+    sStyleSheet = sStyleSheet.arg(width()/3);
+    setStyleSheet(sStyleSheet);
+}

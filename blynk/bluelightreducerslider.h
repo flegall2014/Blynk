@@ -17,6 +17,9 @@ protected:
 
     // Mouse press event:
     virtual void mousePressEvent(QMouseEvent *event);
+
+    // Resize event:
+    virtual void resizeEvent(QResizeEvent *event);
 };
 
 #endif // BLUELIGHTREDUCERSLIDER_H
