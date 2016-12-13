@@ -7,7 +7,6 @@
 namespace Ui {
 class AboutWindow;
 }
-class QSizeGrip;
 
 class AboutWindow : public CustomWindow
 {
@@ -19,15 +18,9 @@ protected:
     // Paint:
     virtual void paintEvent(QPaintEvent *event);
 
-    // Resize event:
-    virtual void resizeEvent(QResizeEvent *event);
-
 private:
     // UI:
     Ui::AboutWindow *ui;
-
-    // Size grip:
-    QSizeGrip *m_pSizeGrip;
 
 public slots:
     // Done:

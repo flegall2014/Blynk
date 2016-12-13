@@ -3,7 +3,6 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QPainter>
-#include <QSizeGrip>
 #include <QDebug>
 
 // Application:
@@ -16,8 +15,7 @@
 // Constructor:
 AboutWindow::AboutWindow(const QString &sTitle, QWidget *parent) :
     CustomWindow(sTitle, parent),
-    ui(new Ui::AboutWindow),
-    m_pSizeGrip(new QSizeGrip(this))
+    ui(new Ui::AboutWindow)
 {
     // Setup UI:
     ui->setupUi(this);
@@ -73,10 +71,4 @@ void AboutWindow::paintEvent(QPaintEvent *event)
     painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
 }
 
-// Resize event:
-void AboutWindow::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event);
-    m_pSizeGrip->move(width()-40, height()-40);
-    m_pSizeGrip->resize(40, 40);
-}
+

@@ -157,7 +157,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             // Font:
             QFont font;
             font.setFamily(sLatoRegularFont);
-            font.setPixelSize(FONT_18);
+            font.setPixelSize(FONT_16);
 
             // Set font based on class name and object name:
             if (sClassName.compare("QLABEL", Qt::CaseInsensitive) == 0) {
@@ -168,7 +168,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wBlueLightReducerLabel"))
                     {
                         font.setFamily(sBebasFont);
-                        font.setPixelSize(FONT_20);
+                        font.setPixelSize(FONT_16);
                         font.setBold(true);
                     }
                     else

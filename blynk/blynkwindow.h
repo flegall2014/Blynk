@@ -11,7 +11,6 @@ namespace Ui {
 class BlynkWindow;
 }
 class Parameters;
-class QSizeGrip;
 
 class BlynkWindow : public CustomWindow
 {
@@ -49,18 +48,12 @@ protected:
     // Paint event:
     virtual void paintEvent(QPaintEvent *event);
 
-    // Resize event:
-    virtual void resizeEvent(QResizeEvent *event);
-
 private:
     // UI:
     Ui::BlynkWindow *ui;
 
     // Parameters:
     Parameters *m_pParameters;
-
-    // Size grip:
-    QSizeGrip *m_pSizeGrip;
 
 public slots:
     // Blynk regularity slider changed:

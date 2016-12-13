@@ -88,12 +88,11 @@ void CustomWindow::paintEvent(QPaintEvent *event)
     painter.fillRect(background, QColor("#F9F9F9"));
 
     // Draw inner rect:
-    QRect innerRect = background.adjusted(32, 64, -32, -32);
-    painter.setBrush(QBrush(QColor("#F2F2F2")));
+    QRect innerRect = background.adjusted(7, 32, -7, -7);
+    painter.setBrush(QBrush(QColor("#E2E2E2")));
     painter.drawRoundedRect(innerRect, 32, 32);
 
     // Draw header:
-    QRect headerRect(0, 0, rect().width(), m_iHeaderHeight);
     painter.setBrush(QBrush(m_headerColor));
     painter.drawRect(0, 0, rect().width(), m_iHeaderHeight);
 

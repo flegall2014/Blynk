@@ -21,7 +21,7 @@
 // Constructor:
 Monitor::Monitor() : m_dRedGamma(1.0),
     m_dGreenGamma(1.0), m_dBlueGamma(1.0),
-    m_dBrightness(0.9), m_iCurrentTemperature(0)
+    m_dBrightness(1), m_iCurrentTemperature(0)
 {
 
 }
@@ -382,7 +382,7 @@ void Monitor::printPeriod(period_t period, double transition)
 // Run continual mode loop
 // This is the main loop of the continual mode which keeps track of the
 // current time and continuously updates the screen to the appropriate
-// color temperature..
+// color temperature.
 int Monitor::runContinualMode(const geoLoc *loc,
                               const transitionScheme *scheme,
                               int transition)
@@ -411,7 +411,10 @@ int Monitor::runContinualMode(const geoLoc *loc,
     int done = 0;
     int disabled = 0;
     bool disable = false;
-    while (1) {
+
+    QDateTime t = QDateTime::currentDateTime();
+
+    for (int i=0; i<24; i++) {
         // Check to see if disable signal was caught.
         if (disable) {
             short_trans_len = 2;
@@ -448,8 +451,9 @@ int Monitor::runContinualMode(const geoLoc *loc,
         }
 
         // Read timestamp.
-        double now;
-        int r = Monitor::systemTimeGetTime(&now);
+        double now = (double)t.toMSecsSinceEpoch()/1000;
+        double now1;
+        int r = Monitor::systemTimeGetTime(&now1);
         if (r < 0) {
             qDebug() << "Unable to read system time";
             continue;
@@ -472,6 +476,8 @@ int Monitor::runContinualMode(const geoLoc *loc,
         // Use elevation of sun to set color temperature.
         color_setting_t interp;
         Monitor::interpolateColorSettings(scheme, elevation, &interp);
+
+        qDebug() << i << "************************************* " << now << now1 << elevation << interp.temperature;
 
         // Print period if it changed during this update,
         // or if we are in transition. In transition we
@@ -535,11 +541,7 @@ int Monitor::runContinualMode(const geoLoc *loc,
             m_dBlueGamma = interp.gamma[2];
             m_dBrightness = (double)interp.brightness;
 
-            if (iTemperature == 3500)
-            {
-                int x = 0;
-            }
-            bool r = setTemperature(iTemperature);
+            bool r = true; setTemperature(iTemperature);
             if (!r) {
                 qDebug() << "Temperature adjustement failed";
                 return -1;
@@ -549,6 +551,9 @@ int Monitor::runContinualMode(const geoLoc *loc,
         // Save temperature as previous.
         prev_period = period;
         memcpy(&prev_interp, &interp, sizeof(color_setting_t));
+
+        qDebug() << "INCREMENT";
+        t = t.addSecs(3600);
     }
 
     // TO DO

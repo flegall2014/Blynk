@@ -2,7 +2,6 @@
 #include <QWidget>
 #include <QFontDatabase>
 #include <QPainter>
-#include <QSizeGrip>
 #include <QDebug>
 
 // Application:
@@ -21,10 +20,10 @@
 BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     CustomWindow(sTitle, parent),
     ui(new Ui::BlynkWindow),
-    m_pParameters(NULL),
-    m_pSizeGrip(new QSizeGrip(this))
+    m_pParameters(NULL)
 {
     ui->setupUi(this);
+    ui->mainLayout->setContentsMargins(16, 32, 16, 16);
 
     // Set font for widget:
     Utils::setFontForWidget(this);
@@ -118,15 +117,7 @@ void BlynkWindow::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     QPoint mapped = ui->wSeparator->mapToParent(QPoint(0, 0));
     painter.setPen(QPen(QColor("#A5A5A7")));
-    painter.drawLine(QPoint(40, mapped.y()), QPoint(rect().width()-40, mapped.y()));
-}
-
-// Resize event:
-void BlynkWindow::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event);
-    m_pSizeGrip->move(width()-40, height()-40);
-    m_pSizeGrip->resize(40, 40);
+    painter.drawLine(QPoint(20, mapped.y()), QPoint(rect().width()-20, mapped.y()));
 }
 
 // Update blynk cursor area:
