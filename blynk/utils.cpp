@@ -162,6 +162,8 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             // Set font based on class name and object name:
             if (sClassName.compare("QLABEL", Qt::CaseInsensitive) == 0) {
                 QLabel *pLabel = dynamic_cast<QLabel *>(pWidget);
+                pLabel->setContentsMargins(0, 0, 0, 0);
+                pLabel->setStyleSheet("padding: 0px; margin: 0px; border: none;");
                 if (pLabel) {
                     if ((sObjectName == "wBlynkCursorLabel") ||
                         (sObjectName == "wScreenBreakLabel") ||
@@ -176,7 +178,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wNotJustYourEyesLabel"))
                     {
                         font.setFamily(sLatoRegularFont);
-                        font.setPixelSize(FONT_22);
+                        font.setPixelSize(FONT_20);
                         font.setBold(true);
                     }
                     else
@@ -184,7 +186,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wNotJustYourEyesText"))
                     {
                         font.setFamily("Calibri");
-                        font.setPixelSize(FONT_15);
+                        font.setPixelSize(FONT_13);
                     }
                     else
                     if (sObjectName == "wCopyRightLabel")

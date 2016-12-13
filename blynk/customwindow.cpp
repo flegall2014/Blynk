@@ -70,8 +70,8 @@ void CustomWindow::positionOnScreen()
 {
     QDesktopWidget screen;
     QRect screenGeom = screen.screenGeometry(this);
-    int iScreenCenterX = screenGeom.width()-width()-8;
-    int iScreenCenterY = screenGeom.height()-height()-64-8;
+    int iScreenCenterX = (screenGeom.width()-width())/2;
+    int iScreenCenterY = (screenGeom.height()-height())/2;
     move(iScreenCenterX, iScreenCenterY);
 }
 

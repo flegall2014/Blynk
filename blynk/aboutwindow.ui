@@ -6,31 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>820</width>
-    <height>820</height>
+    <width>640</width>
+    <height>615</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>640</width>
-    <height>640</height>
+    <width>615</width>
+    <height>615</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>820</width>
-    <height>820</height>
+    <width>768</width>
+    <height>726</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="mainLayout">
    <property name="leftMargin">
     <number>32</number>
    </property>
    <property name="topMargin">
-    <number>64</number>
+    <number>40</number>
    </property>
    <property name="rightMargin">
     <number>32</number>
@@ -41,7 +41,79 @@
    <property name="horizontalSpacing">
     <number>32</number>
    </property>
-   <item row="1" column="0">
+   <item row="5" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="wNotJustYourEyesLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>NOT JUST YOUR EYES</string>
+     </property>
+     <property name="margin">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QWidget" name="wSeparator1" native="true">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>1</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QWidget" name="wSeparator2" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>1</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
     <widget class="QWidget" name="wSeparator3" native="true">
      <property name="minimumSize">
       <size>
@@ -58,32 +130,6 @@
     </widget>
    </item>
    <item row="7" column="0">
-    <widget class="QWidget" name="wSeparator2" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>1</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>1</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0">
-    <widget class="QWidget" name="wSeparator1" native="true">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>1</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
     <widget class="QLabel" name="wNotJustYourEyesText">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -94,13 +140,13 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>116</height>
+       <height>120</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>116</height>
+       <height>120</height>
       </size>
      </property>
      <property name="text">
@@ -119,7 +165,7 @@ If you would like to learn more about the work done by Blynk and Vision Aid Over
      </property>
     </widget>
    </item>
-   <item row="9" column="0">
+   <item row="10" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="wFaceBookButton">
@@ -223,67 +269,7 @@ If you would like to learn more about the work done by Blynk and Vision Aid Over
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="wAboutBlynkLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>8</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>ABOUT BLYNK</string>
-     </property>
-     <property name="margin">
-      <number>20</number>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="0">
-    <widget class="QLabel" name="wNotJustYourEyesLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>64</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>MS Shell Dlg 2</family>
-       <pointsize>8</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>NOT JUST YOUR EYES</string>
-     </property>
-     <property name="margin">
-      <number>20</number>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
     <widget class="QLabel" name="wAboutBlynkText">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -294,13 +280,13 @@ If you would like to learn more about the work done by Blynk and Vision Aid Over
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>168</height>
+       <height>184</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>168</height>
+       <height>184</height>
       </size>
      </property>
      <property name="text">
@@ -319,13 +305,46 @@ We would also like to be clear that using this software is not in any way a subs
      </property>
     </widget>
    </item>
-   <item row="11" column="0">
+   <item row="12" column="0">
     <widget class="QLabel" name="wCopyRightLabel">
      <property name="text">
       <string>2016 © Blynk Tech Ltd. All Rights Reserved.getblynk.org</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="wAboutBlynkLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>MS Shell Dlg 2</family>
+       <pointsize>8</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">padding: 0px</string>
+     </property>
+     <property name="text">
+      <string>ABOUT BLYNK</string>
+     </property>
+     <property name="margin">
+      <number>20</number>
      </property>
     </widget>
    </item>
@@ -337,14 +356,14 @@ We would also like to be clear that using this software is not in any way a subs
         <widget class="ImageWidget" name="wLogoArea" native="true">
          <property name="minimumSize">
           <size>
-           <width>700</width>
-           <height>120</height>
+           <width>0</width>
+           <height>48</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>700</width>
-           <height>120</height>
+           <width>16777215</width>
+           <height>48</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -356,18 +375,18 @@ We would also like to be clear that using this software is not in any way a subs
      </item>
     </layout>
    </item>
-   <item row="6" column="0">
-    <spacer name="verticalSpacer">
+   <item row="1" column="0">
+    <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeType">
-      <enum>QSizePolicy::Expanding</enum>
+      <enum>QSizePolicy::Fixed</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>32</height>
+       <height>20</height>
       </size>
      </property>
     </spacer>

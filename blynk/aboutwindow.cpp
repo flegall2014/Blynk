@@ -19,6 +19,8 @@ AboutWindow::AboutWindow(const QString &sTitle, QWidget *parent) :
 {
     // Setup UI:
     ui->setupUi(this);
+    ui->mainLayout->setContentsMargins(16, 32, 16, 16);
+    ui->mainLayout->setSpacing(0);
 
     // Set font for widget:
     Utils::setFontForWidget(this);
