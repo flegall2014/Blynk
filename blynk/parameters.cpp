@@ -130,7 +130,7 @@ void Parameters::defineParameterDefaultValues()
     setParameter(SCREEN_BREAK_MIN, "20");
     setParameter(SCREEN_BREAK_MAX, "100");
     setParameter(SCREEN_BREAK_REGULARITY, "20");
-    setParameter(BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_ENABLED);
+    setParameter(BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED);
     setParameter(BLUE_LIGHT_REDUCER_STRENGTH, "2");
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(START_BLYNK_AT_LOGIN, "0");
