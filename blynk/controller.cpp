@@ -550,12 +550,22 @@ void Controller::onApplicationTimerTimeOut()
     {
         QTime tTriggerTime = QTime::fromString(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME));
 
-        if (QTime::currentTime() < tTriggerTime)
-            m_pDimmerWidget->setTemperature(0);
-        else {
+        bool bBlueLightReducedAlwaysOn = m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ALWAYS_ON) == ON;
+
+        // Always on, don't care about trigger time:
+        if (bBlueLightReducedAlwaysOn) {
             // Set current temperature:
             int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
             m_pDimmerWidget->setTemperature(iCurrentTemperature);
+        }
+        else {
+            if (QTime::currentTime() < tTriggerTime)
+                m_pDimmerWidget->setTemperature(0);
+            else {
+                // Set current temperature:
+                int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
+                m_pDimmerWidget->setTemperature(iCurrentTemperature);
+            }
         }
     }
     else m_pDimmerWidget->setTemperature(0);

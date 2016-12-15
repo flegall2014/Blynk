@@ -59,6 +59,7 @@ BlynkWindow::BlynkWindow(const QString &sTitle, QWidget *parent) :
     connect(ui->wBlueLightReducerSlider, &QSlider::valueChanged, this, &BlynkWindow::onBlueLightReducerValueChanged);
     connect(ui->wBlueLightReducerEnabled, &QCheckBox::toggled, this, &BlynkWindow::onBlueLightReducerEnabledChanged);
     connect(ui->wStartTimeEdit, &QTimeEdit::timeChanged, this, &BlynkWindow::onStartTimeEditChanged);
+    connect(ui->wAlwaysOnCheckBox, &QCheckBox::clicked, this, &BlynkWindow::onAlwaysOnChanged);
 
     // Start blynk at login:
     connect(ui->wStartBlynkAtLoginCheckBox, &QCheckBox::toggled, this, &BlynkWindow::onStartBlynkAtLoginChanged);
@@ -180,6 +181,9 @@ void BlynkWindow::updateBlueLightReducerArea()
     ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
     ui->wBlueLightReducerSlider->setValue(eBlueLightReducerStrength);
 
+    // Always on checkbox:
+    ui->wAlwaysOnCheckBox->setChecked(m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_ALWAYS_ON) == ON);
+
     // Check state:
     ui->wBlueLightReducerEnabled->setChecked(!bBlueLightReducerEnabled);
 }
@@ -200,7 +204,7 @@ void BlynkWindow::onBlynkRegularitySliderChanged(int iRegularity)
 // Random checkbox toggled:
 void BlynkWindow::onRandomCheckBoxToggled(bool bChecked)
 {
-    m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, bChecked ? "1" : "0");
+    m_pParameters->setParameter(Parameters::BLYNK_CURSOR_RANDOM_MODE, bChecked ? ON : OFF);
     setEnabledState();
 }
 
@@ -287,6 +291,13 @@ void BlynkWindow::onStartTimeEditChanged(const QTime &tTime)
     m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_START_TIME, tTime.toString());
 }
 
+// Always on changed:
+void BlynkWindow::onAlwaysOnChanged(bool bChecked)
+{
+    m_pParameters->setParameter(Parameters::BLUE_LIGHT_REDUCER_ALWAYS_ON,
+        bChecked ? ON : OFF);
+}
+
 // Start blynk at login changed:
 void BlynkWindow::onStartBlynkAtLoginChanged(bool bChecked)
 {
@@ -329,4 +340,5 @@ void BlynkWindow::setEnabledState()
     bool bBlueLightReducerEnabled = (sBlueLightReducerState == BLUELIGHTREDUCER_ENABLED);
     ui->wBlueLightReducerSlider->setEnabled(bBlueLightReducerEnabled);
     ui->wStartTimeEdit->setEnabled(bBlueLightReducerEnabled);
+    ui->wAlwaysOnCheckBox->setEnabled(bBlueLightReducerEnabled);
 }

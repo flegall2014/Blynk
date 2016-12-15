@@ -29,6 +29,9 @@
 #define BLUELIGHTREDUCER_DISABLED_FOR_THREE_HOURS "Disabled For Three Hours"
 #define BLUELIGHTREDUCER_DISABLED_UNTIL_TOMORROW "Disabled Until Tomorrow"
 
+#define ON "1"
+#define OFF "0"
+
 class Parameters : public QObject
 {
     Q_OBJECT
@@ -52,6 +55,7 @@ public:
         BLUELIGHTREDUCER_STATE,
         BLUE_LIGHT_REDUCER_STRENGTH,
         BLUE_LIGHT_REDUCER_START_TIME,
+        BLUE_LIGHT_REDUCER_ALWAYS_ON,
         START_BLYNK_AT_LOGIN,
         LIGHT_TEMPERATURE,
         MEDIUM_TEMPERATURE,

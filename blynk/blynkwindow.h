@@ -86,6 +86,9 @@ public slots:
     // Start time changed:
     void onStartTimeEditChanged(const QTime &tTime);
 
+    // Always on changed:
+    void onAlwaysOnChanged(bool bChecked);
+
     // Start blynk at login changed:
     void onStartBlynkAtLoginChanged(bool bChecked);
 
