@@ -21,7 +21,7 @@
         <MenuItem name="Disable until tomorrow" objectName="blueLightReducerDisabledUntilTomorrow"/>
      </Menu>
      <Separator/>
-     <MenuItem name="Vision aids overseas" objectName="visionAidsOverseas"/>
+     <MenuItem name="Vision Aid overseas" objectName="visionAidsOverseas"/>
      <MenuItem name="About Blynk..." objectName="aboutBlynk"/>
      <MenuItem name="Quit Blynk" objectName="quitBlynk"/>
     </Menu>
