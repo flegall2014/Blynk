@@ -148,6 +148,9 @@ void BlynkWindow::updateBlynkCursorArea()
     }
     QString sCurrentBlynkPerMinuteRandom = QString::number(m_pParameters->parameter(Parameters::BLYNK_PER_MINUTE_RANDOM).toInt());
     ui->wBlynkPerMinuteValues->setCurrentIndex(lBlynkPerMinuteValues.indexOf(sCurrentBlynkPerMinuteRandom));
+
+    int iBlynkCursorFreq = m_pParameters->parameter(Parameters::BLYNK_CURSOR_REGULARITY).toInt();
+    ui->wBlynkRegularitySlider->setValue(iBlynkCursorFreq);
 }
 
 // Update screen break area:

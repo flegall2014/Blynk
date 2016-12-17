@@ -71,8 +71,7 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
 #endif
     m_bSupportGammaRamp = m_pMonitor->start();
 
-    /* Settings for day, night and transition.
-           Initialized to indicate that the values are not set yet. */
+#ifdef TEST_CODE
     transitionScheme scheme =
     { TRANSITION_HIGH, TRANSITION_LOW };
 
@@ -90,6 +89,7 @@ DimmerWidget::DimmerWidget(QWidget *parent) :
 
     geoLoc loc = {48.85, 2.35};
     m_pMonitor->runContinualMode(&loc, &scheme, 1);
+#endif
 }
 
 // Destructor:

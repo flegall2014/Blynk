@@ -118,7 +118,7 @@ void Parameters::defineParameterName()
 void Parameters::defineParameterDefaultValues()
 {
     setParameter(UNDEFINED, "");
-    setParameter(BLYNK_CURSOR_REGULARITY, "2");
+    setParameter(BLYNK_CURSOR_REGULARITY, "6");
     setParameter(BLYNK_CURSOR_STATE, BLYNK_CURSOR_ENABLED);
     setParameter(BLYNK_CURSOR_RANDOM_MODE, "OFF");
     setParameter(BLYNK_CURSOR_MIN, "2");
@@ -131,12 +131,12 @@ void Parameters::defineParameterDefaultValues()
     setParameter(SCREEN_BREAK_MIN, "20");
     setParameter(SCREEN_BREAK_MAX, "100");
     setParameter(SCREEN_BREAK_REGULARITY, "20");
-    setParameter(BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_DISABLED);
+    setParameter(BLUELIGHTREDUCER_STATE, BLUELIGHTREDUCER_ENABLED);
     setParameter(BLUE_LIGHT_REDUCER_STRENGTH, QString::number(Strength::STRONG));
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(BLUE_LIGHT_REDUCER_ALWAYS_ON, OFF);
     setParameter(START_BLYNK_AT_LOGIN, OFF);
-    setParameter(LIGHT_TEMPERATURE, "3500");
-    setParameter(MEDIUM_TEMPERATURE, "3000");
-    setParameter(STRONG_TEMPERATURE, "2500");
+    setParameter(LIGHT_TEMPERATURE, "3750");
+    setParameter(MEDIUM_TEMPERATURE, "3250");
+    setParameter(STRONG_TEMPERATURE, "3000");
 }
