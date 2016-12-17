@@ -186,7 +186,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wNotJustYourEyesText"))
                     {
                         font.setFamily("Calibri");
-                        font.setPixelSize(FONT_13);
+                        font.setPixelSize(FONT_14);
                     }
                     else
                     if (sObjectName == "wCopyRightLabel")
