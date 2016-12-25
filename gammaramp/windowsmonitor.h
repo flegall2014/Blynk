@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <windows.h>
 #include "gammaramp_global.h"
+#define UINT16MAX 65535
 
 class GAMMARAMPSHARED_EXPORT WindowsMonitor : public Monitor
 {

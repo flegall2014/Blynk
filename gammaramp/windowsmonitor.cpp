@@ -5,8 +5,7 @@
 #include <QDebug>
 
 // Constructor:
-WindowsMonitor::WindowsMonitor() : m_pSavedRamps(NULL),
-    hGDI32(NULL)
+WindowsMonitor::WindowsMonitor() : hGDI32(NULL), m_pSavedRamps(NULL)
 {
 
 }
@@ -184,7 +183,7 @@ bool WindowsMonitor::setTemperature(int iTemperature, bool bForce)
                 // Initialize gamma ramps to pure state:
                 for (int i = 0; i < GAMMA_RAMP_SIZE; i++) {
                     WORD value = (double)i/GAMMA_RAMP_SIZE *
-                            (UINT16_MAX+1);
+                            (UINT16MAX+1);
                     gamma_r[i] = value;
                     gamma_g[i] = value;
                     gamma_b[i] = value;
@@ -229,11 +228,11 @@ void WindowsMonitor::colorRampFill(uint16_t *gamma_r, uint16_t *gamma_g, uint16_
     Monitor::interpolateColor(alpha, &blackbody_color[temp_index], &blackbody_color[temp_index+3], white_point);
 
     for (int i = 0; i < iSize; i++) {
-        gamma_r[i] = Monitor::fillFunction(white_point, (double)gamma_r[i]/(UINT16_MAX+1), 0) *
-                (UINT16_MAX+1);
-        gamma_g[i] = Monitor::fillFunction(white_point, (double)gamma_g[i]/(UINT16_MAX+1), 1) *
-                (UINT16_MAX+1);
-        gamma_b[i] = Monitor::fillFunction(white_point, (double)gamma_b[i]/(UINT16_MAX+1), 2) *
-                (UINT16_MAX+1);
+        gamma_r[i] = Monitor::fillFunction(white_point, (double)gamma_r[i]/(UINT16MAX+1), 0) *
+                (UINT16MAX+1);
+        gamma_g[i] = Monitor::fillFunction(white_point, (double)gamma_g[i]/(UINT16MAX+1), 1) *
+                (UINT16MAX+1);
+        gamma_b[i] = Monitor::fillFunction(white_point, (double)gamma_b[i]/(UINT16MAX+1), 2) *
+                (UINT16MAX+1);
     }
 }

@@ -138,5 +138,5 @@ void Parameters::defineParameterDefaultValues()
     setParameter(START_BLYNK_AT_LOGIN, OFF);
     setParameter(LIGHT_TEMPERATURE, "3750");
     setParameter(MEDIUM_TEMPERATURE, "3250");
-    setParameter(STRONG_TEMPERATURE, "3000");
+    setParameter(STRONG_TEMPERATURE, "2750");
 }
