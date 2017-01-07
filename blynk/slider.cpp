@@ -75,7 +75,7 @@ void Slider::paintEvent(QPaintEvent *event)
     int iSliderWidth = ui->wSlider->width();
     int iDelta = 6;
     int iRulerX = sliderPos.x()+iDelta;
-    int iRulerWidth = iSliderWidth-2*iDelta;
+    int iRulerWidth = iSliderWidth-2*iDelta+1;
     QRect tickRect(iRulerX, rect().height()/2, iRulerWidth, rect().height()/2);
     painter.setPen(QPen(m_majorTickColor));
 
