@@ -136,7 +136,7 @@ void Parameters::defineParameterDefaultValues()
     setParameter(BLUE_LIGHT_REDUCER_START_TIME, "09:00:00");
     setParameter(BLUE_LIGHT_REDUCER_ALWAYS_ON, OFF);
     setParameter(START_BLYNK_AT_LOGIN, OFF);
-    setParameter(LIGHT_TEMPERATURE, "3750");
-    setParameter(MEDIUM_TEMPERATURE, "3250");
-    setParameter(STRONG_TEMPERATURE, "2750");
+    setParameter(LIGHT_TEMPERATURE, "4812");
+    setParameter(MEDIUM_TEMPERATURE, "4153");
+    setParameter(STRONG_TEMPERATURE, "3322");
 }
