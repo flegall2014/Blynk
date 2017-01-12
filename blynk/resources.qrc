@@ -62,14 +62,18 @@
         <file>cursor/Fra_36.png</file>
         <file>icons/ico-checked.png</file>
         <file>icons/ico-unchecked.png</file>
-        <file>fonts/Myriad-Pro_31655.ttf</file>
-        <file>fonts/Lato-Regular.ttf</file>
-        <file>fonts/BEBAS___.ttf</file>
-        <file>fonts/BellGothicStd-Black.otf</file>
-        <file>fonts/BellGothicStd-Bold.otf</file>
-        <file>fonts/BellGothicStd-Light.otf</file>
         <file>icons/ico-tray.png</file>
         <file>css/style_macos.css</file>
         <file>css/style_windows.css</file>
+        <file>fonts/OpenSans-Bold.ttf</file>
+        <file>fonts/OpenSans-BoldItalic.ttf</file>
+        <file>fonts/OpenSans-ExtraBold.ttf</file>
+        <file>fonts/OpenSans-ExtraBoldItalic.ttf</file>
+        <file>fonts/OpenSans-Italic.ttf</file>
+        <file>fonts/OpenSans-Light.ttf</file>
+        <file>fonts/OpenSans-LightItalic.ttf</file>
+        <file>fonts/OpenSans-Regular.ttf</file>
+        <file>fonts/OpenSans-Semibold.ttf</file>
+        <file>fonts/OpenSans-SemiboldItalic.ttf</file>
     </qresource>
 </RCC>

@@ -11,9 +11,13 @@
 #define FONT_14 14
 #define FONT_15 15
 #define FONT_16 16
+#define FONT_17 17
 #define FONT_18 18
+#define FONT_19 19
 #define FONT_20 20
+#define FONT_21 21
 #define FONT_22 22
+#define FONT_23 23
 #define FONT_24 24
 
 class Utils
@@ -42,23 +46,8 @@ public:
     // Load fonts:
     static void loadFonts();
 
-    // Bebas:
-    static QString sBebasFont;
-
-    // Bell gothic std black:
-    static QString sBellGothicStdBlackFont;
-
-    // Bell gothic std bold:
-    static QString sBellGothicStdBoldFont;
-
-    // Bell gothic std bold:
-    static QString sBellGothicStdLightFont;
-
-    // Lato regular:
-    static QString sLatoRegularFont;
-
-    // Myriad pro:
-    static QString sMyriadProFont;
+    // Open-SANS regular:
+    static QString sOpenSansRegular;
 };
 
 #endif // UTILS_H

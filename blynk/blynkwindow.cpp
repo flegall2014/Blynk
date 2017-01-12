@@ -198,6 +198,13 @@ void BlynkWindow::updateStartBlynkAtLoginArea()
     ui->wStartBlynkAtLoginCheckBox->setChecked(bStartBlynkAtLogin);
 }
 
+// Update title:
+void BlynkWindow::updateTitle(int iTemperature)
+{
+    QString sTitle = QString("BLUE LIGHT REDUCER: %1").arg(iTemperature);
+    ui->wBlueLightReducerLabel->setText(sTitle);
+}
+
 // Blynk regularity slider changed:
 void BlynkWindow::onBlynkRegularitySliderChanged(int iRegularity)
 {

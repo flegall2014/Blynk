@@ -16,23 +16,8 @@
 // Application:
 #include "utils.h"
 
-// Bebas:
-QString Utils::sBebasFont = "";
-
 // Bell gothic std black:
-QString Utils::sBellGothicStdBlackFont = "";
-
-// Bell gothic std bold:
-QString Utils::sBellGothicStdBoldFont = "";
-
-// Bell gothic std bold:
-QString Utils::sBellGothicStdLightFont = "";
-
-// Lato regular:
-QString Utils::sLatoRegularFont = "";
-
-// Myriad pro:
-QString Utils::sMyriadProFont = "";
+QString Utils::sOpenSansRegular = "";
 
 // Return app dir:
 QDir Utils::appDir()
@@ -105,40 +90,10 @@ QString Utils::splitTooltip(const QString &sText, int iWidth)
 void Utils::loadFonts()
 {
     // Bebas font:
-    int id = QFontDatabase::addApplicationFont(":/fonts/BEBAS___.ttf");
+    int id = QFontDatabase::addApplicationFont(":/fonts/OpenSans-Regular.ttf");
     QString sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
     qDebug() << id << sFamily;
-    sBebasFont = sFamily;
-
-    // Bell gothic std black:
-    id = QFontDatabase::addApplicationFont(":/fonts/BellGothicStd-Black.otf");
-    sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug() << id << sFamily;
-    sBellGothicStdBlackFont = sFamily;
-
-    // Bell gothic std bold:
-    id = QFontDatabase::addApplicationFont(":/fonts/BellGothicStd-Bold.otf");
-    sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug() << id << sFamily;
-    sBellGothicStdBoldFont = sFamily;
-
-    // Bell gothic std light:
-    id = QFontDatabase::addApplicationFont(":/fonts/BellGothicStd-Light.otf");
-    sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug() << id << sFamily;
-    sBellGothicStdLightFont = sFamily;
-
-    // Lato regular:
-    id = QFontDatabase::addApplicationFont(":/fonts/Lato-Regular.ttf");
-    sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug() << id << sFamily;
-    sLatoRegularFont = sFamily;
-
-    // Myriad pro:
-    id = QFontDatabase::addApplicationFont(":/fonts/Myriad-Pro_31655.ttf");
-    sFamily = QFontDatabase::applicationFontFamilies(id).at(0);
-    qDebug() << id << sFamily;
-    sMyriadProFont = sFamily;
+    sOpenSansRegular = sFamily;
 }
 
 // Set font for target widget:
@@ -156,7 +111,7 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
 
             // Font:
             QFont font;
-            font.setFamily(sLatoRegularFont);
+            font.setFamily(sOpenSansRegular);
             font.setPixelSize(FONT_16);
 
             // Set font based on class name and object name:
@@ -169,7 +124,6 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                         (sObjectName == "wScreenBreakLabel") ||
                         (sObjectName == "wBlueLightReducerLabel"))
                     {
-                        font.setFamily(sBebasFont);
                         font.setPixelSize(FONT_16);
                         font.setBold(true);
                     }
@@ -177,7 +131,6 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                     if ((sObjectName == "wAboutBlynkLabel") ||
                         (sObjectName == "wNotJustYourEyesLabel"))
                     {
-                        font.setFamily(sLatoRegularFont);
                         font.setPixelSize(FONT_20);
                         font.setBold(true);
                     }
@@ -185,12 +138,14 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                     if ((sObjectName == "wAboutBlynkText") ||
                         (sObjectName == "wNotJustYourEyesText"))
                     {
-                        font.setFamily("Calibri");
                         font.setPixelSize(FONT_14);
                     }
                     else
                     if (sObjectName == "wCopyRightLabel")
                         font.setPixelSize(FONT_12);
+                    else {
+                        font.setBold(true);
+                    }
                     pLabel->setFont(font);
                 }
             }
@@ -218,8 +173,10 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
             else
             if (sClassName.compare("QCHECKBOX", Qt::CaseInsensitive) == 0) {
                 QCheckBox *pCheckBox = dynamic_cast<QCheckBox *>(pWidget);
-                if (pCheckBox)
+                if (pCheckBox) {
+                    font.setBold(true);
                     pCheckBox->setFont(font);
+                }
             }
             else
             if (sClassName.compare("QRADIOBUTTON", Qt::CaseInsensitive) == 0) {

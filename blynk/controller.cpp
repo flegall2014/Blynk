@@ -129,7 +129,7 @@ void Controller::shutdown()
 void Controller::createMenu(const CXMLNode &menuNode, QMenu *pRootMenu)
 {
     QFont myriadFont;
-    myriadFont.setFamily(Utils::sMyriadProFont);
+    myriadFont.setFamily(Utils::sOpenSansRegular);
     myriadFont.setPointSize(FONT_12);
 
     // Exclusive menu?
@@ -557,6 +557,7 @@ void Controller::onApplicationTimerTimeOut()
             // Set current temperature:
             int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
             m_pDimmerWidget->setTemperature(iCurrentTemperature);
+            m_pBlynkWindow->updateTitle(iCurrentTemperature);
         }
         else {
             if (QTime::currentTime() < tTriggerTime)
@@ -565,6 +566,7 @@ void Controller::onApplicationTimerTimeOut()
                 // Set current temperature:
                 int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
                 m_pDimmerWidget->setTemperature(iCurrentTemperature);
+                m_pBlynkWindow->updateTitle(iCurrentTemperature);
             }
         }
     }

@@ -44,6 +44,9 @@ public:
     // Update start blynk at login area:
     void updateStartBlynkAtLoginArea();
 
+    // Update title:
+    void updateTitle(int iTemperature);
+
 protected:
     // Paint event:
     virtual void paintEvent(QPaintEvent *event);
