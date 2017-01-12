@@ -154,12 +154,10 @@ void Utils::setFontForWidget(QWidget *pRootWidget)
                 QPushButton *pButton = dynamic_cast<QPushButton *>(pWidget);
                 if (pButton) {
                     if (sObjectName == "wDoneButton") {
-                        font.setBold(true);
-                        font.setPointSize(FONT_14);
+                        font.setPointSize(FONT_13);
                     }
                     else
                     if (sObjectName == "wAboutDoneButton") {
-                        font.setBold(true);
                         font.setPointSize(FONT_13);
                     }
                     else

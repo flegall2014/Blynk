@@ -56,7 +56,7 @@ QPushButton#wDoneButton:pressed {
 border-radius: 16px;
 background-color: "#66D495";
 border: 1px solid "black";
-min-width: 196px;
+min-width: 164px;
 min-height: 32px;
 color: "black";
 }
@@ -65,7 +65,7 @@ QPushButton#wAboutDoneButton {
 border-radius: 16px;
 background-color: "#66D495";
 border: none;
-min-width: 196px;
+min-width: 164px;
 min-height: 32px;
 color: "white";
 }
