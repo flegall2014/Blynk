@@ -47,7 +47,7 @@ QPushButton#wDoneButton {
 border-radius: 16px;
 background-color: "white";
 border: 1px solid "#949191";
-min-width: 196px;
+min-width: 164px;
 min-height: 32px;
 color: "black";
 }
@@ -85,5 +85,13 @@ background-color: "#66D495";
 border: 1px solid "black";
 min-width: 256px;
 min-height: 32px;
+color: "black";
+}
+
+QListView {
+background-color: "#EDEDED";
+border: 2px solid "#64D498";
+border-radius: 4px;
+padding: 2px;
 color: "black";
 }

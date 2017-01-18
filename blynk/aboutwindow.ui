@@ -224,13 +224,13 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>148</height>
+       <height>140</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>148</height>
+       <height>140</height>
       </size>
      </property>
      <property name="text">
@@ -331,19 +331,18 @@ So please look after your eyes, they really are very special…
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>128</height>
+       <height>140</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>128</height>
+       <height>140</height>
       </size>
      </property>
      <property name="text">
-      <string>Blynk cares about everyone’s eyes, which is why we have not only created this free eye care software but also formed a closed partnership with Vision Aid Overseas, an amazing charity that help change people’s live with the gift of vision.
-If you would like to learn more about the work done by Blynk and Vision Aid Overseas please hit the button below.
-</string>
+      <string>Blynk cares about everyones eyes which is why we not only created this software but also fundraise to make adequate eye care available to everyone around the world. All of your generous donations will go to Vision Aid Overseas, an amazing charity that help change peoples lives with the gift of vision. If you would like to earn more about the work done by Blynk and Vision Aid Overseas please hit the button below.
+    </string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

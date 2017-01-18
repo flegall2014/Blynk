@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QPainter>
+#include <QMessageBox>
 
 // Application:
 #include "controller.h"
@@ -18,7 +19,7 @@
 #include <monitor.h>
 
 // Defines:
-#define PARAMETERS_FILE "parameters.xml"
+#define PARAMETERS_FILE "BlynkParameters.xml"
 #define NSEC_PER_HOUR 3600
 #define NSEC_IN_THREE_HOURS 10800
 #define NSEC_IN_ONE_DAY 86400
@@ -557,7 +558,6 @@ void Controller::onApplicationTimerTimeOut()
             // Set current temperature:
             int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
             m_pDimmerWidget->setTemperature(iCurrentTemperature);
-            m_pBlynkWindow->updateTitle(iCurrentTemperature);
         }
         else {
             if (QTime::currentTime() < tTriggerTime)
@@ -566,7 +566,6 @@ void Controller::onApplicationTimerTimeOut()
                 // Set current temperature:
                 int iCurrentTemperature = temperatureForStrength((Parameters::Strength)m_pParameters->parameter(Parameters::BLUE_LIGHT_REDUCER_STRENGTH).toInt());
                 m_pDimmerWidget->setTemperature(iCurrentTemperature);
-                m_pBlynkWindow->updateTitle(iCurrentTemperature);
             }
         }
     }

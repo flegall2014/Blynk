@@ -47,6 +47,6 @@ void ImageWidget::paintEvent(QPaintEvent *event)
         QImage scaledImage = image.scaled(targetWidth, targetHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         // Draw:
-        painter.drawImage(QPoint(x, y), scaledImage);
+        painter.drawImage(QPoint(x, y), scaledImage, QRect(0, 0, image.width(), image.height()), Qt::ColorOnly);
     }
 }

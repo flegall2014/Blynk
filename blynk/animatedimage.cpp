@@ -11,7 +11,6 @@
 AnimatedImage::AnimatedImage(QWidget *parent) :
     QObject(parent), m_iCurrentImageIndex(0)
 {
-    m_tTimer.setInterval(25);
     connect(&m_tTimer, &QTimer::timeout, this, &AnimatedImage::onTimeOut);
 }
 
@@ -20,6 +19,7 @@ void AnimatedImage::loadImages(const What &what)
 {   
     if (what == BIGEYE_IMAGES)
     {
+        m_tTimer.setInterval(50);
         for (int i=19; i<=36; i++) {
             QString sPngFile = QString(":/animatedimage/Eye_%1.png").arg(i);
             m_vCursorImages << QImage(sPngFile);
@@ -28,6 +28,7 @@ void AnimatedImage::loadImages(const What &what)
     else
     if (what == CURSOR_IMAGES)
     {
+        m_tTimer.setInterval(25);
         for (int i=11; i<=33; i++) {
             QString sIndex = QString::number(i);
             if (sIndex.length() < 2)
